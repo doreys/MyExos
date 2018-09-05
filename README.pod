@@ -12,5 +12,4 @@ Several books were used to learnt P6. Usualy that's a *.txt *.pdf file in the re
 
 =head2 Repository name
 
-LearningP6
-
+MyExos
