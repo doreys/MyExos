@@ -10,7 +10,7 @@ In some files there is C<<< <base_dir> >>> change it with appropriate path to fi
 
 =head1 Prerequisites
 
-In the directory <base_dir>/.vim two directories need.
+In the directory <base_dir>/.vim two directories are needed.
 
 The mkdir command is needed to be created.
 
