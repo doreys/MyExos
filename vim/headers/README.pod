@@ -1,0 +1,3 @@
+=head1 What does these fles do?
+
+That's where vim will takes the headers patterns according to the file extensions.
