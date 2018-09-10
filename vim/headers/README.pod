@@ -1,3 +1,3 @@
 =head1 What does these files do?
 
-That's where vim will takes the patterns for the headers according to the file extension.
+That's where vim will take the patterns for the headers according to the file extension.
