@@ -4,7 +4,7 @@ The following can be adapted to your needs.
 
 =head1 To change
 
-Read the paragraph B<Hierarchy of file>.
+Read the paragraph B<Hierarchy of files and directories>.
 
 In some files there is C<<< <base_dir> >>> change it with appropriate path to find the file or the directory.
 
@@ -38,7 +38,7 @@ Contains the headers. Can be modified.
 
 Some local variables within the following files s.a $USER, $HOSTNAME can be changed too, to fit to your needs.
 
-=head1 Hierarchy of file
+=head1 Hierarchy of files and directories
 
 <base_dir> is the home directory.
 
