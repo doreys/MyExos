@@ -1,4 +1,4 @@
-=head1 Repository used to learn P6
+=head1 Repository used to learn and practise P6
 
 =head2 Terminology used
 
@@ -13,3 +13,7 @@ Several books were used to learnt P6. Usualy that's a *.txt *.pdf file in the re
 =head2 Repository name
 
 MyExos
+
+=head1 Extra goody(ies)
+
+There is a vim directory. This is for installing headers when programs are written with I<vim>. 
