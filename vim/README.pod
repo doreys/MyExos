@@ -1,4 +1,4 @@
-=head1 WATCHOUT
+=head1 README
 
 The following can be adapted to your needs.
 
