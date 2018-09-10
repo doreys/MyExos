@@ -12,7 +12,7 @@ In some files there is C<<< <base_dir> >>> change it with appropriate path to fi
 
 In the directory <base_dir>/.vim two directories are needed.
 
-The mkdir command is needed to be created.
+The mkdir command is needed to create 2 directories if they don't exist.
 
 =over
 
