@@ -1,0 +1,5 @@
+=head1 What do these files?
+
+Script compatible with vim that is read just after .vimrc. 
+
+It will load the templates in ../vimrc/headers according to extensions and will fill the fields.
