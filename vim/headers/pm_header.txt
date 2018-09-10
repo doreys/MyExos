@@ -16,8 +16,6 @@ q##//q#
 * Last Modified :
 * Email Address :  
 * Version : 0.0.0.0
-* License:
-*
 * Purpose :
 #;
 # ------------------------------------------------------
