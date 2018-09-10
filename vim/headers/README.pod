@@ -1,3 +1,7 @@
 =head1 README
 
 That's where vim will take the patterns for the headers according to the file extension.
+
+=head1 Source
+
+ https://www.vim.org/
