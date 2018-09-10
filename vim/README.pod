@@ -120,3 +120,7 @@ Next save it will modify the last date saved in the field I<* Last Modified :> a
  # ------------------------------------------------------
 
 =back
+
+=head1 Sources
+
+This tuto was based on the tuto written here: https://www.thegeekstuff.com/2008/12/vi-and-vim-autocommand-3-steps-to-add-custom-header-to-your-file/
