@@ -1,0 +1,42 @@
+:insert
+package Foo;
+use strict;
+use warnings;
+use Exporter;
+
+use 5.010;
+
+our @ISA= qw( Exporter );
+
+# ------------------------------------------------------
+q##//q#
+* Created By :  
+* File Name :
+* Creation Date :
+* Last Modified :
+* Email Address :  
+* Version : 0.0.0.0
+* License:
+* 	Permission is granted to copy, distribute, and/or modify this document under the terms of the Creative Commons Attribution-NonCommercial 3.0 
+* 	Unported License, which is available at http: //creativecommons.org/licenses/by- nc/3.0/.
+* Purpose :
+#;
+# ------------------------------------------------------
+
+
+
+# these CAN be exported.
+our @EXPORT_OK = qw( export_me export_me_too );
+
+# these are exported by default.
+our @EXPORT = qw( export_me export_me_too );
+
+sub export_me {
+}
+
+sub export_me_too {
+    # stuff
+}
+
+1;
+.
