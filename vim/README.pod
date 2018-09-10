@@ -110,7 +110,7 @@ Next save it will modify the last date saved in the field I<* Last Modified :> a
  * File Name : foo.p6
  * Creation Date : Sun Sep  9 14:10:50 2018
  * Last Modified : Sun Sep  9 14:27:18 2018
- * Email Address : sdo@macbook-pro-de-sdo.home
+ * Email Address : 
  * Version : 0.0.0.0
  * License:
  *       Permission is granted to copy, distribute, and/or modify this document under the terms of the Creative Commons Attribution-NonCommercial 3.0
@@ -120,3 +120,7 @@ Next save it will modify the last date saved in the field I<* Last Modified :> a
  # ------------------------------------------------------
 
 =back
+
+=head1 Source
+
+ https://www.vim.org/
