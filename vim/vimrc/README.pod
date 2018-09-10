@@ -1,4 +1,4 @@
-=head1 What do these files?
+=head1 README
 
 Script compatible with vim that is read just after .vimrc. 
 
