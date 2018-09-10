@@ -10,7 +10,7 @@ In some files there is C<<< <base_dir> >>> change it with appropriate path to fi
 
 =head1 Prerequisites
 
-In the directory <base_dir>/.vim two directories need to be created.
+In the directory <base_dir>/.vim two directories need.
 
 The mkdir command is needed to be created.
 
@@ -120,7 +120,3 @@ Next save it will modify the last date saved in the field I<* Last Modified :> a
  # ------------------------------------------------------
 
 =back
-
-=head1 Sources
-
-This tuto was based on the tuto written here: https://www.thegeekstuff.com/2008/12/vi-and-vim-autocommand-3-steps-to-add-custom-header-to-your-file/
