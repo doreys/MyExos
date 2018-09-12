@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : 3-3-3-1.FraisBancaire.p6
 * Creation Date : Tue Sep 11 23:21:17 2018
-* Last Modified : Wed Sep 12 00:06:10 2018
+* Last Modified : Wed Sep 12 18:52:08 2018
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -177,7 +177,8 @@ role Frais-bancaire [Rat $amount] {
 
 #--------------------------
 #class Compte-avec-frais is Compte does Frais-bancaire[0,5] {};
-class Compte-avec-frais is Compte does Frais-bancaire[Rat.new(0,5)] {};
+class Compte-avec-frais is Compte does Frais-bancaire[0.5] {};
+#class Compte-avec-frais is Compte does Frais-bancaire[Rat.new(0,5)] {};
 #--------------------------
 my $nouvelle-rue = "rue Jean d'Ormesson";
 my $cp = "13003";
