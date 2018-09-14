@@ -10,7 +10,7 @@
 
 =head2 Books used / Livre Utilisés
 
-Several books were used to learnt P6. Usualy that's a *.txt *.pdf file in the repository. May be other types will be added in the future. / I<Plusieurs livres furent utilisés pour apprendre le langage de script P6 (pour Perl 6)..>
+Several books were used to learnt P6. Usualy that's a *.txt *.pdf file in the repository. May be other types will be added in the future. / I<Plusieurs livres furent utilisés pour apprendre le langage de script P6 (pour Perl 6).>
 
 =head2 Repository name / Nom de l'arche
 
