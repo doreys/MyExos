@@ -1,23 +1,23 @@
 =encoding utf8
 
-=head1 Repository used to learn and practise P6 / Des exos fais tirés de la doc pour apprendre P6
+=head1 Repository used to learn and practise P6
 
-=head2 Terminology used / Terminologie usité
+=head2 Terminology used
 
-*.p6 or *.P6 that's the Perl 6 file extensions (P6 stands for Perl 6). / I<*.p6 ou *.P6 pour extension des fichiers en Perl 6.>
+*.p6 or *.P6 that's the Perl 6 file extensions (P6 stands for Perl 6).
 
-*.pm6 or *.pm for P6 module names (second one is the old version in P5). / I<*.pm6 ou *.pm pour extension les modules en Perl 6.>
+*.pm6 or *.pm for P6 module names (second one is the old version in P5).
 
-=head2 Books used / Livre Utilisés
+=head2 Books used
 
-Several books were used to learnt P6. Usualy that's a *.txt *.pdf file in the repository. May be other types will be added in the future. / I<Plusieurs livres furent utilisés pour apprendre le langage de script P6 (pour Perl 6).>
+Several books were used to learnt P6. Usualy that's a *.txt *.pdf file in the repository. May be other types will be added in the future.
 
-=head2 Repository name / Nom de l'arche
+=head2 Repository name
 
 MyExos
 
-=head1 Extra goody(ies) / Des friandises
+=head1 Extra goody(ies)
 
-There is a vim directory. This is for installing headers when programs are written with I<vim>.  / I<Pour l'éditeur vim.>
+There is a vim directory. This is for installing headers when programs are written with I<vim>.
 
-There is directory called ToRead-ALire (both docs in French/English). / I<Il y a un répertoire ToRead-Alire où l'on peut trouver des copies des documents utilisés.>
+There is directory called ToRead-ALire (both docs in French/English). 
