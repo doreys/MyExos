@@ -1,5 +1,5 @@
 =encoding utf8
 
-=head1 Documentation utilisée
+=head1 Documentation
 
-Français
+French
