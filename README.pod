@@ -1,3 +1,5 @@
+=encoding utf8
+
 =head1 Repository used to learn and practise P6 / Des exos fait pour appendre P6 tirés de la doc
 
 =head2 Terminology used / Terminologie usité
@@ -14,7 +16,7 @@ Several books were used to learnt P6. Usualy that's a *.txt *.pdf file in the re
 
 MyExos
 
-=head1 Extra goody(ies)
+=head1 Extra goody(ies) / Des friandises
 
 There is a vim directory. This is for installing headers when programs are written with I<vim>.  / Pour l'éditeur I<vim>.
 
