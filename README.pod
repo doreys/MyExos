@@ -1,6 +1,6 @@
 =encoding utf8
 
-=head1 Repository used to learn and practise P6 / Des exos fait pour appendre P6 tirés de la doc
+=head1 Repository used to learn and practise P6 / Des exos fais tirés de la doc pour apprendre P6
 
 =head2 Terminology used / Terminologie usité
 
