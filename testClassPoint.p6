@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : testClassPoint.p6
 * Creation Date : Fri Sep 14 23:31:56 2018
-* Last Modified : Fri Sep 14 23:48:16 2018
+* Last Modified : Sat Sep 15 00:12:32 2018
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -17,7 +17,7 @@ use v6 ;
 	Trying to catch an error when accessing a private method.
 	The test is "try to access z which is private in the class". 
 	As a result an error is raised because it cannot be found (declared has private). The trick is to
-	put the whole stuff in a try block ence catch an error. Like I don't know yet what kind of error 
+	put the whole stuff in a try block hence catch an error. Like I don't know yet what kind of error 
 	is raised I put default when error is catched. Then I print my own message.
 
 		macbook-pro-de-sdo:tp6 sdo$ ./testClassPoint.p6
