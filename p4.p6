@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : p4.p6
 * Creation Date : Mon Sep 17 01:49:33 2018
-* Last Modified : Mon Sep 17 21:48:42 2018
+* Last Modified : Mon Sep 17 23:42:14 2018
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -30,19 +30,3 @@ say "Hello world";
 # new commit
 say "Another test";
  
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
-c 
