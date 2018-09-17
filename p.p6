@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : p.p6
 * Creation Date : Mon Sep 17 01:49:33 2018
-* Last Modified : Mon Sep 17 02:16:05 2018
+* Last Modified : Mon Sep 17 02:24:17 2018
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -17,9 +17,6 @@ use v6 ;
 ]
 # ------------------------------------------------------
 
-say "Hello world";
-say "Hello world";
-say "Hello world";
 say "Hello world";
 say "Hello world";
 say "Hello world";
