@@ -1,2 +1,3 @@
  
 say 'hello';
+say 'hello';
