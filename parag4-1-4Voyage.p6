@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : parag4-1-4Voyage.p6
 * Creation Date : Fri Sep 21 15:04:05 2018
-* Last Modified : Fri Sep 21 15:04:20 2018
+* Last Modified : Fri Sep 21 15:29:46 2018
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -36,3 +36,12 @@ class Voyage {
                   "- Voyageurs:", @!voyageurs;
     }
 }
+
+my $week-end-amoureux = Voyage.new(départ      => "Paris",
+                                   destination => "Londres");
+$week-end-amoureux.ajoute_voyageur($_) for <Roméo Juliette Roméo>;
+say $week-end-amoureux.perl;
+say "Ajoute une note";
+$week-end-amoureux.notes = "Eurostar";
+say $week-end-amoureux.perl;
+say $week-end-amoureux.décrire;
