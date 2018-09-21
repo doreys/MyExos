@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : parag4-1-4Voyage.p6
 * Creation Date : Fri Sep 21 15:04:05 2018
-* Last Modified : Fri Sep 21 15:29:46 2018
+* Last Modified : Fri Sep 21 15:56:56 2018
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -19,6 +19,7 @@ use v6 ;
 
 class Voyage {
     has $.départ;
+    has $.point-de-départ;
     has $.destination;
     has @!voyageurs;
     has $.notes is rw;
@@ -37,7 +38,25 @@ class Voyage {
     }
 }
 
+# ------------------- Autre exemple 4-1-3. Attributs ---------------------------------
+
+# Création d'une nouvelle instance de la classe
+my $vacances = Voyage.new(
+    départ  => 'Suède',
+    point-de-départ  => 'Suède',
+    destination      => 'Suisse',
+    notes            => 'Équipement type camping!'
+);
+
+# Utilisation d'un accesseur :
+say $vacances.point-de-départ;    # -> Suède
+
+# Utilisation d'un accesseur de type rw pour modifier la valeur:
+$vacances.notes = 'Équipement type camping plus lunettes de soleil';
+
+# ------------------- Autre exemple 4-1-4. ---------------------------------
 my $week-end-amoureux = Voyage.new(départ      => "Paris",
+				   point-de-départ => "Paris",
                                    destination => "Londres");
 $week-end-amoureux.ajoute_voyageur($_) for <Roméo Juliette Roméo>;
 say $week-end-amoureux.perl;
