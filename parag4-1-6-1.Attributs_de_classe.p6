@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : parag4-1-6-1.Attributs_de_classe.p6
 * Creation Date : Fri Sep 21 16:08:33 2018
-* Last Modified : Fri Sep 21 16:10:34 2018
+* Last Modified : Fri Sep 21 18:19:10 2018
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
