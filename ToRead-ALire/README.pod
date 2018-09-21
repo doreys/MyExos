@@ -1,0 +1,7 @@
+=encoding utf8
+
+=head1 Meanings / I<Sens>
+
+En: English / Anglais
+
+Fr: French / Français

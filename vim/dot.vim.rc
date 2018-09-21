@@ -1,0 +1,4 @@
+" To put in .vimrc file
+" Defines file for creating headers
+source <base_dir>/.vim/vimrc/pm_vimrc
+source <base_dir>/.vim/vimrc/p6_vimrc

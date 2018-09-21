@@ -1,0 +1,9 @@
+=head1 README
+
+Script compatible with vim that is read just after .vimrc. 
+
+It will load the templates from ../headers according to extensions and will fill the fields.
+
+=head1 Source
+
+ https://www.vim.org/

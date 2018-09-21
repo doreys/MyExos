@@ -1,0 +1,12 @@
+" ----------------------------------------------------------------------------------------
+" pm perl 5 programming
+autocmd bufnewfile *.pm so <base_dir>/.vim/headers/pm_header.txt
+autocmd Bufwritepre,filewritepre *.pm execute "normal ma" 
+autocmd Bufwritepre,filewritepre *.pm exe "1," . 13 . "g/Created By :.*/s/Created By :.*/Created By : " .$USER
+autocmd Bufwritepre,filewritepre *.pm exe "1," . 13 . "g/File Name :.*/s/File Name :.*/File Name : " .expand("%")
+autocmd bufnewfile *.pm exe "1," . 13 . "g/Creation Date :.*/s/Creation Date :.*/Creation Date : " .strftime("%c")
+autocmd Bufwritepre,filewritepre *.pm exe "1," . 13 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%c")
+autocmd Bufwritepre,filewritepre *.pm exe "1," . 13 . "g/Email Address :.*/s/Email Address :.*/Email Address : " .$USER . '@' . expand("$HOSTNAME")
+autocmd bufwritepost,filewritepost *.pm execute "normal `a" 
+autocmd bufwritepost *.pm silent! !chmod +x %
+" ----------------------------------------------------------------------------------------

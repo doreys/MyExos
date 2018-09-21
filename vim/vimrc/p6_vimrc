@@ -1,0 +1,55 @@
+" ----------------------------------------------------------------------------------------
+" p6 programming
+autocmd bufnewfile *.p6 so <dir_base>/.vim/headers/p6_header.txt
+autocmd Bufwritepre,filewritepre *.p6 execute "normal ma" 
+autocmd Bufwritepre,filewritepre *.p6 exe "1," . 14 . "g/Created By :.*/s/Created By :.*/Created By : " .$USER
+autocmd Bufwritepre,filewritepre *.p6 exe "1," . 14 . "g/File Name :.*/s/File Name :.*/File Name : " .expand("%")
+autocmd bufnewfile *.p6 exe "1," . 14 . "g/Creation Date :.*/s/Creation Date :.*/Creation Date : " .strftime("%c")
+autocmd Bufwritepre,filewritepre *.p6 exe "1," . 14 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%c")
+autocmd Bufwritepre,filewritepre *.p6 exe "1," . 14 . "g/Email Address :.*/s/Email Address :.*/Email Address : " .$USER . '@' . expand("$HOSTNAME")
+autocmd bufwritepost,filewritepost *.p6 execute "normal `a" 
+autocmd bufwritepost *.p6 silent! !chmod +x %
+" ----------------------------------------------------------------------------------------
+
+" ----------------------------------------------------------------------------------------
+" pl6 programming
+autocmd bufnewfile *.pl6 so <base_dir>/.vim/headers/p6_header.txt
+autocmd Bufwritepre,filewritepre *.pl6 execute "normal ma" 
+autocmd Bufwritepre,filewritepre *.pl6 exe "1," . 13 . "g/Created By :.*/s/Created By :.*/Created By : " .$USER
+autocmd Bufwritepre,filewritepre *.pl6 exe "1," . 13 . "g/File Name :.*/s/File Name :.*/File Name : " .expand("%")
+autocmd bufnewfile *.pl6 exe "1," . 13 . "g/Creation Date :.*/s/Creation Date :.*/Creation Date : " .strftime("%c")
+autocmd Bufwritepre,filewritepre *.pl6 exe "1," . 13 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%c")
+autocmd Bufwritepre,filewritepre *.pl6 exe "1," . 13 . "g/Email Address :.*/s/Email Address :.*/Email Address : " .$USER . '@' . expand("$HOSTNAME")
+autocmd bufwritepost,filewritepost *.pl6 execute "normal `a" 
+autocmd bufwritepost *.pl6 silent! !chmod +x %
+" ----------------------------------------------------------------------------------------
+
+" ----------------------------------------------------------------------------------------
+" t programming
+autocmd bufnewfile *.t so <base_dir>/.vim/headers/p6_header.txt
+autocmd Bufwritepre,filewritepre *.t execute "normal ma" 
+autocmd Bufwritepre,filewritepre *.t exe "1," . 13 . "g/Created By :.*/s/Created By :.*/Created By : " .$USER
+autocmd Bufwritepre,filewritepre *.t exe "1," . 13 . "g/File Name :.*/s/File Name :.*/File Name : " .expand("%")
+autocmd bufnewfile *.t exe "1," . 13 . "g/Creation Date :.*/s/Creation Date :.*/Creation Date : " .strftime("%c")
+autocmd Bufwritepre,filewritepre *.t exe "1," . 13 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%c")
+autocmd Bufwritepre,filewritepre *.t exe "1," . 13 . "g/Email Address :.*/s/Email Address :.*/Email Address : " .$USER . '@' . expand("$HOSTNAME")
+autocmd bufwritepost,filewritepost *.t execute "normal `a" 
+autocmd bufwritepost *.t silent! !chmod +x %
+" ----------------------------------------------------------------------------------------
+
+" ----------------------------------------------------------------------------------------
+" pm6 programming
+autocmd bufnewfile *.pm6 so <base_dir>/.vim/headers/pm6_header.txt
+autocmd Bufwritepre,filewritepre *.pm6 execute "normal ma" 
+autocmd Bufwritepre,filewritepre *.pm6 exe "1," . 16 . "g/Created By :.*/s/Created By :.*/Created By : " .$USER
+" autocmd bufnewfile,filewritepre *.pm6 exe "1," . 16 . "g/File Name :.*/s/File Name :.*/File Name : " .expand("%")
+autocmd Bufwritepre,filewritepre *.pm6 exe "1," . 16 . "g/File Name :.*/s/File Name :.*/File Name : " .expand("%")
+autocmd bufnewfile *.pm6 exe "1," . 16 . "g/Creation Date :.*/s/Creation Date :.*/Creation Date : " .strftime("%c")
+autocmd Bufwritepre,filewritepre *.pm6 exe "1," . 16 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%c")
+autocmd Bufwritepre,filewritepre *.pm6 exe "1," . 16 . "g/Email Address :.*/s/Email Address :.*/Email Address : " .$USER . '@' . expand("$HOSTNAME")
+autocmd Bufwritepre,filewritepre *.pm6 exe "1," . 16 . "g/unit module ;/s/unit module ;/unit module "  . expand("%") . ":ver<0.0.0.1>:auth<". $USER . ">;"
+autocmd Bufwritepre,filewritepre *.pm6 exe "1," . 16 . "g/.pm6;/s/.pm6;/;/g"
+autocmd Bufwritepre,filewritepre *.pm6 exe "1," . 16 . "g/.pm6:/s/.pm6:/:/g"
+autocmd bufwritepost,filewritepost *.pm6 execute "normal `a" 
+autocmd bufwritepost *.pm6 silent! !chmod +x %
+" ----------------------------------------------------------------------------------------

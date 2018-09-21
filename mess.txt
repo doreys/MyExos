@@ -1,0 +1,27 @@
+Now, MovablePixel is subclassing both MovablePoint and Pixel and inheriting from both
+
+parent classes.
+
+This looks very promising, but it turns out to be more complicated than expected in real
+
+situations. If there is a confict (for example a name collision between two methods), which
+
+one shall prevail? Some mechanisms exist to handle such situations (for example in the
+
+C++ programming language), and Perl has some metaobject methods to fnd out about the
+
+method resolution order (MRO), but this might quickly leads to severe design problems
+
+and to really subtle or complicated bugs. In short, while multiple inheritance originally
+
+looked as a attractive idea, it turned out to be complicated to master, because it creates
+
+multiple and often implicit dependencies that are quite hard to sort out.
+
+This is the reason why, contrary to C++, relatively more recent OO programming languages
+
+such as Java (which came out not so recently, back in 1995) have decided not to implement
+
+multiple inheritance.
+
+Perl 6 does not want to f
