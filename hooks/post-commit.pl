@@ -29,13 +29,29 @@ use Data::Dumper qw(Dumper);
 use constant MAX_CHAR_COMMENT => 50;
 use constant MAX_CHAR_BRANCH_NAME => 20;
 
-my $mtwitter="https://twitter.com/Sh4rkb41t"; # Twitte account
+my $curpa=getcwd();# We save the current path
 my $datestring = strftime '%Y-%m-%d_%H:%M:%S', localtime(); # set date format + time format
-my ( $consumer_key, $consumer_secret, $token, $token_secret)=(
-								"X3NiE5Vr8HKVsURUTcRzcbvGq",
-								"S11c2CsO3XGB6ziQnWw4BYRb3oOa3hQUQr7OmWwyh0cqFrZ2JC",
-								"171048000-Zo9wyN7EyV5cpdx6mPnW75rmAw0DIH5JqWBLPg7d",
-								"OCQglb1XnAo1CQY44TJCi61BZ5cJwI61JxrrJsAjSnkow");
+my $mpwd=`git rev-parse --git-dir`;# we get the path home repository
+my $dir_store="bkUps";# Where are data?
+
+chomp($mpwd); # We remove last character \n
+chdir("$mpwd"); # We got to directory
+
+if(! -d "$dir_store"){ # Begin If directory does not exist
+	mkdir("$dir_store")||die("Error: $!\n"); # We create the directory to store message to send
+} # End If directory does not exist
+chdir("$dir_store")||die("Error: $!\n"); # We go into the directory
+
+open(R,"<credential_twitter.txt")||die("Error: $!\n");
+my @l=<R>;
+close(R)||die("Error: $!\n");
+my ($mtwitter,$consumer_key,$consumer_secret,$token,$token_secret)=@l;
+chomp($mtwitter);
+chomp($consumer_key);
+chomp($consumer_secret);
+chomp($token);
+chomp($token_secret);
+chdir($curpa);
 
 my $nt = Net::Twitter->new(
 			    traits   => [qw/API::RESTv1_1/],
@@ -45,13 +61,11 @@ my $nt = Net::Twitter->new(
 			    access_token_secret => $token_secret,
 			); # Set file handler for twitter account
 
-my $curpa=getcwd();# We save the current path
 my $remoteOrigin=`git config remote.origin.url`; # Got url with .git
 $remoteOrigin=~m/\/([^\/\n]+\/[^\/\n]+)(.git){0,1}$/i; # Select the name in $1
 my $baseName=$1; # Gets base name of the repo
 chomp($baseName); # Remove end character \n
 $baseName=~s/(.git){0,1}$//i; # Remove .git end characters
-#$baseName="$baseName";
 my $myHashValueCommit=`git log -n 1 --pretty=format:"%H"`; # Get hash value to reach info on repo
 my $whoDidIt=`git var GIT_COMMITTER_IDENT`; # Get committer info 
 chomp($whoDidIt); # Remove end character \n
@@ -66,43 +80,24 @@ foreach my $mlb (split(/\n/,$curBranch)){ # Begin enter the loop
 	} # End Check for selected branch
 } # End enter the loop 
 
-#print "----------------------------->$curBranch\n";
-my $mpwd=`git rev-parse --git-dir`;# we get the path home repository
-chomp($mpwd); # We remove \n
 open(R,getcwd()."/.git/COMMIT_EDITMSG")||die("Error $!");
 my $commit_msg=<R>;
 close(R)||die("Error $!");
 chomp($commit_msg);
-#print "*******************************>$commit_msg\n";
 my $mtosend=(); # Message to send
-my $dir_store="bkUps";
 
-#print "xxxxxxxxxxxxxx>$myHashValueCommit<xxxxxxxxxxxxxxxxxxxxxx\n";
-#print "****************>$remoteOrigin\n";
 $remoteOrigin=~s/(.git){0,1}$/\/commit\/$myHashValueCommit/; # We create the url to get the committed info
-#print "****************>$remoteOrigin\n";
 if(length($commit_msg)>=MAX_CHAR_COMMENT){ # Begin Truncate the message
-	$mtosend="$whoDidIt\n[$curBranch,$baseName] ". substr($commit_msg,0,MAX_CHAR_COMMENT-1) ."...\n$remoteOrigin"; # Message to send
+	$mtosend="$whoDidIt\n[$baseName,$curBranch] ". substr($commit_msg,0,MAX_CHAR_COMMENT-1) ."...\n$remoteOrigin"; # Message to send
 } # End Truncate the message
 else { # Begin Orignal message
-	$mtosend="$whoDidIt\n[$curBranch,$baseName] $commit_msg\n$remoteOrigin"; # Message to send
+	$mtosend="$whoDidIt\n[$baseName,$curBranch] $commit_msg\n$remoteOrigin"; # Message to send
 } # End Orignal message
-#print "*********)$mpwd ".length($mpwd)."\n";
-chdir("$mpwd"); # We got to directory
-#print "Go to $mpwd\n".getcwd()."\n";
 
-if(! -d "$dir_store"){ # Begin If directory does not exist
-	#print "We create $dir_store in $mpwd\n".getcwd()."\n";
-	mkdir("$dir_store")||die("Error: $!\n"); # We create the directory to store message to send
-} # End If directory does not exist
-
-#print "Go to $dir_store\n";
-chdir("$dir_store")||die("Error: $!\n"); # We go into the directory
 my $lt=localtime(); # We create memory to get time 
 open(W,">bakups_${lt}_$$.txt") || die("Error: $!\n");# We create a file to store the message
 print W "$mtosend"; # We store data
 close(W) || die("Error: $!\n"); # We close file
-#print "@@@@>current dir:".getcwd()."\n";
 opendir(my $dh,".") || die("Error: $!\n"); # We read current directory
 my @f=sort { (stat($a))[9] <=> (stat($b))[9] }  grep { !/^\.{1,2}$/ && /^bakups\_[a-zA-Z\ \:0-9]+\_[0-9]+\.txt$/ } readdir($dh); # We store in an array file that old messages
 closedir $dh || die("Error: $!\n"); # We close directory
@@ -111,7 +106,6 @@ foreach my $fn (@f){ # Begin Read file list
 	my @u=<R>; # We create a memory and we store the file content
 	close(R)||die("Error:$$\n");# We close the file
 	$datestring = strftime '%Y-%m-%d_%H:%M:%S', localtime(); # Calculte the date before sending
-	#print "******>$fn " . (stat($fn))[9] . "\n";
 	$mtosend=join("",("$datestring\n",@u)); # create a memory that old content of current file as and array in a string
 	my $result = $nt->update("$mtosend"); # We sendout the string to twitter account
 	if(my $err=$@){ # Begin We check if error occured
