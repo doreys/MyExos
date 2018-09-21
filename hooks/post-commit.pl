@@ -7,7 +7,7 @@ q##//q#
 * Created By : sdo
 * File Name : post-commit.pl
 * Creation Date : Mon Sep 17 00:58:28 2018
-* Last Modified : Fri Sep 21 15:20:20 2018
+* Last Modified : Fri Sep 21 15:24:19 2018
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -30,7 +30,7 @@ print Dumper \@ARGV;
 
 
 
-my $mtwitter="https://twitter.com/Sh4rkb41t"; # Twitte account
+my $mtwitter=""; # Twitte account
 my $datestring = strftime '%Y-%m-%d_%H:%M:%S', localtime(); # set date format + time format
 my ( $consumer_key, $consumer_secret, $token, $token_secret)=(
 								"",
