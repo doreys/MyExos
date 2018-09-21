@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : test.p6
 * Creation Date : Fri Sep 21 22:18:10 2018
-* Last Modified : Fri Sep 21 23:02:09 2018
+* Last Modified : Fri Sep 21 23:12:00 2018
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
