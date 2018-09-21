@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : test.p6
 * Creation Date : Fri Sep 21 22:18:10 2018
-* Last Modified : Fri Sep 21 22:43:42 2018
+* Last Modified : Fri Sep 21 22:50:34 2018
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -17,4 +17,4 @@ use v6 ;
 ]
 # ------------------------------------------------------
 
-
+say "hello world";
