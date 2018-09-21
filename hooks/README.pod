@@ -1,3 +1,3 @@
 =head1 Files hor hooks directory
 
-A new file that broadcast for test
+A new file that broadcast for test. The file can be added in .git/hooks in the current repository with permission of execution.
