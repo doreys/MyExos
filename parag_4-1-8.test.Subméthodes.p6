@@ -7,13 +7,16 @@ use v6 ;
 * Created By : sdo
 * File Name : parag_4-1-8.test.Subméthodes.p6
 * Creation Date : Sun Sep 23 02:14:34 2018
-* Last Modified : Sun Sep 23 04:45:10 2018
+* Last Modified : Sun Sep 23 05:02:18 2018
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
 * 	Permission is granted to copy, distribute, and/or modify this document under the terms of the Creative Commons Attribution-NonCommercial 3.0 
 * 	Unported License, which is available at http: //creativecommons.org/licenses/by- nc/3.0/.
 * Purpose :
+	overload gist (not multi method)
+	surcharge gist (pas multi method) 
+
 	check file methodCall.p6
 	In this tet we overload the method gist
 
