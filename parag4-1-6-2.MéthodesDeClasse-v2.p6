@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : parag4-1-6-2.MéthodesDeClasse-v2.p6
 * Creation Date : Sat Sep 22 13:42:15 2018
-* Last Modified : Tue Sep 25 00:49:30 2018
+* Last Modified : Tue Sep 25 00:56:28 2018
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -61,9 +61,9 @@ class Employé {
 #     valeur-matricule-courant used at line ...
 
 #say Employé::matricule-courant;
-say "Matricule courant = ", Employé::valeur-matricule-courant;
-say "test increm ", Employé::nouveau-matricule;
-say "Matricule courant = ", Employé::valeur-matricule-courant;
+say "Methode de classe Matricule courant = ", Employé::valeur-matricule-courant;
+say "Methode de classe increm ", Employé::nouveau-matricule;
+say "Methode de classe affiche ", Employé::valeur-matricule-courant;
 
 my $salarié = Employé.new(
     données-personnelles => Personne.new(
@@ -80,10 +80,11 @@ my $salarié = Employé.new(
     intitulé-poste => "technicien de surface",
     salaire => 1234.5
 );
+
 say "Matricule de l'employé : {$salarié.matricule}";
-say "affiche matricule par méthode de classe ", Employé::valeur-matricule-courant;
-say "increm matricule par méthode de classe ", Employé::nouveau-matricule;
-say "affiche matricule par méthode de classe ", Employé::valeur-matricule-courant;
+say "Méthode de classe affiche ", Employé::valeur-matricule-courant;
+say "Methode de classe increm ", Employé::nouveau-matricule;
+say "Méthode de classe affiche ", Employé::valeur-matricule-courant;
 
 my $salarié2 = Employé.new(
     données-personnelles => Personne.new(
