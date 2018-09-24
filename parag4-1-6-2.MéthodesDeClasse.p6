@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : parag4-1-6-2.MéthodesDeClasse.p6
 * Creation Date : Sat Sep 22 13:42:15 2018
-* Last Modified : Sat Sep 22 13:44:18 2018
+* Last Modified : Mon Sep 24 23:04:11 2018
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -52,5 +52,12 @@ class Employé {
     has Str $.intitulé-poste is rw;
     has Numeric $.salaire is rw;
     # ...
-    sub nouveau-matricule { return ++$matricule-courant }
+    sub nouveau-matricule { return ++$matricule-courant; }
+    our sub valeur-matricule-courant { return $matricule-courant; }
 }
+
+#say "Matricule courant = ", Employé.valeur-matricule-courant;; # ERREUR
+# Undeclared routine:
+#     valeur-matricule-courant used at line ...
+
+say "Matricule courant = ", Employé::valeur-matricule-courant;
