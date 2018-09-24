@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : ParentP6O.p6
 * Creation Date : Thu Sep 13 22:04:00 2018
-* Last Modified : Mon Sep 24 13:58:22 2018
+* Last Modified : Mon Sep 24 14:02:37 2018
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -25,7 +25,7 @@ class Parent {
 
 class Enfant is Parent {
     method farfouille {
-        say "Appel de la méthode farfouille de la classe fille"
+        say "Appel de la méthode farfouille de la classe fille";
 	self.Parent::farfouille;
     }
 }
