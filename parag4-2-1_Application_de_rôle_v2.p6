@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : parag4-2-1_Application_de_rôle_v2.p6
 * Creation Date : Fri Sep 28 21:55:34 2018
-* Last Modified : Fri Sep 28 21:58:10 2018
+* Last Modified : Fri Sep 28 22:25:09 2018
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -33,6 +33,7 @@ role Menable {
 }
 class Taurus does Taurin does Menable {
     method mène ($direction?) {
-        self.Menable::mène($direction?)
+	    #self.Menable::mène($direction?) # <--- ancien code du livre qui génère une erreur
+        self.Menable::mène($direction)
     }
 }
