@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : parag4-2-4._Rôles_paramétrés.p6
 * Creation Date : Sat Sep 29 21:43:30 2018
-* Last Modified : Sat Sep 29 21:44:32 2018
+* Last Modified : Sat Sep 29 23:26:24 2018
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -25,7 +25,7 @@ role ArbreBinaire[::Type] {
     method visite-préordre(&cb) {
         cb $.noeud;
         for $.gauche, $.droite -> $branche {
-            $branche.visite-préordre (&cb) if defined $branche;
+            $branche.visite-préordre(&cb) if defined $branche;
         }
     }
     method visite-postordre(&cb) {
@@ -41,9 +41,9 @@ role ArbreBinaire[::Type] {
         my @droite       = @el[$index-milieu + 1 .. *];
         self.new(
             noeud   => $milieu,
-            gauche  => @gauche  ?? self.nouv-de-la-liste (@gauche)
+            gauche  => @gauche  ?? self.nouv-de-la-liste(@gauche)
                                 !! self,
-            droite  => @droite ?? self.nouv-de-la-liste (@droite)
+            droite  => @droite ?? self.nouv-de-la-liste(@droite)
                                !! self,
         );
     }
