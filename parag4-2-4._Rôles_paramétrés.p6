@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : parag4-2-4._Rôles_paramétrés.p6
 * Creation Date : Sat Sep 29 21:43:30 2018
-* Last Modified : Sat Sep 29 23:26:24 2018
+* Last Modified : Wed Oct  3 01:15:44 2018
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -34,16 +34,16 @@ role ArbreBinaire[::Type] {
         }
         cb $.noeud;
     }
-    method nouv-de-la-liste(::?CLASS:U: *@el) {
-        my $index-milieu = @el.elems div 2;
-        my @gauche       = @el[0 .. $index-milieu - 1];
-        my $milieu       = @el[$index-milieu];
-        my @droite       = @el[$index-milieu + 1 .. *];
-        self.new(
-            noeud   => $milieu,
-            gauche  => @gauche  ?? self.nouv-de-la-liste(@gauche)
+    method nouv-de-la-liste(::?CLASS:U: *@el) { # for class methods
+        my $index-milieu = @el.elems div 2; # we get number of elements from the list then we divide it by two
+        my @gauche       = @el[0 .. $index-milieu - 1]; # we take from the list the  first element till the one that is before the on in the middle of the list
+        my $milieu       = @el[$index-milieu]; # wetake the one in the middle
+        my @droite       = @el[$index-milieu + 1 .. *]; # we we take to the next element after the one that is in the middle then we'll take the last from the list
+        self.new(   # self that's the class
+            noeud   => $milieu, # value of the node
+            gauche  => @gauche  ?? self.nouv-de-la-liste(@gauche) # we create a new objet left side
                                 !! self,
-            droite  => @droite ?? self.nouv-de-la-liste(@droite)
+            droite  => @droite ?? self.nouv-de-la-liste(@droite) # we create a new objet right side
                                !! self,
         );
     }
