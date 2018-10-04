@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : the::?CLASSVariable.p6
 * Creation Date : Wed Oct  3 00:22:10 2018
-* Last Modified : Wed Oct  3 00:23:57 2018
+* Last Modified : Fri Oct  5 00:48:30 2018
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -38,5 +38,7 @@ class Pizza {
 my $p = Pizza.from-ingredients: <cheese pepperoni vegetables>;
 say $p.ingredients;     # OUTPUT: «[cheese pepperoni vegetables]␤»
 say $p.get-radius;      # OUTPUT: «42␤»
+say "---->"~Pizza.new.get-radius();   # This will be ok
+say "x---->"~Pizza.new.get-radius;   # This will be ok
 say Pizza.get-radius;   # This will fail.
 CATCH { default { put .^name ~ ":\n" ~ .Str } };
