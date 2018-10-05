@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : parag2-2-4.Tables_de_hachage_p6b.p6
 * Creation Date : Fri Oct  5 23:03:54 2018
-* Last Modified : Fri Oct  5 23:17:23 2018
+* Last Modified : Fri Oct  5 23:19:31 2018
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -25,3 +25,4 @@ my %boissons =
 say "Boisson favorite en France : ",  %boissons{'France'};
 say "Pays: ", %boissons.keys.sort;
 say "Boissons: ", %boissons.values.sort;
+say %boissons<Angleterre>;     # imprime 'Tea'@@:wq
