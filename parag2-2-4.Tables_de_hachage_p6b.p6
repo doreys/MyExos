@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : parag2-2-4.Tables_de_hachage_p6b.p6
 * Creation Date : Fri Oct  5 23:03:54 2018
-* Last Modified : Fri Oct  5 23:25:25 2018
+* Last Modified : Sat Oct  6 00:00:30 2018
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -34,3 +34,6 @@ say %hash;    # imprime: ("jan" => "1", "fev" => "2", "mar" => "3",
 say values %hash;    # imprime 1 2 3 4 5 6
 say %hash.keys;      # imprime jan fev mar avr mai jun
 say $_ for %hash.pairs;
+for %hash.kv -> $a,$b {
+	say "$a     $b";
+}
