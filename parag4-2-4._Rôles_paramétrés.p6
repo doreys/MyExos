@@ -7,7 +7,11 @@ use v6 ;
 * Created By : sdo
 * File Name : parag4-2-4._Rôles_paramétrés.p6
 * Creation Date : Sat Sep 29 21:43:30 2018
+<<<<<<< HEAD
 * Last Modified : Wed Oct  3 21:20:34 2018
+=======
+* Last Modified : Wed Oct  3 01:15:44 2018
+>>>>>>> 9e6d34c625ff056c9bf61e2ed6bc507a8d58dd69
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:

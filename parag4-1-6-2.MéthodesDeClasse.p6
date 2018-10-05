@@ -7,7 +7,11 @@ use v6 ;
 * Created By : sdo
 * File Name : parag4-1-6-2.MéthodesDeClasse.p6
 * Creation Date : Sat Sep 22 13:42:15 2018
+<<<<<<< HEAD
 * Last Modified : Tue Sep 25 00:36:38 2018
+=======
+* Last Modified : Mon Sep 24 23:04:11 2018
+>>>>>>> 9e6d34c625ff056c9bf61e2ed6bc507a8d58dd69
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -60,5 +64,8 @@ class Employé {
 # Undeclared routine:
 #     valeur-matricule-courant used at line ...
 
+<<<<<<< HEAD
 say Employé::matricule-courant;
+=======
+>>>>>>> 9e6d34c625ff056c9bf61e2ed6bc507a8d58dd69
 say "Matricule courant = ", Employé::valeur-matricule-courant;
