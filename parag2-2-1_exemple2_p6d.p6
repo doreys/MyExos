@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : parag2-2-1_exemple2_p6d.p6
 * Creation Date : Fri Oct  5 15:22:49 2018
-* Last Modified : Fri Oct  5 20:55:16 2018
+* Last Modified : Fri Oct  5 21:03:28 2018
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -54,3 +54,10 @@ lines
 of comment
 
 =end comment
+
+#= ERREUR. Syntaxe d'appel correcte: ...
+sub ma_fonction{
+    ...
+}
+
+#say ma_fonction.WHY;
