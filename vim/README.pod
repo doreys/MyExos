@@ -1,0 +1,126 @@
+=head1 README
+
+The following can be adapted to your needs.
+
+=head1 To change
+
+Read the paragraph B<Hierarchy of files and directories>.
+
+In some files there is C<<< <base_dir> >>> change it with appropriate path to find the file or the directory.
+
+=head1 Prerequisites
+
+In the directory <base_dir>/.vim two directories are needed.
+
+The mkdir command is needed to create 2 directories if they don't exist.
+
+=over
+
+mkdir -p <base_dir>/.vim/vimrc
+
+mkdir -p <base_dir>/.vim/headers
+
+=back
+
+=head2 <base_dir>/.vimrc
+
+The file that is read by default (read later on).
+
+=head2 <base_dir>/.vim/vimrc
+
+Contains the instructions.
+
+=head2 <base_dir>/.vim/headers
+
+Contains the headers. Can be modified.
+
+=head1 Local variables
+
+Some local variables within the following files s.a $USER, $HOSTNAME can be changed too, to fit to your needs.
+
+=head1 Hierarchy of files and directories
+
+<base_dir> is the home directory.
+
+<base_dir>/.vimrc is the file that vim will be read in your home directory (standard configuration with vim on Mac OS X).
+
+Put in C<<< <base_dir>/.vimrc >>> the content of the file B<dot.vim.rc>.
+
+->: Calls the file
+
+<base_dir>/.vimrc -> <base_dir>/.vim/vimrc/pm_vimrc
+
+<base_dir>/.vimrc -> <base_dir>/.vim/vimrc/p6_vimrc -> <dir_base>/.vim/headers/p6_header.txt
+
+<base_dir>/.vimrc -> <base_dir>/.vim/vimrc/p6_vimrc -> <dir_base>/.vim/headers/pm6_header.txt
+
+=head1 Admin duties a basic example
+
+In <base_dir>/.vim/vimrc you can specify all the file types that you wants as long as you specify the file type in a file.
+
+If you type I<vi foo.p6> you'll get this:
+
+
+=over
+
+ #!/usr/bin/env perl6
+ 
+ use v6 ;
+
+ # ------------------------------------------------------
+ #`[
+ * Created By :
+ * File Name :
+ * Creation Date : Sun Sep  9 14:10:50 2018
+ * Last Modified :
+ * Email Address :
+ * Version : 0.0.0.0
+ * License:
+ *       Permission is granted to copy, distribute, and/or modify this document under the terms of the Creative Commons Attribution-NonCommercial 3.0
+ *       Unported License, which is available at http://creativecommons.org/licenses/by- nc/3.0/.
+ * Purpose :
+ ]
+ # ------------------------------------------------------
+
+=back
+
+Save the file for the first time with I<:w> then you'll get this message:
+
+=over
+
+ "foo.p6" [New] 18L, 605C written
+ W16: Warning: Mode of file "foo.p6" has changed since editing started
+ See ":help W16" for more info.
+ [O]K, (L)oad File:
+
+=back
+
+Press enter to accept. Then you'll get the following and then you can save with I<:w>. 
+
+Next save it will modify the last date saved in the field I<* Last Modified :> and, fill some fields for you.
+
+=over
+
+ #!/usr/bin/env perl6
+ use v6 ;
+
+ # ------------------------------------------------------
+ #`[
+ * Created By : sdo
+ * File Name : foo.p6
+ * Creation Date : Sun Sep  9 14:10:50 2018
+ * Last Modified : Sun Sep  9 14:27:18 2018
+ * Email Address : 
+ * Version : 0.0.0.0
+ * License:
+ *       Permission is granted to copy, distribute, and/or modify this document under the terms of the Creative Commons Attribution-NonCommercial 3.0
+ *       Unported License, which is available at http://creativecommons.org/licenses/by- nc/3.0/.
+ * Purpose :
+ ]
+ # ------------------------------------------------------
+
+=back
+
+=head1 Source
+
+ https://www.vim.org/

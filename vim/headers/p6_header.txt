@@ -1,0 +1,17 @@
+:insert
+#!/usr/bin/env perl6
+
+use v6 ;
+
+# ------------------------------------------------------
+#`[
+* Created By :  
+* File Name :
+* Creation Date :
+* Last Modified :
+* Email Address :  
+* Version : 0.0.0.0
+* Purpose :
+]
+# ------------------------------------------------------
+.
