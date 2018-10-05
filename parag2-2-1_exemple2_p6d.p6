@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : parag2-2-1_exemple2_p6d.p6
 * Creation Date : Fri Oct  5 15:22:49 2018
-* Last Modified : Fri Oct  5 15:24:15 2018
+* Last Modified : Fri Oct  5 15:30:25 2018
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -33,9 +33,12 @@ et une accolade fermante }.
  Ainsi: ]} = 2.71828;
 say "e vaut: $e";
 
+#`{{{{
 my $nb_or = #`({
 Autre commentaire multiligne.
 On a ouvert avec une parenthese ( et une
 accolade {, on ferme avec une accolade }
 et une parenthese ), comme suit: }) 1.618;
 say "Le nombre d'or est: $nb_or";
+}}}}
+say "hello";
