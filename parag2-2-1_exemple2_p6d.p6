@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : parag2-2-1_exemple2_p6d.p6
 * Creation Date : Fri Oct  5 15:22:49 2018
-* Last Modified : Fri Oct  5 15:30:25 2018
+* Last Modified : Fri Oct  5 20:55:16 2018
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -42,3 +42,15 @@ et une parenthese ), comme suit: }) 1.618;
 say "Le nombre d'or est: $nb_or";
 }}}}
 say "hello";
+
+if #`( why would I ever write an inline comment here? ) True {
+    say "something stupid";
+}
+
+=begin comment
+
+Here are several
+lines
+of comment
+
+=end comment
