@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : parag4-1_p6b.p6
 * Creation Date : Sat Oct  6 23:28:45 2018
-* Last Modified : Sat Oct  6 23:28:58 2018
+* Last Modified : Sat Oct  6 23:37:39 2018
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -17,6 +17,7 @@ use v6 ;
 ]
 # ------------------------------------------------------
 
+my Int $pourcent=1;
 if $pourcent > 100  {
     say "drôle d'arithmétique";
 }
