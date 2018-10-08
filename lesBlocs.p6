@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : lesBlocs.p6
 * Creation Date : Mon Oct  8 16:28:21 2018
-* Last Modified : Mon Oct  8 16:28:41 2018
+* Last Modified : Mon Oct  8 16:41:14 2018
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -18,6 +18,19 @@ use v6 ;
 # ------------------------------------------------------
 
 my $x = -> $a, $b { say "Argument 1 : $a - Argument 2: $b"; }
+my $nom = "Jacques";
 $x(10, 20);
 $x(3.14159265, 2.71828183);
 $x("Un", "Deux");
+
+my $block;
+{
+  my $nom = "Sébastien";
+  $block = { say $nom };
+}
+$block();
+$nom = "Dorey";
+$block();
+$block();
+$nom = "Sébastien";
+$block();
