@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : parag5-2_Description_p6b.p6
 * Creation Date : Mon Oct  8 13:12:58 2018
-* Last Modified : Mon Oct  8 13:13:08 2018
+* Last Modified : Mon Oct  8 13:19:52 2018
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -32,3 +32,13 @@ sub quox($toto is copy){
     $toto = 3;
 }
 quox($x); say $x     # à nouveau 0
+
+sub fonction1($x, $y?) {
+    if $y.defined {
+        say "Le second paramètre a été fourni et défini";
+    }
+}
+
+sub fonction2($x, $y = 2 * $x) {
+    # ...
+}
