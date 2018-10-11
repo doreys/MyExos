@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : parag6-1.Résumé_p6b.p6
 * Creation Date : Thu Oct 11 23:29:13 2018
-* Last Modified : Thu Oct 11 23:30:32 2018
+* Last Modified : Thu Oct 11 23:47:44 2018
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -39,3 +39,9 @@ my $x = Rectangle.new(
 say $x.aire;            # imprime 600
 say $x.couleur;         # imprime 'noir'
 $x.couleur = 'bleu';
+
+class NomClasse {
+    # définition de la classe dans ce bloc
+}
+# autres définitions de classes ou code autre
+
