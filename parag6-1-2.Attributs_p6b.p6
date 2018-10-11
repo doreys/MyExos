@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : parag6-1-2.Attributs_p6b.p6
 * Creation Date : Fri Oct 12 00:30:59 2018
-* Last Modified : Fri Oct 12 00:31:57 2018
+* Last Modified : Fri Oct 12 00:34:40 2018
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -39,3 +39,5 @@ say $x.a;       # ERREUR!
 say $x.b;       # OK
 $x.b = 2;       # ERREUR!
 $x.c = 3;       # OK
+say $x.a;       # ERREUR!
+say $x.b;       # OK
