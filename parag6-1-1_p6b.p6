@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : parag6-1-1_p6b.p6
 * Creation Date : Thu Oct 11 23:49:07 2018
-* Last Modified : Thu Oct 11 23:49:36 2018
+* Last Modified : Thu Oct 11 23:54:08 2018
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -30,3 +30,16 @@ my SomeClass $x .= new;
 $x.foo;          # même chose que $x
 $x.bar;          # pareil
 $x.foo.bar ;     # idem
+
+
+class Foo {
+    method !private($toto) {
+        return "Reçu le param $toto";
+    }
+
+    method publique {
+        say self!private("foo");
+    }
+}
+my Foo $x .= new;
+$x.publique;  # imprime "Reçu le param foo"
