@@ -5,9 +5,9 @@ use v6 ;
 # ------------------------------------------------------
 #`[
 * Created By : sdo
-* File Name : parag5-2-2_ParamètresOptionnels.p6
+* File Name : parag5-2-2_ParamètresOptionnels_p6b.p6
 * Creation Date : Wed Oct 10 15:46:20 2018
-* Last Modified : Wed Oct 10 15:57:27 2018
+* Last Modified : Thu Oct 11 20:56:50 2018
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -40,12 +40,18 @@ use v6 ;
 			Reste:
 			Je désire un steak, mais avec quelques modifications:
 			oignons, bien-cuit
+
+	* Nouvelle série de tests
+		On teste les paramètres gloutons ou slupy array.
+		Le test est le suivant. Que se passe-t-il si l'on affiche un élément du 
+		tableau (avec son rang) dont le rang dépasse la taille ie: rang=9 taille tableau=4
 ]
 # ------------------------------------------------------
 
 sub ma_fonction ($param1, *@reste){
     say "Premier: $param1";
     say "Reste: @reste[]";
+    say @reste[9];
 }
 ma_fonction(1, 2, 3, 4);
 ma_fonction(1);
