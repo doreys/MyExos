@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : parag5-2-2_ParamètresOptionnels_p6b.p6
 * Creation Date : Wed Oct 10 15:46:20 2018
-* Last Modified : Thu Oct 11 20:56:50 2018
+* Last Modified : Thu Oct 11 21:14:50 2018
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -51,7 +51,11 @@ use v6 ;
 sub ma_fonction ($param1, *@reste){
     say "Premier: $param1";
     say "Reste: @reste[]";
-    say @reste[9];
+    if @reste[9] ~~ Any {
+	    say "inexistant";
+    } else {
+	    say @reste[9];
+    }
 }
 ma_fonction(1, 2, 3, 4);
 ma_fonction(1);
