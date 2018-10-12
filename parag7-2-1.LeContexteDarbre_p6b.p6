@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : parag7-2-1.LeContexteDarbre_p6b.p6
 * Creation Date : Fri Oct 12 19:53:38 2018
-* Last Modified : Fri Oct 12 21:30:09 2018
+* Last Modified : Fri Oct 12 22:34:51 2018
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -40,9 +40,10 @@ use v6 ;
 ]
 # ------------------------------------------------------
 
+my @tt = (<a b c> Z <5 2 3>).tree;
+say @tt;
 my @a = <a b c> Z <2 2 3>;
 say @a.join;         # imprime : a1b2c3
-#my @t = (<a b c> Z <5 2 3>).tree;
 my @t = <a b c> Z <15 2 3>;
 say @t.elems;
 
