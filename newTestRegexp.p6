@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : newTestRegexp.p6
 * Creation Date : Sat Oct 13 20:11:45 2018
-* Last Modified : Sat Oct 13 20:11:59 2018
+* Last Modified : Sat Oct 13 20:14:02 2018
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -19,4 +19,8 @@ use v6 ;
 
 if 'abc' ~~ /(a) b (c)/ {
     say "0: $0; 1: $1";             # OUTPUT: «0: a; 1: c␤»
+}
+
+if 'abc' ~~ /(a) b (c)/ {
+    say $/.list.join: ', '  # OUTPUT: «a, c␤»
 }
