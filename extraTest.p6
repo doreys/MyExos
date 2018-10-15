@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : extraTest.p6
 * Creation Date : Mon Oct 15 03:16:11 2018
-* Last Modified : Mon Oct 15 03:23:58 2018
+* Last Modified : Mon Oct 15 03:26:50 2018
 * Email Address : sdo@MacBook-Pro-de-SDO.local
 * Version : 0.0.0.0
 * License:
@@ -26,3 +26,5 @@ my @tableau2 = <a b c> Z <1 2 3>;
 for @tableau2 -> $paire {
     say "premier: $paire[0]  second: $paire[1]"
 }
+my @tableau3 = <a b c> Z <1 2 3>.flat;
+say @tableau3;
