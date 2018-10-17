@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : parargLes_jonction_1-2.Description_p6bp2.p6
 * Creation Date : Tue Oct 16 21:30:52 2018
-* Last Modified : Tue Oct 16 23:10:42 2018
+* Last Modified : Wed Oct 17 21:54:50 2018
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -55,3 +55,8 @@ if $jour eq $jour_semaine {
     say "Rendez-vous $jour à 20 h pour dîner";
 }
 }}}
+
+my $j = 1|2;
+if 3 == ($j + 1) {
+    say 'yes ',$j,' ',$j+1;
+}
