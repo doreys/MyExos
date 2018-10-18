@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : parargLes_jonction_1-2.Description_p6bp2.p6
 * Creation Date : Tue Oct 16 21:30:52 2018
-* Last Modified : Wed Oct 17 22:39:07 2018
+* Last Modified : Wed Oct 17 23:57:35 2018
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -50,7 +50,9 @@ say 25 ~~ (25 | 42);    # OUTPUT: «True␤»             – Bool
 
 my Junction $jour_semaine = any <lundi mardi mercredi
                             jeudi vendredi samedi dimanche>;
-my $jour = $jour_semaine[0];
+
+say "-------->",$jour_semaine[0];
+my $jour = "mardi";
 
 if $jour eq $jour_semaine {
     say "Rendez-vous $jour à 20 h pour dîner";
@@ -60,3 +62,7 @@ my $j = 1|2;
 if 3 == ($j + 1) {
     say 'yes ',$j,' ',$j+1;
 }
+
+say "$_ est un nombre de Fibonacci"
+     for grep { $_ == any(<1 2 3 5 8 13>)}, 1..20;
+     # Noter la virgule après le bloc du grep en Perl 6
