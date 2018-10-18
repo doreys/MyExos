@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : parargLes_jonction_1-2.Description_p6bp2.p6
 * Creation Date : Tue Oct 16 21:30:52 2018
-* Last Modified : Thu Oct 18 10:11:36 2018
+* Last Modified : Thu Oct 18 10:12:48 2018
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -74,3 +74,7 @@ say "$_ est un nombre de Fibonacci" for grep { $_ == any(@fib)}, 1..20;
 # Test sur un seul élément
 my @fib = <1 2 3 5 8 13>;
 say "Oui" if 8 == any(@fib); # Affiche "Oui"
+
+if 2 == sqrt(4 | 9 | 16) {
+    say "Oui"; # imprime Oui, puisque 2 est bien la racine de 4
+}
