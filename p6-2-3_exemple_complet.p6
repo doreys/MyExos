@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : p6-2-3_exemple_complet.p6
 * Creation Date : Tue Jan  1 15:52:03 2019
-* Last Modified : Tue Jan  1 22:43:39 2019
+* Last Modified : Tue Jan  1 23:02:01 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -18,35 +18,22 @@ use v6 ;
 # ------------------------------------------------------
 
 multi sub prefix:<-> (Pair $x) is equiv(&prefix:<->) {
-
 	# opposé d'un nombre complexe
-
 	- $x.key => - $x.value;
-
 }
 
 multi sub infix:<+> (Pair $x, Pair $y) is equiv(&infix:<+>) {
-
 	# somme de nombres complexe
-
 	my $key = $x.key + $y.key; 
-
 	my $val = $x.value + $y.value; 
-
 	return $key=>$val
-
 }
 
 multi sub infix:<*> (Pair $x, Pair $y) is equiv(&infix:<*>) {
-
 	# produit de nombres complexes
-
 	my $key = $x.key * $y.key - $x.value * $y.value; 
-
 	my $val = $x.key * $y.value + $x.value * $y.key; 
-
 	return $key=>$val
-
 }
 
 my $a = 4=>3; # une paire pour le complexe 4 + 3i
