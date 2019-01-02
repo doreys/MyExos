@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : p8-1_examplr.p6
 * Creation Date : Wed Jan  2 13:55:48 2019
-* Last Modified : Wed Jan  2 14:25:07 2019
+* Last Modified : Wed Jan  2 14:49:48 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
