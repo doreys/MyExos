@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : p8-2_p6b-p2_description.p6
 * Creation Date : Wed Jan  2 21:36:38 2019
-* Last Modified : Wed Jan  2 21:36:55 2019
+* Last Modified : Wed Jan  2 21:43:18 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -21,4 +21,11 @@ use v6 ;
 my $block = { say "$^c $^a $^b" };
 $block(1, 2, 3);          # imprime :  3 1 2
 
+my @list = 2,1,3,7,99,12;
 
+say @list;
+@list = sort { $^b <=> $^a }, @list; # virgule après le bloc
+say @list;
+# ou:
+@list = sort { $^toto <=> $^tuti }, @list;
+say @list;
