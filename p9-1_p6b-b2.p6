@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : p9-1_p6b-b2.p6
 * Creation Date : Sat Jan  5 14:09:59 2019
-* Last Modified : Sun Jan  6 04:44:43 2019
+* Last Modified : Sun Jan  6 04:46:05 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -18,7 +18,23 @@ use v6 ;
 # ------------------------------------------------------
 #
 
+enum bit Bool <False True>;
+my $value = $arbitrary_value but True;
+if $value {
+    say "Yes, it's true";       # sera imprimé
+}
 
+enum Day ('Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun');
+if custom_get_date().Day == Day::Sat | Day::Sun {
+    say "Weekend";
+}
+
+my enum chiffres_romains (I => 1,   V => 5,
+                X => 10,  L => 50,
+                C => 100, D => 500,
+                M => 1000);
+say chiffres_romains.enums.kv; 
+         # imprime: I 1 V 5 X 10 L 50 C 100 D 500 M 1000
 
 my enum ouinon <non oui>; # les constantes oui et non prennent vie
 say ouinon.enums;         # imprime ("non" => 0, "oui" => 1).hash
