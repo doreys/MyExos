@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : p11-2-2_p6b-p2_valeurDuCompteurPorteeLexicale.p6
 * Creation Date : Sun Jan 13 15:36:42 2019
-* Last Modified : Sun Jan 13 15:36:51 2019
+* Last Modified : Sun Jan 13 15:48:08 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -17,6 +17,7 @@ use v6 ;
 ]
 # ------------------------------------------------------
 
+#my $j=123;
 for 1..5 -> $j {
     say "La valeur du compteur dans la boucle est $j";
 }
