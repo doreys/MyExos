@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : p6b-p3_parag-1-1-1.p6
 * Creation Date : Tue Jan 15 11:43:36 2019
-* Last Modified : Tue Jan 15 23:29:26 2019
+* Last Modified : Tue Jan 15 23:38:53 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -20,6 +20,8 @@ use v6 ;
 
 my $x = 'Abcd';
 
+say $x; # Foocd
+
 $x ~~ s:ii/^../foo/;
 
 say $x; # Foocd
@@ -28,4 +30,4 @@ $x = 'ABC';
 
 $x ~~ s:ii/^../foo/;
 
-say $x # FOO
+say $x # FOOC et non FOO
