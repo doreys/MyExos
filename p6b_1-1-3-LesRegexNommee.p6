@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : p6b_1-1-3-LesRegexNommee.p6
 * Creation Date : Sat Jan 19 12:18:38 2019
-* Last Modified : Sat Jan 19 14:50:44 2019
+* Last Modified : Sat Jan 19 14:53:18 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -46,7 +46,7 @@ my regex entier {
     <decimal>
 }
 
-my regex float {
+my regex float3 {
     <signe>?
     [
     || <decimal>?  '.' <decimal> <exposant>?
