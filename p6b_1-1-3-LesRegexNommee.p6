@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : p6b_1-1-3-LesRegexNommee.p6
 * Creation Date : Sat Jan 19 12:18:38 2019
-* Last Modified : Sat Jan 19 12:24:04 2019
+* Last Modified : Sat Jan 19 14:50:44 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -19,41 +19,37 @@ use v6 ;
 #
 
 my regex float {
+	<[+-]>? # signe optionnel
+	\d* # chiffres avant la virgule, optionnel (en anglais)
+	'.' # séparateur décimal (la "virgule")
+	\d+ # chiffres après la virgule
+	[ # exposant optionnel
+		e <[+-]>? \d+
+	]?
+}
 
-	 <[+-]>? # signe optionnel
 
-	  \d* # chiffres avant la virgule, optionnel (en anglais)
 
-	   '.' # séparateur décimal (la "virgule")
+my token signe { <[+-]> }
+my token decimal { \d+ }
+my token exposant { 'e' <signe>? <decimal> }
+my regex float2 {
+	<signe>?
+	<decimal>?
+	'.'
+	<decimal>
+	<exposant>?
+}
 
-	    \d+ # chiffres après la virgule
+my regex entier {
+    <signe>?
+    <decimal>
+}
 
-	     [ # exposant optionnel
-
-		      e <[+-]>? \d+
-
-		       ]?
-
-	       }
-
-	 
-
-	       my token signe { <[+-]> }
-
-	       my token decimal { \d+ }
-
-	       my token exposant { 'e' <signe>? <decimal> }
-
-	       my regex float {
-
-		        <signe>?
-
-			 <decimal>?
-
-			  '.'
-
-			   <decimal>
-
-			    <exposant>?
-
-		    }
+my regex float {
+    <signe>?
+    [
+    || <decimal>?  '.' <decimal> <exposant>?
+    || <decimal> <exposant>
+    ]
+}
