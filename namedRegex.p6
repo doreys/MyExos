@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : namedRegex.p6
 * Creation Date : Sat Jan 26 22:02:06 2019
-* Last Modified : Sat Jan 26 22:08:00 2019
+* Last Modified : Sun Jan 27 00:27:53 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -23,11 +23,13 @@ True
 ]
 # ------------------------------------------------------
 
-my regex works-but-slow { .+ q }
-my token fails-but-fast { .+ q }
+my regex works-but-slow { ( .+ q ) }
+my token fails-but-fast { ( .+ q ) }
 my $s = 'Tokens won\'t backtrack, which makes them fail quicker!';
 say so $s ~~ &works-but-slow; # OUTPUT: «True␤»
+say "------>$0";
 say so $s ~~ &fails-but-fast; # OUTPUT: «False␤»
+say "------>$0";
                               # the entire string get taken by the .+
 say so $s ~~ m/(.+ q)/;
 say $0;
