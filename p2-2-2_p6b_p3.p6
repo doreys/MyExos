@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : p2-2-2_p6b_p3.p6
 * Creation Date : Fri Jan 25 16:54:56 2019
-* Last Modified : Fri Jan 25 20:57:59 2019
+* Last Modified : Sat Jan 26 14:46:31 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
