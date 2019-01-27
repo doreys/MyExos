@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : parag8-1_p6b.p6
 * Creation Date : Sat Oct 13 00:27:44 2018
-* Last Modified : Sun Jan 27 01:02:08 2019
+* Last Modified : Sun Jan 27 01:42:50 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -23,7 +23,7 @@ use v6 ;
 
 # Une grammaire pour analyser syntaxiquement (parser) une URL:
 grammar URL {
-    token TOP {
+    token #`( Where to start) TOP {
         <schema> '://' 
         [<ip> | <hostname> ]
         [ ':' <port>]?
