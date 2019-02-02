@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : p1-1-2_p6b-p3.p6
 * Creation Date : Wed Jan 16 12:57:28 2019
-* Last Modified : Wed Jan 16 12:58:14 2019
+* Last Modified : Sat Feb  2 12:58:38 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -19,17 +19,11 @@ use v6 ;
 
 
 if 'abcdef' ~~ / de / {
+	say ~$/; # de
+	say $/.prematch; # abc
+	say $/.postmatch; # f
+	say $/.from; # 3
+	say $/.to; # 5
+};
 
-	 say ~$/; # de
 
-	  say $/.prematch; # abc
-
-	   say $/.postmatch; # f
-
-	    say $/.from; # 3
-
-	     say $/.to; # 5
-
-     };
-
-  
