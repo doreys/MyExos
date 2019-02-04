@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : p6b-p3-parag1-1-4-alternatives.p6
 * Creation Date : Sat Jan 19 23:46:15 2019
-* Last Modified : Sat Feb  2 16:23:07 2019
+* Last Modified : Mon Feb  4 00:00:37 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -23,5 +23,23 @@ use v6 ;
 $_ = '12 oranges';
 my @fruits = <pomme orange banane kiwi>;
 if m:i:s #`(m: match regex ; i: incensitive ; s: sigspace space not ignored ) / (\d+) #`{match one or more digit(s) }  (@fruits)s? #`( make it match one of the element of the array @fruits and then put one s or not at the end of the matched element from the array @fruits ) / {
-    say "Vous avez $0 $1s, j'en ai { $0 + 2 }. Vous avez perdu.";
+    say "1. Vous avez $0 $1s, j'en ai { $0 + 2 }. Vous avez perdu.";
+}
+if m:i:s/ (\d+) (@fruits)s? / {
+    say "2. Vous avez $0 $1s, j'en ai { $0 + 2 }. Vous avez perdu.";
+}
+if m:i:s/^ (\d+) (@fruits)s? $/ {
+    say "3. Vous avez $0 $1s, j'en ai { $0 + 2 }. Vous avez perdu.";
+}
+if m:i:s/^ (\d+)  (@fruits)s? $/ {
+    say "4. Vous avez $0 $1s, j'en ai { $0 + 2 }. Vous avez perdu.";
+}
+if m:i / (\d+) (@fruits)s? / {
+    say "4. Vous avez $0 $1s, j'en ai { $0 + 2 }. Vous avez perdu.";
+}
+if m:i /^ (\d+)  (@fruits)s? $/ {
+    say "5. Vous avez $0 $1s, j'en ai { $0 + 2 }. Vous avez perdu.";
+}
+if m:i / (\d+) ' ' (@fruits)s? / {
+    say "6. Vous avez $0 $1s, j'en ai { $0 + 2 }. Vous avez perdu.";
 }
