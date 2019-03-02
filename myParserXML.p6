@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : myParserXML.p6
 * Creation Date : Sat Mar  2 11:27:28 2019
-* Last Modified : Sat Mar  2 13:23:03 2019
+* Last Modified : Sat Mar  2 13:27:24 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -50,6 +50,6 @@ for @tests -> $t {
     } else {
         say "\tnot ok $count - '$s'";
     }
-    say $M.^mro;
+    #    say $M.^mro;
     $count++;
 }
