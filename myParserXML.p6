@@ -7,15 +7,16 @@ use v6 ;
 * Created By : sdo
 * File Name : myParserXML.p6
 * Creation Date : Sat Mar  2 11:27:28 2019
-* Last Modified : Tue Mar  5 11:47:42 2019
+* Last Modified : Tue Mar  5 12:29:40 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
 * 	Permission is granted to copy, distribute, and/or modify this document under the terms of the Creative Commons Attribution-NonCommercial 3.0 
 * 	Unported License, which is available at http: //creativecommons.org/licenses/by- nc/3.0/.
 * Purpose :
-	exta test:
-		du texte pur contient des entités telles que &amp; ;
+   exta test:
+	* du texte pur contient des entités telles que &amp; ;
+	* je ne sais pas si les noms des balises XML peuvent commencer par un chiffre, mais la grammaire actuelle (à l'époque de l'écriture de l'article) l'autorise. Vous pourriez vérifier la spécification XML et, si besoin, adopter cette grammaire ;
 ]
 # ------------------------------------------------------
 
@@ -25,7 +26,7 @@ grammar XML {
 	token text {
 			<-[<>&]>* <antite>*
 		}
-	rule tag { '<' (\w+) <attribute>* [
+	rule tag { '<' (\d*\w+) <attribute>* [
 						|'/>'
 						|'>' <xml> '</' $0 '>'
 					] 
@@ -57,6 +58,8 @@ my @tests = (
     [1, 'abc&amp'                       ],      # 1
     [1, 'abc&amp;'                       ],      # 1
     [1, 'abc&amp;aqwxsz'                       ],      # 1
+    [1, '<1a></a>'                   ],      # 2
+    [1, '<1a></1a>'                   ],      # 2
 );
 
 my $count = 1;
