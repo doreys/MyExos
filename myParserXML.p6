@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : myParserXML.p6
 * Creation Date : Sat Mar  2 11:27:28 2019
-* Last Modified : Tue Mar  5 12:31:11 2019
+* Last Modified : Tue Mar  5 12:37:28 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -17,6 +17,7 @@ use v6 ;
    exta test:
 	* du texte pur contient des entités telles que &amp; ;
 	* je ne sais pas si les noms des balises XML peuvent commencer par un chiffre, mais la grammaire actuelle (à l'époque de l'écriture de l'article) l'autorise. Vous pourriez vérifier la spécification XML et, si besoin, adopter cette grammaire ;
+	* du XML réel autorise des préambules du type <?xml version="0.9" encoding="utf-8"?> nécessitant une balise racine contenant le reste (il faudra peut-être modifier des cas de test) ;
 ]
 # ------------------------------------------------------
 
@@ -42,25 +43,25 @@ grammar XML {
 };
 
 my @tests = (
-    [1, 'abc'                       ],      # 1
-    [1, '<a></a>'                   ],      # 2
-    [1, '..<ab>foo</ab>dd'          ],      # 3
-    [1, '<a><b>c</b></a>'           ],      # 4
-    [1, '<a href="foo"><b>c</b></a>'],      # 5
-    [1, '<a empty="" ><b>c</b></a>' ],      # 6
-    [1, '<a><b>c</b><c></c></a>'    ],      # 7
-    [0, '<'                         ],      # 8
-    [0, '<a>b</b>'                  ],      # 9
+    [1, 'abc'                       ],      # 01
+    [1, '<a></a>'                   ],      # 02
+    [1, '..<ab>foo</ab>dd'          ],      # 03
+    [1, '<a><b>c</b></a>'           ],      # 04
+    [1, '<a href="foo"><b>c</b></a>'],      # 05
+    [1, '<a empty="" ><b>c</b></a>' ],      # 06
+    [1, '<a><b>c</b><c></c></a>'    ],      # 07
+    [0, '<'                         ],      # 08
+    [0, '<a>b</b>'                  ],      # 09
     [0, '<a>b</a'                   ],      # 10
     [0, '<a>b</a href="">'          ],      # 11
     [1, '<a/>'                      ],      # 12
     [1, '<a />'                     ],      # 13
-    [1, 'abc&amp'                       ],      # 1
-    [1, 'abc&amp;'                       ],      # 1
-    [1, 'abc&amp;aqwxsz'                       ],      # 1
-    [1, '<a1></a1>'                   ],      # 2
-    [1, '<1a></a>'                   ],      # 2
-    [1, '<1a></1a>'                   ],      # 2
+    [1, 'abc&amp'                   ],      # 14
+    [1, 'abc&amp;'                  ],      # 15
+    [1, 'abc&amp;aqwxsz'            ],      # 16
+    [1, '<a1></a1>'                 ],      # 17
+    [1, '<1a></a>'                  ],      # 18
+    [1, '<1a></1a>'                 ],      # 19
 );
 
 my $count = 1;
