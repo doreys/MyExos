@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : myParserXML.p6
 * Creation Date : Sat Mar  2 11:27:28 2019
-* Last Modified : Sat Mar  2 13:27:24 2019
+* Last Modified : Tue Mar  5 11:19:03 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -18,10 +18,17 @@ use v6 ;
 # ------------------------------------------------------
 
 grammar XML {
-	token TOP 	{ ^ <xml> $ }
-	token xml 	{ <text> [ <tag> <text> ] }
-	token tag 	{ '<' (\w+) '>' '</' $0 '>' }
-	token text 	{ <-[<>"/]>* }
+	token TOP { ^ <xml> $ }
+	token xml { <text> [ <tag> <text> ]* }
+	token text { <-[<>&]>* }
+	rule tag { '<' (\w+) <attribute>* [
+						|'/>'
+						|'>' <xml> '</' $0 '>'
+					] 
+		}
+	token attribute { \w+ '="' <-[="<>]>* \" }
+	#rule tag 	{ '<' (\w+) <attribute> '>' <xml> '</' $0 '>' }
+	#token attribute { \w+ '="' <-["<>]>* \" }
 };
 
 my @tests = (
@@ -44,12 +51,11 @@ my $count = 1;
 for @tests -> $t {
     my $s = $t[1];
     my $M = XML.parse($s);
-    say $t[1];
     if !($M  xor $t[0]) {
-        say "\tok $count - '$s'";
+        say "ok $count - '$s'";
     } else {
-        say "\tnot ok $count - '$s'";
+        say "not ok $count - '$s'";
     }
-    #    say $M.^mro;
     $count++;
 }
+
