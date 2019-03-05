@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : myParserXML.p6
 * Creation Date : Sat Mar  2 11:27:28 2019
-* Last Modified : Tue Mar  5 12:29:40 2019
+* Last Modified : Tue Mar  5 12:31:11 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -58,6 +58,7 @@ my @tests = (
     [1, 'abc&amp'                       ],      # 1
     [1, 'abc&amp;'                       ],      # 1
     [1, 'abc&amp;aqwxsz'                       ],      # 1
+    [1, '<a1></a1>'                   ],      # 2
     [1, '<1a></a>'                   ],      # 2
     [1, '<1a></1a>'                   ],      # 2
 );
