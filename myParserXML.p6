@@ -9,7 +9,7 @@ use v6 ;
 * Created By : sdo
 * File Name : myParserXML.p6
 * Creation Date : Sat Mar  2 11:27:28 2019
-* Last Modified : Thu Mar 14 11:09:59 2019
+* Last Modified : Thu Mar 21 19:26:50 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -47,10 +47,11 @@ grammar XML {
 		]
 	}
 
-	rule myCDATA { '<![CDATA[' [ 
+	token myCDATA { '<![CDATA[' [ 
 					| \w+
 					| \s+
 					| <tag>+
+					#| <myCDATA>
 				]* 
 			']]>' <xml> 
 	}
@@ -87,6 +88,8 @@ my @tests = (
     [1, 'abctotozezrerze'                       ],      # 24
     [1, 'abc toto zezrerze'                       ],      # 24
     [1, '[['                       ],      # 24
+    [1, 'azert<![CDATA[ <! [CDATA[  <a></a> ]] <a></a> ]]>qsdsqd dsfdsfsd'                 ],      # 23
+    [1, 'azert<![CDATA[ <CDATA>  <a>![]</a> </CDATA> <a></a> ]]>qsdsqd dsfdsfsd'                 ],      # 23
 );
 
 my $count = 1;
