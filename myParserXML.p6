@@ -2,14 +2,14 @@
 
 use v6 ;
 
-use Grammar::Tracer;
+#use Grammar::Tracer;
 
 # ------------------------------------------------------
 #`[
 * Created By : sdo
 * File Name : myParserXML.p6
 * Creation Date : Sat Mar  2 11:27:28 2019
-* Last Modified : Sat Mar 23 16:30:56 2019
+* Last Modified : Sat Mar 23 23:28:38 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -26,27 +26,58 @@ use Grammar::Tracer;
 
 grammar XML {
 	token TOP { ^ <xml> $ }
-	token xml { <text> [ <tag> <text> ]* }
+
+	token xml { [ 
+			| <myxml1> 
+			| <myxml2> 
+		] }
+
+	token myxml1 { <text> [ <tag> <text> ]* }
+
+	token myxml2 { <text2> [ <tag> <text2> ]* }
+
 	rule text {
 		<basicText>
 		[
 			| <basicText>
 			| <basicAntity>
+			| <myCDATA>
 		]
-#`(
-			| <myCDATA> <text>
-			[ <-[<>&]>* <antite> ]*
-			[ <-[<>&]>* <myCDATA> ]*
-)
-		}
+	}
+
+	rule text2 {
+		<basicText2>
+		[
+			| <basicText2>
+			| <basicAntity>
+			| <myCDATA>
+		]
+	}
 
 	rule basicText {
 		<-[<>&]>* 
 	}
+
+	rule basicText2 {
+		<-[<>&\[\]]>* 
+	}
+
 	rule basicAntity {
 		<antity> <text>
 	}
 
+	rule corpseCDATA {
+		[ 
+			| <text2>
+		]
+	}
+
+	rule myCDATA
+	{ 
+		'<![CDATA[' 
+			<corpseCDATA>
+		']]>' <xml> 
+	}
 
 
 	rule tag { '<' (\d*\w+) <attribute>* [
@@ -62,19 +93,6 @@ grammar XML {
 			| '&amp;'
 		]
 	}
-
-	rule myCDATA
-	{ '<![CDATA[' [ 
-					| \w+
-					| \s+
-					| <tag>+
-					#| <myCDATA>
-				]* 
-			']]>' <xml> 
-	}
-	#token ecda { ']]>' }
-	#rule tag 	{ '<' (\w+) <attribute> '>' <xml> '</' $0 '>' }
-	#token attribute { \w+ '="' <-["<>]>* \" }
 };
 
 my @tests = (
@@ -109,11 +127,15 @@ my @tests = (
     [1, '[['                       ],      # 28
     [1, 'azert<![CDATA[ <! [CDATA[  <a></a> ]] <a></a> ]]>qsdsqd dsfdsfsd'                 ],      # 28
 }}
-    [1, 'azert<![CDATA[ <! [CDATA[  <a></a> ]] <a></a> ]]>qsdsqd dsfdsfsd'                 ],      # 28
+#[1, 'azert<![CDATA[ <![CDATA[  <a></a> ]] <a></a> ]]>qsdsqd dsfdsfsd'                 ],      # 28
+    [1, 'azert<![CDATA[  <a></a> <a></a> ]]>qsdsqd dsfdsfsd'                 ],      # 28
+    [1, '<![CDATA[toto]]>'                 ],      # 20
+    #[1, '<![CDATA[<a></a>toto]]>'                 ],      # 20
+    [1, '[['                       ],      # 28
     [1, 'uuuuu'                   ],      # 02
-    [1, '&amp;'                  ],      # 15
-    [1, 'abc&amp;'                  ],      # 15
-    [1, 'abc&amp;u&amp;'                  ],      # 15
+    #[1, '&amp;'                  ],      # 15
+    #[1, 'abc&amp;'                  ],      # 15
+    #[1, 'abc&amp;u&amp;'                  ],      # 15
 );
 
 my $count = 1;
