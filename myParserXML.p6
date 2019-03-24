@@ -9,7 +9,7 @@ use v6 ;
 * Created By : sdo
 * File Name : myParserXML.p6
 * Creation Date : Sat Mar  2 11:27:28 2019
-* Last Modified : Sun Mar 24 12:09:58 2019
+* Last Modified : Sun Mar 24 21:35:46 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -66,16 +66,22 @@ grammar XML {
 		<antity> <text>
 	}
 
+#`(
 	rule corpseCDATA {
 		[ 
 			| <text2>
 		]
 	}
+)
 
 	rule myCDATA
 	{ 
 		'<![CDATA[' 
-			<corpseCDATA>
+			[
+				#|<corpseCDATA>
+				#|<text2>
+				|<myxml2>
+			]
 		']]>' <xml> 
 	}
 
