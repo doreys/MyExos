@@ -9,7 +9,7 @@ use v6 ;
 * Created By : sdo
 * File Name : myParserXML.p6
 * Creation Date : Sat Mar  2 11:27:28 2019
-* Last Modified : Sat Mar 23 23:28:38 2019
+* Last Modified : Sun Mar 24 12:09:58 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -130,12 +130,14 @@ my @tests = (
 #[1, 'azert<![CDATA[ <![CDATA[  <a></a> ]] <a></a> ]]>qsdsqd dsfdsfsd'                 ],      # 28
     [1, 'azert<![CDATA[  <a></a> <a></a> ]]>qsdsqd dsfdsfsd'                 ],      # 28
     [1, '<![CDATA[toto]]>'                 ],      # 20
+    [1, '<![CDATA[<![CDATA[toto]]]]>'                 ],      # 20
     #[1, '<![CDATA[<a></a>toto]]>'                 ],      # 20
     [1, '[['                       ],      # 28
     [1, 'uuuuu'                   ],      # 02
     #[1, '&amp;'                  ],      # 15
     #[1, 'abc&amp;'                  ],      # 15
     #[1, 'abc&amp;u&amp;'                  ],      # 15
+    [1, '<a1></a1>'                 ],      # 17
 );
 
 my $count = 1;
