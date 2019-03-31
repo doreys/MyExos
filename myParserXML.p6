@@ -2,14 +2,14 @@
 
 use v6 ;
 
-#use Grammar::Tracer;
+use Grammar::Tracer;
 
 # ------------------------------------------------------
 #`[
 * Created By : sdo
 * File Name : myParserXML.p6
 * Creation Date : Sat Mar  2 11:27:28 2019
-* Last Modified : Sun Mar 31 19:56:06 2019
+* Last Modified : Sun Mar 31 20:00:08 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -70,7 +70,7 @@ grammar XML {
 	rule myCDATA { 
 		'<![CDATA[' 
 			 <text2>
-		']]>'
+		']]>' <text>
 	}
 
 
@@ -110,11 +110,11 @@ my @tests = (
     [1, '<a1></a1>'                 ],      # 17
     [1, '<1a></a>'                  ],      # 18
     [1, '<1a></1a>'                 ],      # 19
-}}
     [1, '<![CDATA[toto]]>'                 ],      # 20
     [1, '<![CDATA[ toto ]]>'                 ],      # 21
-#`{{
+}}
     [1, 'azert<![CDATA[ ... ]]>qsdsqd dsfdsfsd'                 ],      # 22
+#`{{
     [1, 'azert<![CDATA[ <a></a> ]]>qsdsqd dsfdsfsd'                 ],      # 23
     [1, 'azert<![CDATA[ <a></a> ]]>'                 ],      # 24
     [1, 'abctotozezrerze'                       ],      # 25
