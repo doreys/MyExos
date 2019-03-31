@@ -9,7 +9,7 @@ use v6 ;
 * Created By : sdo
 * File Name : myParserXML.p6
 * Creation Date : Sat Mar  2 11:27:28 2019
-* Last Modified : Sun Mar 24 21:35:46 2019
+* Last Modified : Sun Mar 31 19:56:06 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -29,12 +29,9 @@ grammar XML {
 
 	token xml { [ 
 			| <myxml1> 
-			| <myxml2> 
 		] }
 
 	token myxml1 { <text> [ <tag> <text> ]* }
-
-	token myxml2 { <text2> [ <tag> <text2> ]* }
 
 	rule text {
 		<basicText>
@@ -45,17 +42,17 @@ grammar XML {
 		]
 	}
 
+	rule basicText {
+		<-[<>&]>* 
+	}
+
 	rule text2 {
 		<basicText2>
 		[
 			| <basicText2>
-			| <basicAntity>
+			| <basicAntity2>
 			| <myCDATA>
 		]
-	}
-
-	rule basicText {
-		<-[<>&]>* 
 	}
 
 	rule basicText2 {
@@ -66,23 +63,14 @@ grammar XML {
 		<antity> <text>
 	}
 
-#`(
-	rule corpseCDATA {
-		[ 
-			| <text2>
-		]
+	rule basicAntity2 {
+		<antity> <text2>
 	}
-)
 
-	rule myCDATA
-	{ 
+	rule myCDATA { 
 		'<![CDATA[' 
-			[
-				#|<corpseCDATA>
-				#|<text2>
-				|<myxml2>
-			]
-		']]>' <xml> 
+			 <text2>
+		']]>'
 	}
 
 
@@ -122,8 +110,10 @@ my @tests = (
     [1, '<a1></a1>'                 ],      # 17
     [1, '<1a></a>'                  ],      # 18
     [1, '<1a></1a>'                 ],      # 19
+}}
     [1, '<![CDATA[toto]]>'                 ],      # 20
     [1, '<![CDATA[ toto ]]>'                 ],      # 21
+#`{{
     [1, 'azert<![CDATA[ ... ]]>qsdsqd dsfdsfsd'                 ],      # 22
     [1, 'azert<![CDATA[ <a></a> ]]>qsdsqd dsfdsfsd'                 ],      # 23
     [1, 'azert<![CDATA[ <a></a> ]]>'                 ],      # 24
@@ -133,17 +123,6 @@ my @tests = (
     [1, '[['                       ],      # 28
     [1, 'azert<![CDATA[ <! [CDATA[  <a></a> ]] <a></a> ]]>qsdsqd dsfdsfsd'                 ],      # 28
 }}
-#[1, 'azert<![CDATA[ <![CDATA[  <a></a> ]] <a></a> ]]>qsdsqd dsfdsfsd'                 ],      # 28
-    [1, 'azert<![CDATA[  <a></a> <a></a> ]]>qsdsqd dsfdsfsd'                 ],      # 28
-    [1, '<![CDATA[toto]]>'                 ],      # 20
-    [1, '<![CDATA[<![CDATA[toto]]]]>'                 ],      # 20
-    #[1, '<![CDATA[<a></a>toto]]>'                 ],      # 20
-    [1, '[['                       ],      # 28
-    [1, 'uuuuu'                   ],      # 02
-    #[1, '&amp;'                  ],      # 15
-    #[1, 'abc&amp;'                  ],      # 15
-    #[1, 'abc&amp;u&amp;'                  ],      # 15
-    [1, '<a1></a1>'                 ],      # 17
 );
 
 my $count = 1;
