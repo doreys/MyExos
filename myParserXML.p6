@@ -2,14 +2,14 @@
 
 use v6 ;
 
-use Grammar::Tracer;
+#use Grammar::Tracer;
 
 # ------------------------------------------------------
 #`[
 * Created By : sdo
 * File Name : myParserXML.p6
 * Creation Date : Sat Mar  2 11:27:28 2019
-* Last Modified : Mon Apr  1 13:22:42 2019
+* Last Modified : Sun Apr  7 10:11:10 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -69,7 +69,10 @@ grammar XML {
 
 	rule myCDATA { 
 		'<![CDATA[' 
-			 [ <text2> || { fail("Parenthèse non fermée") } ]
+			[
+				 | [ <text2> || { fail("crochet non fermée") } ]
+				 | [ <tag> || { fail("tag non fermée") } ]
+			]
 		']]>' <text>
 	}
 
@@ -90,7 +93,6 @@ grammar XML {
 };
 
 my @tests = (
-#`{{
     [1, 'abc'                       ],      # 01
     [1, '<a></a>'                   ],      # 02
     [1, '..<ab>foo</ab>dd'          ],      # 03
@@ -110,20 +112,17 @@ my @tests = (
     [1, '<a1></a1>'                 ],      # 17
     [1, '<1a></a>'                  ],      # 18
     [1, '<1a></1a>'                 ],      # 19
-}}
-    [1, '<![CDATA[toto]]>'                 ],      # 20
-    [1, '<![CDATA[ toto ]]>'                 ],      # 21
-    [1, 'azert<![CDATA[ ... ]]>qsdsqd dsfdsfsd'                 ],      # 22
-    [1, 'azert<![CDATA[ ... ]>qsdsqd dsfdsfsd'                 ],      # 22
-#`{{
+    [1, '<![CDATA[toto]]>'          ],      # 20
+    [1, '<![CDATA[ toto ]]>'        ],      # 21
+    [1, 'azert<![CDATA[ ]]>qsdsqd dsfdsfsd'                 ],      # 22
+    [1, 'azErt<![CDATA[ ]]>qsdsqd dsfdsfsd'                 ],      # 22
     [1, 'azert<![CDATA[ <a></a> ]]>qsdsqd dsfdsfsd'                 ],      # 23
     [1, 'azert<![CDATA[ <a></a> ]]>'                 ],      # 24
     [1, 'abctotozezrerze'                       ],      # 25
     [1, 'abc toto zezrerze'                       ],      # 26
-    [1, 'azert<![CDATA[ <CDATA>  <a>![]</a> </CDATA> <a></a> ]]>qsdsqd dsfdsfsd'                 ],      # 27
     [1, '[['                       ],      # 28
-    [1, 'azert<![CDATA[ <! [CDATA[  <a></a> ]] <a></a> ]]>qsdsqd dsfdsfsd'                 ],      # 28
-}}
+    #[1, 'azert<![CDATA[ <CDATA>  <a>![]</a> </CDATA> <a></a> ]]>qsdsqd dsfdsfsd'                 ],      # 27
+    #[1, 'azert<![CDATA[ <! [CDATA[  <a></a> ]] <a></a> ]]>qsdsqd dsfdsfsd'                 ],      # 28
 );
 
 my $count = 1;
