@@ -1,6 +1,869 @@
------>
-.git
-
------>
-[master 9adb448] test
- 1 file changed, 1 insertion(+)
+[1mTOP[0m
+|  [1mxml[0m
+|  |  [1mtext[0m
+|  |  |  [1mantite[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  |  [1mmyCDATA[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  * [37;42mMATCH[0m[37m "abc"[0m
+|  |  [1mtag[0m
+|  |  * [37;41mFAIL[0m
+|  * [37;42mMATCH[0m[37m "abc"[0m
+* [37;42mMATCH[0m[37m "abc"[0m
+ok 1 - 'abc'
+[1mTOP[0m
+|  [1mxml[0m
+|  |  [1mtext[0m
+|  |  |  [1mantite[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  |  [1mmyCDATA[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  [1mtag[0m
+|  |  |  [1mattribute[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  |  [1mxml[0m
+|  |  |  |  [1mtext[0m
+|  |  |  |  |  [1mantite[0m
+|  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  [1mmyCDATA[0m
+|  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  |  |  [1mtag[0m
+|  |  |  |  * [37;41mFAIL[0m
+|  |  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  * [37;42mMATCH[0m[37m "<a></a>"[0m
+|  |  [1mtext[0m
+|  |  |  [1mantite[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  |  [1mmyCDATA[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  [1mtag[0m
+|  |  * [37;41mFAIL[0m
+|  * [37;42mMATCH[0m[37m "<a></a>"[0m
+* [37;42mMATCH[0m[37m "<a></a>"[0m
+ok 2 - '<a></a>'
+[1mTOP[0m
+|  [1mxml[0m
+|  |  [1mtext[0m
+|  |  |  [1mantite[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  |  [1mmyCDATA[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  * [37;42mMATCH[0m[37m ".."[0m
+|  |  [1mtag[0m
+|  |  |  [1mattribute[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  |  [1mxml[0m
+|  |  |  |  [1mtext[0m
+|  |  |  |  |  [1mantite[0m
+|  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  [1mmyCDATA[0m
+|  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  * [37;42mMATCH[0m[37m "foo"[0m
+|  |  |  |  [1mtag[0m
+|  |  |  |  * [37;41mFAIL[0m
+|  |  |  * [37;42mMATCH[0m[37m "foo"[0m
+|  |  * [37;42mMATCH[0m[37m "<ab>foo</ab>"[0m
+|  |  [1mtext[0m
+|  |  |  [1mantite[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  |  [1mmyCDATA[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  * [37;42mMATCH[0m[37m "dd"[0m
+|  |  [1mtag[0m
+|  |  * [37;41mFAIL[0m
+|  * [37;42mMATCH[0m[37m "..<ab>foo</ab>dd"[0m
+* [37;42mMATCH[0m[37m "..<ab>foo</ab>dd"[0m
+ok 3 - '..<ab>foo</ab>dd'
+[1mTOP[0m
+|  [1mxml[0m
+|  |  [1mtext[0m
+|  |  |  [1mantite[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  |  [1mmyCDATA[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  [1mtag[0m
+|  |  |  [1mattribute[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  |  [1mxml[0m
+|  |  |  |  [1mtext[0m
+|  |  |  |  |  [1mantite[0m
+|  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  [1mmyCDATA[0m
+|  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  |  |  [1mtag[0m
+|  |  |  |  |  [1mattribute[0m
+|  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  [1mxml[0m
+|  |  |  |  |  |  [1mtext[0m
+|  |  |  |  |  |  |  [1mantite[0m
+|  |  |  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  |  |  [1mmyCDATA[0m
+|  |  |  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  |  * [37;42mMATCH[0m[37m "c"[0m
+|  |  |  |  |  |  [1mtag[0m
+|  |  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  * [37;42mMATCH[0m[37m "c"[0m
+|  |  |  |  * [37;42mMATCH[0m[37m "<b>c</b>"[0m
+|  |  |  |  [1mtext[0m
+|  |  |  |  |  [1mantite[0m
+|  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  [1mmyCDATA[0m
+|  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  |  |  [1mtag[0m
+|  |  |  |  * [37;41mFAIL[0m
+|  |  |  * [37;42mMATCH[0m[37m "<b>c</b>"[0m
+|  |  * [37;42mMATCH[0m[37m "<a><b>c</b></a>"[0m
+|  |  [1mtext[0m
+|  |  |  [1mantite[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  |  [1mmyCDATA[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  [1mtag[0m
+|  |  * [37;41mFAIL[0m
+|  * [37;42mMATCH[0m[37m "<a><b>c</b></a>"[0m
+* [37;42mMATCH[0m[37m "<a><b>c</b></a>"[0m
+ok 4 - '<a><b>c</b></a>'
+[1mTOP[0m
+|  [1mxml[0m
+|  |  [1mtext[0m
+|  |  |  [1mantite[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  |  [1mmyCDATA[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  [1mtag[0m
+|  |  |  [1mattribute[0m
+|  |  |  * [37;42mMATCH[0m[37m "href=\"foo\""[0m
+|  |  |  [1mattribute[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  |  [1mxml[0m
+|  |  |  |  [1mtext[0m
+|  |  |  |  |  [1mantite[0m
+|  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  [1mmyCDATA[0m
+|  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  |  |  [1mtag[0m
+|  |  |  |  |  [1mattribute[0m
+|  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  [1mxml[0m
+|  |  |  |  |  |  [1mtext[0m
+|  |  |  |  |  |  |  [1mantite[0m
+|  |  |  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  |  |  [1mmyCDATA[0m
+|  |  |  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  |  * [37;42mMATCH[0m[37m "c"[0m
+|  |  |  |  |  |  [1mtag[0m
+|  |  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  * [37;42mMATCH[0m[37m "c"[0m
+|  |  |  |  * [37;42mMATCH[0m[37m "<b>c</b>"[0m
+|  |  |  |  [1mtext[0m
+|  |  |  |  |  [1mantite[0m
+|  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  [1mmyCDATA[0m
+|  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  |  |  [1mtag[0m
+|  |  |  |  * [37;41mFAIL[0m
+|  |  |  * [37;42mMATCH[0m[37m "<b>c</b>"[0m
+|  |  * [37;42mMATCH[0m[37m "<a href=\"foo\"><b>c</b></a>"[0m
+|  |  [1mtext[0m
+|  |  |  [1mantite[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  |  [1mmyCDATA[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  [1mtag[0m
+|  |  * [37;41mFAIL[0m
+|  * [37;42mMATCH[0m[37m "<a href=\"foo\"><b>c</b></a>"[0m
+* [37;42mMATCH[0m[37m "<a href=\"foo\"><b>c</b></a>"[0m
+ok 5 - '<a href="foo"><b>c</b></a>'
+[1mTOP[0m
+|  [1mxml[0m
+|  |  [1mtext[0m
+|  |  |  [1mantite[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  |  [1mmyCDATA[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  [1mtag[0m
+|  |  |  [1mattribute[0m
+|  |  |  * [37;42mMATCH[0m[37m "empty=\"\""[0m
+|  |  |  [1mattribute[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  |  [1mxml[0m
+|  |  |  |  [1mtext[0m
+|  |  |  |  |  [1mantite[0m
+|  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  [1mmyCDATA[0m
+|  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  |  |  [1mtag[0m
+|  |  |  |  |  [1mattribute[0m
+|  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  [1mxml[0m
+|  |  |  |  |  |  [1mtext[0m
+|  |  |  |  |  |  |  [1mantite[0m
+|  |  |  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  |  |  [1mmyCDATA[0m
+|  |  |  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  |  * [37;42mMATCH[0m[37m "c"[0m
+|  |  |  |  |  |  [1mtag[0m
+|  |  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  * [37;42mMATCH[0m[37m "c"[0m
+|  |  |  |  * [37;42mMATCH[0m[37m "<b>c</b>"[0m
+|  |  |  |  [1mtext[0m
+|  |  |  |  |  [1mantite[0m
+|  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  [1mmyCDATA[0m
+|  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  |  |  [1mtag[0m
+|  |  |  |  * [37;41mFAIL[0m
+|  |  |  * [37;42mMATCH[0m[37m "<b>c</b>"[0m
+|  |  * [37;42mMATCH[0m[37m "<a empty=\"\" ><b>c</b></a>"[0m
+|  |  [1mtext[0m
+|  |  |  [1mantite[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  |  [1mmyCDATA[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  [1mtag[0m
+|  |  * [37;41mFAIL[0m
+|  * [37;42mMATCH[0m[37m "<a empty=\"\" ><b>c</b></a>"[0m
+* [37;42mMATCH[0m[37m "<a empty=\"\" ><b>c</b></a>"[0m
+ok 6 - '<a empty="" ><b>c</b></a>'
+[1mTOP[0m
+|  [1mxml[0m
+|  |  [1mtext[0m
+|  |  |  [1mantite[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  |  [1mmyCDATA[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  [1mtag[0m
+|  |  |  [1mattribute[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  |  [1mxml[0m
+|  |  |  |  [1mtext[0m
+|  |  |  |  |  [1mantite[0m
+|  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  [1mmyCDATA[0m
+|  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  |  |  [1mtag[0m
+|  |  |  |  |  [1mattribute[0m
+|  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  [1mxml[0m
+|  |  |  |  |  |  [1mtext[0m
+|  |  |  |  |  |  |  [1mantite[0m
+|  |  |  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  |  |  [1mmyCDATA[0m
+|  |  |  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  |  * [37;42mMATCH[0m[37m "c"[0m
+|  |  |  |  |  |  [1mtag[0m
+|  |  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  * [37;42mMATCH[0m[37m "c"[0m
+|  |  |  |  * [37;42mMATCH[0m[37m "<b>c</b>"[0m
+|  |  |  |  [1mtext[0m
+|  |  |  |  |  [1mantite[0m
+|  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  [1mmyCDATA[0m
+|  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  |  |  [1mtag[0m
+|  |  |  |  |  [1mattribute[0m
+|  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  [1mxml[0m
+|  |  |  |  |  |  [1mtext[0m
+|  |  |  |  |  |  |  [1mantite[0m
+|  |  |  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  |  |  [1mmyCDATA[0m
+|  |  |  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  |  |  |  |  [1mtag[0m
+|  |  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  |  |  * [37;42mMATCH[0m[37m "<c></c>"[0m
+|  |  |  |  [1mtext[0m
+|  |  |  |  |  [1mantite[0m
+|  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  [1mmyCDATA[0m
+|  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  |  |  [1mtag[0m
+|  |  |  |  * [37;41mFAIL[0m
+|  |  |  * [37;42mMATCH[0m[37m "<b>c</b><c></c>"[0m
+|  |  * [37;42mMATCH[0m[37m "<a><b>c</b><c></c></a>"[0m
+|  |  [1mtext[0m
+|  |  |  [1mantite[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  |  [1mmyCDATA[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  [1mtag[0m
+|  |  * [37;41mFAIL[0m
+|  * [37;42mMATCH[0m[37m "<a><b>c</b><c></c></a>"[0m
+* [37;42mMATCH[0m[37m "<a><b>c</b><c></c></a>"[0m
+ok 7 - '<a><b>c</b><c></c></a>'
+[1mTOP[0m
+|  [1mxml[0m
+|  |  [1mtext[0m
+|  |  |  [1mantite[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  |  [1mmyCDATA[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  [1mtag[0m
+|  |  * [37;41mFAIL[0m
+|  * [37;42mMATCH[0m[37m ""[0m
+* [37;41mFAIL[0m
+ok 8 - '<'
+[1mTOP[0m
+|  [1mxml[0m
+|  |  [1mtext[0m
+|  |  |  [1mantite[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  |  [1mmyCDATA[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  [1mtag[0m
+|  |  |  [1mattribute[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  |  [1mxml[0m
+|  |  |  |  [1mtext[0m
+|  |  |  |  |  [1mantite[0m
+|  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  [1mmyCDATA[0m
+|  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  * [37;42mMATCH[0m[37m "b"[0m
+|  |  |  |  [1mtag[0m
+|  |  |  |  * [37;41mFAIL[0m
+|  |  |  * [37;42mMATCH[0m[37m "b"[0m
+|  |  * [37;41mFAIL[0m
+|  * [37;42mMATCH[0m[37m ""[0m
+* [37;41mFAIL[0m
+ok 9 - '<a>b</b>'
+[1mTOP[0m
+|  [1mxml[0m
+|  |  [1mtext[0m
+|  |  |  [1mantite[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  |  [1mmyCDATA[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  [1mtag[0m
+|  |  |  [1mattribute[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  |  [1mxml[0m
+|  |  |  |  [1mtext[0m
+|  |  |  |  |  [1mantite[0m
+|  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  [1mmyCDATA[0m
+|  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  * [37;42mMATCH[0m[37m "b"[0m
+|  |  |  |  [1mtag[0m
+|  |  |  |  * [37;41mFAIL[0m
+|  |  |  * [37;42mMATCH[0m[37m "b"[0m
+|  |  * [37;41mFAIL[0m
+|  * [37;42mMATCH[0m[37m ""[0m
+* [37;41mFAIL[0m
+ok 10 - '<a>b</a'
+[1mTOP[0m
+|  [1mxml[0m
+|  |  [1mtext[0m
+|  |  |  [1mantite[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  |  [1mmyCDATA[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  [1mtag[0m
+|  |  |  [1mattribute[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  |  [1mxml[0m
+|  |  |  |  [1mtext[0m
+|  |  |  |  |  [1mantite[0m
+|  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  [1mmyCDATA[0m
+|  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  * [37;42mMATCH[0m[37m "b"[0m
+|  |  |  |  [1mtag[0m
+|  |  |  |  * [37;41mFAIL[0m
+|  |  |  * [37;42mMATCH[0m[37m "b"[0m
+|  |  * [37;41mFAIL[0m
+|  * [37;42mMATCH[0m[37m ""[0m
+* [37;41mFAIL[0m
+ok 11 - '<a>b</a href="">'
+[1mTOP[0m
+|  [1mxml[0m
+|  |  [1mtext[0m
+|  |  |  [1mantite[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  |  [1mmyCDATA[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  [1mtag[0m
+|  |  |  [1mattribute[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  * [37;42mMATCH[0m[37m "<a/>"[0m
+|  |  [1mtext[0m
+|  |  |  [1mantite[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  |  [1mmyCDATA[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  [1mtag[0m
+|  |  * [37;41mFAIL[0m
+|  * [37;42mMATCH[0m[37m "<a/>"[0m
+* [37;42mMATCH[0m[37m "<a/>"[0m
+ok 12 - '<a/>'
+[1mTOP[0m
+|  [1mxml[0m
+|  |  [1mtext[0m
+|  |  |  [1mantite[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  |  [1mmyCDATA[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  [1mtag[0m
+|  |  |  [1mattribute[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  * [37;42mMATCH[0m[37m "<a />"[0m
+|  |  [1mtext[0m
+|  |  |  [1mantite[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  |  [1mmyCDATA[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  [1mtag[0m
+|  |  * [37;41mFAIL[0m
+|  * [37;42mMATCH[0m[37m "<a />"[0m
+* [37;42mMATCH[0m[37m "<a />"[0m
+ok 13 - '<a />'
+[1mTOP[0m
+|  [1mxml[0m
+|  |  [1mtext[0m
+|  |  |  [1mantite[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  |  [1mmyCDATA[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  * [37;42mMATCH[0m[37m "abc"[0m
+|  |  [1mtag[0m
+|  |  * [37;41mFAIL[0m
+|  * [37;42mMATCH[0m[37m "abc"[0m
+* [37;41mFAIL[0m
+not ok 14 - 'abc&amp'
+[1mTOP[0m
+|  [1mxml[0m
+|  |  [1mtext[0m
+|  |  |  [1mantite[0m
+|  |  |  |  [1mtext[0m
+|  |  |  |  |  [1mantite[0m
+|  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  [1mmyCDATA[0m
+|  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  |  * [37;42mMATCH[0m[37m "\&amp;"[0m
+|  |  |  [1mantite[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  |  [1mmyCDATA[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  * [37;42mMATCH[0m[37m "abc\&amp;"[0m
+|  |  [1mtag[0m
+|  |  * [37;41mFAIL[0m
+|  * [37;42mMATCH[0m[37m "abc\&amp;"[0m
+* [37;42mMATCH[0m[37m "abc\&amp;"[0m
+ok 15 - 'abc&amp;'
+[1mTOP[0m
+|  [1mxml[0m
+|  |  [1mtext[0m
+|  |  |  [1mantite[0m
+|  |  |  |  [1mtext[0m
+|  |  |  |  |  [1mantite[0m
+|  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  [1mmyCDATA[0m
+|  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  * [37;42mMATCH[0m[37m "aqwxsz"[0m
+|  |  |  * [37;42mMATCH[0m[37m "\&amp;aqwxsz"[0m
+|  |  |  [1mantite[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  |  [1mmyCDATA[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  * [37;42mMATCH[0m[37m "abc\&amp;aqwxsz"[0m
+|  |  [1mtag[0m
+|  |  * [37;41mFAIL[0m
+|  * [37;42mMATCH[0m[37m "abc\&amp;aqwxsz"[0m
+* [37;42mMATCH[0m[37m "abc\&amp;aqwxsz"[0m
+ok 16 - 'abc&amp;aqwxsz'
+[1mTOP[0m
+|  [1mxml[0m
+|  |  [1mtext[0m
+|  |  |  [1mantite[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  |  [1mmyCDATA[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  [1mtag[0m
+|  |  |  [1mattribute[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  |  [1mxml[0m
+|  |  |  |  [1mtext[0m
+|  |  |  |  |  [1mantite[0m
+|  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  [1mmyCDATA[0m
+|  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  |  |  [1mtag[0m
+|  |  |  |  * [37;41mFAIL[0m
+|  |  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  * [37;42mMATCH[0m[37m "<a1></a1>"[0m
+|  |  [1mtext[0m
+|  |  |  [1mantite[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  |  [1mmyCDATA[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  [1mtag[0m
+|  |  * [37;41mFAIL[0m
+|  * [37;42mMATCH[0m[37m "<a1></a1>"[0m
+* [37;42mMATCH[0m[37m "<a1></a1>"[0m
+ok 17 - '<a1></a1>'
+[1mTOP[0m
+|  [1mxml[0m
+|  |  [1mtext[0m
+|  |  |  [1mantite[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  |  [1mmyCDATA[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  [1mtag[0m
+|  |  |  [1mattribute[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  |  [1mxml[0m
+|  |  |  |  [1mtext[0m
+|  |  |  |  |  [1mantite[0m
+|  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  [1mmyCDATA[0m
+|  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  |  |  [1mtag[0m
+|  |  |  |  * [37;41mFAIL[0m
+|  |  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  * [37;41mFAIL[0m
+|  * [37;42mMATCH[0m[37m ""[0m
+* [37;41mFAIL[0m
+not ok 18 - '<1a></a>'
+[1mTOP[0m
+|  [1mxml[0m
+|  |  [1mtext[0m
+|  |  |  [1mantite[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  |  [1mmyCDATA[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  [1mtag[0m
+|  |  |  [1mattribute[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  |  [1mxml[0m
+|  |  |  |  [1mtext[0m
+|  |  |  |  |  [1mantite[0m
+|  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  [1mmyCDATA[0m
+|  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  |  |  [1mtag[0m
+|  |  |  |  * [37;41mFAIL[0m
+|  |  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  * [37;42mMATCH[0m[37m "<1a></1a>"[0m
+|  |  [1mtext[0m
+|  |  |  [1mantite[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  |  [1mmyCDATA[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  [1mtag[0m
+|  |  * [37;41mFAIL[0m
+|  * [37;42mMATCH[0m[37m "<1a></1a>"[0m
+* [37;42mMATCH[0m[37m "<1a></1a>"[0m
+ok 19 - '<1a></1a>'
+[1mTOP[0m
+|  [1mxml[0m
+|  |  [1mtext[0m
+|  |  |  [1mantite[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  |  [1mmyCDATA[0m
+|  |  |  |  [1mxml[0m
+|  |  |  |  |  [1mtext[0m
+|  |  |  |  |  |  [1mantite[0m
+|  |  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  |  [1mmyCDATA[0m
+|  |  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  |  |  |  [1mtag[0m
+|  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  |  * [37;42mMATCH[0m[37m "<![CDATA[toto]]>"[0m
+|  |  |  [1mmyCDATA[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  * [37;42mMATCH[0m[37m "<![CDATA[toto]]>"[0m
+|  |  [1mtag[0m
+|  |  * [37;41mFAIL[0m
+|  * [37;42mMATCH[0m[37m "<![CDATA[toto]]>"[0m
+* [37;42mMATCH[0m[37m "<![CDATA[toto]]>"[0m
+ok 20 - '<![CDATA[toto]]>'
+[1mTOP[0m
+|  [1mxml[0m
+|  |  [1mtext[0m
+|  |  |  [1mantite[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  |  [1mmyCDATA[0m
+|  |  |  |  [1mxml[0m
+|  |  |  |  |  [1mtext[0m
+|  |  |  |  |  |  [1mantite[0m
+|  |  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  |  [1mmyCDATA[0m
+|  |  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  |  |  |  [1mtag[0m
+|  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  |  * [37;42mMATCH[0m[37m "<![CDATA[ toto ]]>"[0m
+|  |  |  [1mmyCDATA[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  * [37;42mMATCH[0m[37m "<![CDATA[ toto ]]>"[0m
+|  |  [1mtag[0m
+|  |  * [37;41mFAIL[0m
+|  * [37;42mMATCH[0m[37m "<![CDATA[ toto ]]>"[0m
+* [37;42mMATCH[0m[37m "<![CDATA[ toto ]]>"[0m
+ok 21 - '<![CDATA[ toto ]]>'
+[1mTOP[0m
+|  [1mxml[0m
+|  |  [1mtext[0m
+|  |  |  [1mantite[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  |  [1mmyCDATA[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  * [37;42mMATCH[0m[37m "azert"[0m
+|  |  [1mtag[0m
+|  |  * [37;41mFAIL[0m
+|  * [37;42mMATCH[0m[37m "azert"[0m
+* [37;41mFAIL[0m
+not ok 22 - 'azert<![CDATA[ ... ]]>qsdsqd dsfdsfsd'
+[1mTOP[0m
+|  [1mxml[0m
+|  |  [1mtext[0m
+|  |  |  [1mantite[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  |  [1mmyCDATA[0m
+|  |  |  |  [1mtag[0m
+|  |  |  |  |  [1mattribute[0m
+|  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  [1mxml[0m
+|  |  |  |  |  |  [1mtext[0m
+|  |  |  |  |  |  |  [1mantite[0m
+|  |  |  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  |  |  [1mmyCDATA[0m
+|  |  |  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  |  |  |  |  [1mtag[0m
+|  |  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  |  |  * [37;42mMATCH[0m[37m "<a></a> "[0m
+|  |  |  |  [1mtag[0m
+|  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  [1mxml[0m
+|  |  |  |  |  [1mtext[0m
+|  |  |  |  |  |  [1mantite[0m
+|  |  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  |  [1mmyCDATA[0m
+|  |  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  * [37;42mMATCH[0m[37m "qsdsqd dsfdsfsd"[0m
+|  |  |  |  |  [1mtag[0m
+|  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  * [37;42mMATCH[0m[37m "qsdsqd dsfdsfsd"[0m
+|  |  |  * [37;42mMATCH[0m[37m "<![CDATA[ <a></a> ]]>qsdsqd dsfdsfsd"[0m
+|  |  |  [1mmyCDATA[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  * [37;42mMATCH[0m[37m "azert<![CDATA[ <a></a> ]]>qsdsqd dsfdsfsd"[0m
+|  |  [1mtag[0m
+|  |  * [37;41mFAIL[0m
+|  * [37;42mMATCH[0m[37m "azert<![CDATA[ <a></a> ]]>qsdsqd dsfdsfsd"[0m
+* [37;42mMATCH[0m[37m "azert<![CDATA[ <a></a> ]]>qsdsqd dsfdsfsd"[0m
+ok 23 - 'azert<![CDATA[ <a></a> ]]>qsdsqd dsfdsfsd'
+[1mTOP[0m
+|  [1mxml[0m
+|  |  [1mtext[0m
+|  |  |  [1mantite[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  |  [1mmyCDATA[0m
+|  |  |  |  [1mtag[0m
+|  |  |  |  |  [1mattribute[0m
+|  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  [1mxml[0m
+|  |  |  |  |  |  [1mtext[0m
+|  |  |  |  |  |  |  [1mantite[0m
+|  |  |  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  |  |  [1mmyCDATA[0m
+|  |  |  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  |  |  |  |  [1mtag[0m
+|  |  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  |  |  * [37;42mMATCH[0m[37m "<a></a> "[0m
+|  |  |  |  [1mtag[0m
+|  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  [1mxml[0m
+|  |  |  |  |  [1mtext[0m
+|  |  |  |  |  |  [1mantite[0m
+|  |  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  |  [1mmyCDATA[0m
+|  |  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  |  |  |  [1mtag[0m
+|  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  |  * [37;42mMATCH[0m[37m "<![CDATA[ <a></a> ]]>"[0m
+|  |  |  [1mmyCDATA[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  * [37;42mMATCH[0m[37m "azert<![CDATA[ <a></a> ]]>"[0m
+|  |  [1mtag[0m
+|  |  * [37;41mFAIL[0m
+|  * [37;42mMATCH[0m[37m "azert<![CDATA[ <a></a> ]]>"[0m
+* [37;42mMATCH[0m[37m "azert<![CDATA[ <a></a> ]]>"[0m
+ok 24 - 'azert<![CDATA[ <a></a> ]]>'
+[1mTOP[0m
+|  [1mxml[0m
+|  |  [1mtext[0m
+|  |  |  [1mantite[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  |  [1mmyCDATA[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  * [37;42mMATCH[0m[37m "abctotozezrerze"[0m
+|  |  [1mtag[0m
+|  |  * [37;41mFAIL[0m
+|  * [37;42mMATCH[0m[37m "abctotozezrerze"[0m
+* [37;42mMATCH[0m[37m "abctotozezrerze"[0m
+ok 25 - 'abctotozezrerze'
+[1mTOP[0m
+|  [1mxml[0m
+|  |  [1mtext[0m
+|  |  |  [1mantite[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  |  [1mmyCDATA[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  * [37;42mMATCH[0m[37m "abc toto zezrerze"[0m
+|  |  [1mtag[0m
+|  |  * [37;41mFAIL[0m
+|  * [37;42mMATCH[0m[37m "abc toto zezrerze"[0m
+* [37;42mMATCH[0m[37m "abc toto zezrerze"[0m
+ok 26 - 'abc toto zezrerze'
+[1mTOP[0m
+|  [1mxml[0m
+|  |  [1mtext[0m
+|  |  |  [1mantite[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  |  [1mmyCDATA[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  * [37;42mMATCH[0m[37m "[["[0m
+|  |  [1mtag[0m
+|  |  * [37;41mFAIL[0m
+|  * [37;42mMATCH[0m[37m "[["[0m
+* [37;42mMATCH[0m[37m "[["[0m
+ok 27 - '[['
+[1mTOP[0m
+|  [1mxml[0m
+|  |  [1mtext[0m
+|  |  |  [1mantite[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  |  [1mmyCDATA[0m
+|  |  |  |  [1mtag[0m
+|  |  |  |  * [37;41mFAIL[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  * [37;42mMATCH[0m[37m "azert"[0m
+|  |  [1mtag[0m
+|  |  * [37;41mFAIL[0m
+|  * [37;42mMATCH[0m[37m "azert"[0m
+* [37;41mFAIL[0m
+not ok 28 - 'azert<![CDATA[ <! [CDATA[  <a></a> ]] <a></a> ]]>qsdsqd dsfdsfsd'
+[1mTOP[0m
+|  [1mxml[0m
+|  |  [1mtext[0m
+|  |  |  [1mantite[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  |  [1mmyCDATA[0m
+|  |  |  |  [1mtag[0m
+|  |  |  |  |  [1mattribute[0m
+|  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  [1mxml[0m
+|  |  |  |  |  |  [1mtext[0m
+|  |  |  |  |  |  |  [1mantite[0m
+|  |  |  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  |  |  [1mmyCDATA[0m
+|  |  |  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  |  |  |  |  [1mtag[0m
+|  |  |  |  |  |  |  [1mattribute[0m
+|  |  |  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  |  |  [1mxml[0m
+|  |  |  |  |  |  |  |  [1mtext[0m
+|  |  |  |  |  |  |  |  |  [1mantite[0m
+|  |  |  |  |  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  |  |  |  |  [1mmyCDATA[0m
+|  |  |  |  |  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  |  |  |  * [37;42mMATCH[0m[37m "![]"[0m
+|  |  |  |  |  |  |  |  [1mtag[0m
+|  |  |  |  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  |  |  * [37;42mMATCH[0m[37m "![]"[0m
+|  |  |  |  |  |  * [37;42mMATCH[0m[37m "<a>![]</a> "[0m
+|  |  |  |  |  |  [1mtext[0m
+|  |  |  |  |  |  |  [1mantite[0m
+|  |  |  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  |  |  [1mmyCDATA[0m
+|  |  |  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  |  |  |  |  [1mtag[0m
+|  |  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  * [37;42mMATCH[0m[37m "<a>![]</a> "[0m
+|  |  |  |  * [37;42mMATCH[0m[37m "<CDATA>  <a>![]</a> </CDATA> "[0m
+|  |  |  |  [1mtag[0m
+|  |  |  |  |  [1mattribute[0m
+|  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  [1mxml[0m
+|  |  |  |  |  |  [1mtext[0m
+|  |  |  |  |  |  |  [1mantite[0m
+|  |  |  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  |  |  [1mmyCDATA[0m
+|  |  |  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  |  |  |  |  [1mtag[0m
+|  |  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  * [37;42mMATCH[0m[37m ""[0m
+|  |  |  |  * [37;42mMATCH[0m[37m "<a></a> "[0m
+|  |  |  |  [1mtag[0m
+|  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  [1mxml[0m
+|  |  |  |  |  [1mtext[0m
+|  |  |  |  |  |  [1mantite[0m
+|  |  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  |  [1mmyCDATA[0m
+|  |  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  |  * [37;42mMATCH[0m[37m "qsdsqd dsfdsfsd"[0m
+|  |  |  |  |  [1mtag[0m
+|  |  |  |  |  * [37;41mFAIL[0m
+|  |  |  |  * [37;42mMATCH[0m[37m "qsdsqd dsfdsfsd"[0m
+|  |  |  * [37;42mMATCH[0m[37m "<![CDATA[ <CDATA>  <a>![]</a> </CDATA> <a></a> ]]>q"[0m
+|  |  |  [1mmyCDATA[0m
+|  |  |  * [37;41mFAIL[0m
+|  |  * [37;42mMATCH[0m[37m "azert<![CDATA[ <CDATA>  <a>![]</a> </CDATA> <a></a> ]]"[0m
+|  |  [1mtag[0m
+|  |  * [37;41mFAIL[0m
+|  * [37;42mMATCH[0m[37m "azert<![CDATA[ <CDATA>  <a>![]</a> </CDATA> <a></a> ]]>qs"[0m
+* [37;42mMATCH[0m[37m "azert<![CDATA[ <CDATA>  <a>![]</a> </CDATA> <a></a> ]]>qsdsq"[0m
+ok 29 - 'azert<![CDATA[ <CDATA>  <a>![]</a> </CDATA> <a></a> ]]>qsdsqd dsfdsfsd'

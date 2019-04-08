@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : p8-2_p6b-p2_3xemple.p6
 * Creation Date : Thu Jan  3 13:54:48 2019
-* Last Modified : Thu Jan  3 14:40:46 2019
+* Last Modified : Thu Jan  3 14:52:08 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -34,3 +34,4 @@ say $block(stuff => "147852");
 # ou
 #
 my $sub = sub (:$stuff) { say $stuff };
+say $sub(stuff => "147852");

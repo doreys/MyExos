@@ -7,8 +7,8 @@ use v6 ;
 * Created By : sdo
 * File Name : p9-1_p6b-b2.p6
 * Creation Date : Sat Jan  5 14:09:59 2019
-* Last Modified : Sun Jan  6 04:46:05 2019
-* Email Address : sdo@macbook-pro-de-sdo.home
+* Last Modified : Tue Jan  8 22:00:32 2019
+* Email Address : sdo@MBP-de-SDO
 * Version : 0.0.0.0
 * License:
 * 	Permission is granted to copy, distribute, and/or modify this document under the terms of the Creative Commons Attribution-NonCommercial 3.0 
@@ -18,7 +18,8 @@ use v6 ;
 # ------------------------------------------------------
 #
 
-enum bit Bool <False True>;
+enum Bool <False True>;
+my $arbitrary_value;
 my $value = $arbitrary_value but True;
 if $value {
     say "Yes, it's true";       # sera imprimé
