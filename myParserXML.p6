@@ -9,7 +9,7 @@ use v6 ;
 * Created By : sdo
 * File Name : myParserXML.p6
 * Creation Date : Sat Mar  2 11:27:28 2019
-* Last Modified : Mon Apr  8 14:04:29 2019
+* Last Modified : Mon Apr  8 22:33:19 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -127,8 +127,13 @@ my @tests = (
     [1, 'abc toto zezrerze'                       ],      # 26
     [1, '<empty_tag/> test'], # 27
     [1, '<empty_tag></empty_tag/> test'], # 29
+    [1, 'test <empty_tag></empty_tag/> test'], # 29
+    [1, 'test <empty_tag> aaaaa </empty_tag/> test'], # 29
+    [1, '<empty_tag>zzz</empty_tag/> test'], # 29
     [1, '<empty_tag><empty_tag/> test'], # 30
     [1, '<empty_tag></empty_tag> test'], # 31
+    [1, 'test <empty_tag> test </empty_tag> test'], # 31
+    [1, '<empty_tag>zzz</empty_tag> test'], # 31
     [1, '[['                       ],      # 28
     #[1, 'azert<![CDATA[ <CDATA>  <a>![]</a> </CDATA> <a></a> ]]>qsdsqd dsfdsfsd'                 ],      # 27
     #[1, 'azert<![CDATA[ <! [CDATA[  <a></a> ]] <a></a> ]]>qsdsqd dsfdsfsd'                 ],      # 28
