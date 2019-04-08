@@ -9,13 +9,18 @@ use v6 ;
 * Created By : sdo
 * File Name : myParserXML.p6
 * Creation Date : Sat Mar  2 11:27:28 2019
-* Last Modified : Sun Apr  7 10:11:10 2019
+* Last Modified : Mon Apr  8 13:09:30 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
 * 	Permission is granted to copy, distribute, and/or modify this document under the terms of the Creative Commons Attribution-NonCommercial 3.0 
 * 	Unported License, which is available at http: //creativecommons.org/licenses/by- nc/3.0/.
 * Purpose :
+   basic test:
+   	• Les balises ouvrantes <item> ---> opening tag checked and verified (that's in the example but need to be checked)
+	• Les balises fermantes </item> ---> opening tag checked and verified (that's in the example but need to be checked)
+	• Les balises vides <nop/> ---> null tag checked and verified (that's in the example but need to be checked)
+
    exta test:
 	* du texte pur contient des entités telles que &amp; ;
 	* je ne sais pas si les noms des balises XML peuvent commencer par un chiffre, mais la grammaire actuelle (à l'époque de l'écriture de l'article) l'autorise. Vous pourriez vérifier la spécification XML et, si besoin, adopter cette grammaire ;
@@ -114,12 +119,13 @@ my @tests = (
     [1, '<1a></1a>'                 ],      # 19
     [1, '<![CDATA[toto]]>'          ],      # 20
     [1, '<![CDATA[ toto ]]>'        ],      # 21
-    [1, 'azert<![CDATA[ ]]>qsdsqd dsfdsfsd'                 ],      # 22
+    [1, 'azert <![CDATA[ ]]> qsdsqd dsfdsfsd'                 ],      # 22
     [1, 'azErt<![CDATA[ ]]>qsdsqd dsfdsfsd'                 ],      # 22
     [1, 'azert<![CDATA[ <a></a> ]]>qsdsqd dsfdsfsd'                 ],      # 23
     [1, 'azert<![CDATA[ <a></a> ]]>'                 ],      # 24
     [1, 'abctotozezrerze'                       ],      # 25
     [1, 'abc toto zezrerze'                       ],      # 26
+    [1, '<empty_tag/> test'], # 27
     [1, '[['                       ],      # 28
     #[1, 'azert<![CDATA[ <CDATA>  <a>![]</a> </CDATA> <a></a> ]]>qsdsqd dsfdsfsd'                 ],      # 27
     #[1, 'azert<![CDATA[ <! [CDATA[  <a></a> ]] <a></a> ]]>qsdsqd dsfdsfsd'                 ],      # 28
