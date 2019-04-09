@@ -9,19 +9,19 @@ use v6 ;
 * Created By : sdo
 * File Name : myParserXML.p6
 * Creation Date : Sat Mar  2 11:27:28 2019
-* Last Modified : Mon Apr  8 22:33:19 2019
-* Email Address : sdo@macbook-pro-de-sdo.home
+* Last Modified : Tue Apr  9 13:58:07 2019
+* Email Address : sdo@MacBook-Pro-de-SDO.local
 * Version : 0.0.0.0
 * License:
 * 	Permission is granted to copy, distribute, and/or modify this document under the terms of the Creative Commons Attribution-NonCommercial 3.0 
 * 	Unported License, which is available at http: //creativecommons.org/licenses/by- nc/3.0/.
 * Purpose :
-   basic test:
+   - Basic tests:
    	• Les balises ouvrantes <item> ---> opening tag checked and verified (that's in the example but need to be checked)
 	• Les balises fermantes </item> ---> opening tag checked and verified (that's in the example but need to be checked)
 	• Les balises vides <nop/> ---> null tag checked and verified (that's in the example but need to be checked)
 
-   exta test:
+   - Extra tests:
 	* du texte pur contient des entités telles que &amp; ;
 	* je ne sais pas si les noms des balises XML peuvent commencer par un chiffre, mais la grammaire actuelle (à l'époque de l'écriture de l'article) l'autorise. Vous pourriez vérifier la spécification XML et, si besoin, adopter cette grammaire ;
 	* du texte pur peut contenir des blocs du genre <![CDATA[ ... ]]> , dans lesquels les balises de type XML sont ignorées et les caractères tels que < sont ignorés et n'ont pas besoin d'un caractère d'échappement ;
@@ -38,6 +38,10 @@ grammar XML {
 
 	token myxml1 { <text> [ <tag> <text> ]* }
 
+	rule basicText {
+		<-[<>&]>* 
+	}
+
 	rule text {
 		<basicText>
 		[
@@ -45,10 +49,6 @@ grammar XML {
 			| <basicAntity>
 			| <myCDATA>
 		]
-	}
-
-	rule basicText {
-		<-[<>&]>* 
 	}
 
 	rule text2 {
@@ -126,17 +126,16 @@ my @tests = (
     [1, 'abctotozezrerze'                       ],      # 25
     [1, 'abc toto zezrerze'                       ],      # 26
     [1, '<empty_tag/> test'], # 27
-    [1, '<empty_tag></empty_tag/> test'], # 29
+    [1, '<empty_tag></empty_tag/> test'], # 28
     [1, 'test <empty_tag></empty_tag/> test'], # 29
-    [1, 'test <empty_tag> aaaaa </empty_tag/> test'], # 29
-    [1, '<empty_tag>zzz</empty_tag/> test'], # 29
-    [1, '<empty_tag><empty_tag/> test'], # 30
-    [1, '<empty_tag></empty_tag> test'], # 31
-    [1, 'test <empty_tag> test </empty_tag> test'], # 31
-    [1, '<empty_tag>zzz</empty_tag> test'], # 31
-    [1, '[['                       ],      # 28
-    #[1, 'azert<![CDATA[ <CDATA>  <a>![]</a> </CDATA> <a></a> ]]>qsdsqd dsfdsfsd'                 ],      # 27
-    #[1, 'azert<![CDATA[ <! [CDATA[  <a></a> ]] <a></a> ]]>qsdsqd dsfdsfsd'                 ],      # 28
+    [1, 'test <empty_tag> aaaaa </empty_tag/> test'], # 30
+    [1, '<empty_tag>zzz</empty_tag/> test'], # 31
+    [1, '<empty_tag><empty_tag/> test'], # 32
+    [1, '<empty_tag></empty_tag> test'], # 33
+    [1, 'test <empty_tag> test </empty_tag> test'], # 34
+    [1, '<empty_tag>zzz</empty_tag> test'], # 35
+    [1, 'oooo<empty_tag>zzz</empty_tag> test'], # 36
+    [1, '[['                       ],      # 37
 );
 
 my $count = 1;
