@@ -9,7 +9,7 @@ use v6 ;
 * Created By : sdo
 * File Name : myParserXML.p6
 * Creation Date : Sat Mar  2 11:27:28 2019
-* Last Modified : Sat Apr 13 14:16:09 2019
+* Last Modified : Sat Apr 13 15:08:12 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -39,11 +39,13 @@ grammar XML {
 	rule corps {
 		[
 			| 	<entete>
-				'<' (\d*\w+) <attribute>*	
-				[ 
-					| <myxml1> 
-				] 
-				'</'$0 '>'
+				[
+					'<' (\d*\w+) <attribute>*	
+					[ 
+						| <myxml1> 
+					] 
+					'</'$0 '>'
+				]*
 			| <myxml1>
 		]
 	}
@@ -149,6 +151,9 @@ my @tests = (
     [1, '<empty_tag>zzz</empty_tag> test'], # 35
     [1, 'oooo<empty_tag>zzz</empty_tag> test'], # 36
     [1, '[['                       ],      # 37
+    [1, '<?xml version="0.9" encoding="utf-8"?>'                       ],      # 38
+    [1, '<?xml version="0.9" encoding="utf-8"?><momo></momo>'                       ],      # 39
+    [1, '<?xml version="0.9" encoding="utf-8"?><momo>test</momo>'                       ],      # 39
 );
 
 my $count = 1;
