@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : methodCall.p6
 * Creation Date : Wed Jul 25 00:08:20 2018
-* Last Modified : Wed Jul 25 00:09:59 2018
+* Last Modified : Sun Sep 23 05:02:34 2018
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -15,6 +15,8 @@ use v6 ;
 * 	Creative Commons Attribution-NonCommercial 3.0 Unported License, which is available at
 * 	at http://creativecommons.org/licenses/by-nc/3.0/.
 * Purpose :
+	overload (not multi method)
+	surcharge
 ]
 # ------------------------------------------------------
 
