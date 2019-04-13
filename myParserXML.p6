@@ -9,7 +9,7 @@ use v6 ;
 * Created By : sdo
 * File Name : myParserXML.p6
 * Creation Date : Sat Mar  2 11:27:28 2019
-* Last Modified : Sat Apr 13 18:55:23 2019
+* Last Modified : Sat Apr 13 20:49:21 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -22,8 +22,8 @@ use v6 ;
 	• Les balises vides <nop/> ---> null tag checked and verified (that's in the example but need to be checked)
 
    - Extra tests:
-	* du texte pur contient des entités telles que &amp; ;
-	* je ne sais pas si les noms des balises XML peuvent commencer par un chiffre, mais la grammaire actuelle (à l'époque de l'écriture de l'article) l'autorise. Vous pourriez vérifier la spécification XML et, si besoin, adopter cette grammaire ;
+	X du texte pur contient des entités telles que &amp; ;
+	X je ne sais pas si les noms des balises XML peuvent commencer par un chiffre, mais la grammaire actuelle (à l'époque de l'écriture de l'article) l'autorise. Vous pourriez vérifier la spécification XML et, si besoin, adopter cette grammaire ;
 	* du texte pur peut contenir des blocs du genre <![CDATA[ ... ]]> , dans lesquels les balises de type XML sont ignorées et les caractères tels que < sont ignorés et n'ont pas besoin d'un caractère d'échappement ;
 	* du XML réel autorise des préambules du type <?xml version="0.9" encoding="utf-8"?> nécessitant une balise racine contenant le reste (il faudra peut-être modifier des cas de test) ;
 ]
