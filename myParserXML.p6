@@ -2,14 +2,14 @@
 
 use v6 ;
 
-use Grammar::Tracer;
+# use Grammar::Tracer;
 
 # ------------------------------------------------------
 #`[
 * Created By : sdo
 * File Name : myParserXML.p6
 * Creation Date : Sat Mar  2 11:27:28 2019
-* Last Modified : Sat Apr 13 18:47:17 2019
+* Last Modified : Sat Apr 13 18:55:23 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -159,6 +159,9 @@ my @tests = (
     [1, '<?xml version="0.9" encoding="utf-8"?><momo></momo>'                       ],      # 39
     #}}}
     [1, '<?xml version="0.9" encoding="utf-8"?><momo>test</momo>'                       ],      # 40
+    [1, '<?xml version="0.9" encoding="utf-8"?><tuu><momo></tuu>test</momo>'                       ],      # 41
+    [1, '<?xml version="0.9" encoding="utf-8"?><momo><tuu></Tuu>test</momo>'                       ],      # 42
+    [1, '<?xml version="0.9" encoding="utf-8"?><momo><Tuu></Tuu>test</momo>'                       ],      # 43
 );
 
 my $count = 1;
