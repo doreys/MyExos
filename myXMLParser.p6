@@ -9,7 +9,7 @@ use v6 ;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Sun Apr 14 03:18:14 2019
+* Last Modified : Mon Apr 15 00:31:58 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -45,12 +45,13 @@ grammar XML {
 						|'/>'
 						|'>' <xml> '</' $0 '>'
 					] 
-				]** 0..1
+					#]** 0..1
+				]+
 			| <myxml1>
 		]
 	}
 
-	rule entete { '<?xml' 'version="' \d+ '.' \d+ '"' ['encoding="utf-8"']**0..1  '?>' }
+	rule entete { '<?xml' 'version="' \d+ '.' \d+ '"' ['encoding="' <-[\'\"\s]>+ '"']**0..1  '?>' }
 
 	token myxml1 { <text> [ <tag> <text> ]* }
 
@@ -92,7 +93,7 @@ grammar XML {
 		'<![CDATA[' 
 			[
 				 | [ <text2> || { fail("crochet non fermée") } ]
-				 | [ <tag> || { fail("tag non fermée") } ]
+				 | [ <tag> || { fail("tag non fermée $/") } ]
 			]
 		']]>' <text>
 	}
@@ -162,6 +163,7 @@ my @tests = (
     [1, '<?xml version="0.9" encoding="utf-8"?><tuu><momo></tuu>test</momo>'                       ],      # 41
     [1, '<?xml version="0.9" encoding="utf-8"?><momo><tuu></Tuu>test</momo>'                       ],      # 42
     [1, '<?xml version="0.9" encoding="utf-8"?><momo><Tuu></Tuu>test</momo>'                       ],      # 43
+    [1, '<?xml version="1.0" ?><momo><Tuu></Tuu>test</momo>'                       ],      # 43
     [1, '<?xml version="1.0" ?> <redir> index.php </redir> <menu><![CDATA[ <div class="dossier"> Accueil <div class="categorie" onclick="click(1,3);">D&#65533;connexion</div> </div> <div class="dossier"> Administration <div class="categorie" onclick="click(1,4);">Nouveau menu</div> </div> ]]></menu>'],
 );
 
