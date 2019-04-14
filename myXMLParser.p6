@@ -9,7 +9,7 @@ use v6 ;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Mon Apr 15 00:31:58 2019
+* Last Modified : Mon Apr 15 00:46:09 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -45,7 +45,6 @@ grammar XML {
 						|'/>'
 						|'>' <xml> '</' $0 '>'
 					] 
-					#]** 0..1
 				]+
 			| <myxml1>
 		]
