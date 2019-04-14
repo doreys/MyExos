@@ -9,7 +9,7 @@ use v6 ;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Mon Apr 15 01:13:56 2019
+* Last Modified : Mon Apr 15 01:17:42 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -91,8 +91,8 @@ grammar XML {
 	rule myCDATA { 
 		'<![CDATA[' 
 			[
-				 | [ <text2> || { fail("crochet non fermée") } ]
-				 | [ <tag> || { fail("tag non fermée $/") } ]
+				 | [ <text2> || { fail("Crochet non fermée $/") } ]
+				 | [ <tag> || { fail("Tag non fermée $/") } ]
 			]
 		']]>' <text>
 	}
