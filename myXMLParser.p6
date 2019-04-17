@@ -9,7 +9,7 @@ use v6 ;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Wed Apr 17 12:27:59 2019
+* Last Modified : Wed Apr 17 13:45:41 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -164,11 +164,16 @@ my @tests = (
     [1, '<?xml version="1.0" ?><momo><Tuu></Tuu>test</momo>'                       ],      # 43
     [1, '<?xml version="1.0" ?><momo><Tuu class="aqaqa"></Tuu>test</momo>'                       ],      # 43
 
-}}}
     [1, '<?xml version="1.0" ?><momo><Tuu class="click(1,2);"></Tuu>test</momo>'                       ],      # 43
     [1, '<?xml version="1.0" ?><momo><Tuu class="click(1,2);">test within</Tuu>test</momo>'                       ],      # 43
+}}}
     [1, '<?xml version="1.0" ?> <redir> index.php </redir> <momo><Tuu class="click(1,2);">test within</Tuu>test</momo>'                       ],      # 43
-    [1, '<?xml version="1.0" ?> <redir> index.php </redir> <menu><![CDATA[ <div class="dossier"> Accueil <div class="categorie" onclick="click(1,3);">D&#65533;connexion</div> </div> <div class="dossier"> Administration <div class="categorie" onclick="click(1,4);">Nouveau menu</div> </div> ]]></menu>'],
+    [1, '<?xml version="1.0" ?><momo>azazaza<Tuu class="click(1,2);" onclick="ee">test within<![CDATA[ <div class="categorie" onclick="click(1,4);">Nouveau menu</div> <div class="dossier"> Accueil</div> ]]></Tuu>test</momo>'                       ],      # 43
+    [1, '<?xml version="1.0" ?> <redir> index.php </redir> <menu>'~
+    		'<![CDATA[ '~
+			'<div class="dossier"> Accueil <div class="categorie" onclick="click(1,3);">D&#65533;connexion</div> </div> '~
+			'<div class="dossier"> Administration <div class="categorie" onclick="click(1,4);">Nouveau menu</div> </div>'~
+		' ]]></menu>'],
 );
 
 my $count = 1;
