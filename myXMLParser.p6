@@ -9,7 +9,7 @@ use v6 ;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Mon Apr 15 17:24:23 2019
+* Last Modified : Wed Apr 17 12:27:59 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -116,7 +116,7 @@ grammar XML {
 };
 
 my @tests = (
-# #`{{{
+#`{{{
     [1, 'abc'                       ],      # 01
     [1, '<a></a>'                   ],      # 02
     [1, '..<ab>foo</ab>dd'          ],      # 03
@@ -157,15 +157,17 @@ my @tests = (
     [1, '[['                       ],      # 37
     [1, '<?xml version="0.9" encoding="utf-8"?>'                       ],      # 38
     [1, '<?xml version="0.9" encoding="utf-8"?><momo></momo>'                       ],      # 39
-    #}}}
     [1, '<?xml version="0.9" encoding="utf-8"?><momo>test</momo>'                       ],      # 40
     [1, '<?xml version="0.9" encoding="utf-8"?><tuu><momo></tuu>test</momo>'                       ],      # 41
     [1, '<?xml version="0.9" encoding="utf-8"?><momo><tuu></Tuu>test</momo>'                       ],      # 42
     [1, '<?xml version="0.9" encoding="utf-8"?><momo><Tuu></Tuu>test</momo>'                       ],      # 43
     [1, '<?xml version="1.0" ?><momo><Tuu></Tuu>test</momo>'                       ],      # 43
     [1, '<?xml version="1.0" ?><momo><Tuu class="aqaqa"></Tuu>test</momo>'                       ],      # 43
+
+}}}
     [1, '<?xml version="1.0" ?><momo><Tuu class="click(1,2);"></Tuu>test</momo>'                       ],      # 43
     [1, '<?xml version="1.0" ?><momo><Tuu class="click(1,2);">test within</Tuu>test</momo>'                       ],      # 43
+    [1, '<?xml version="1.0" ?> <redir> index.php </redir> <momo><Tuu class="click(1,2);">test within</Tuu>test</momo>'                       ],      # 43
     [1, '<?xml version="1.0" ?> <redir> index.php </redir> <menu><![CDATA[ <div class="dossier"> Accueil <div class="categorie" onclick="click(1,3);">D&#65533;connexion</div> </div> <div class="dossier"> Administration <div class="categorie" onclick="click(1,4);">Nouveau menu</div> </div> ]]></menu>'],
 );
 
