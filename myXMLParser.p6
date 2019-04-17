@@ -9,7 +9,7 @@ use v6 ;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Wed Apr 17 13:45:41 2019
+* Last Modified : Wed Apr 17 22:21:43 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -72,7 +72,8 @@ grammar XML {
 		[
 			| <basicText2>
 			| <basicAntity2>
-			| <myCDATA>
+			| <tag>
+			#| <myCDATA>
 		]
 	}
 
@@ -92,14 +93,14 @@ grammar XML {
 		'<![CDATA[' 
 			[
 				 | [ <text2> || { fail("Crochet non fermé $/") } ]
-				 | [ <tag> || { fail("Tag non fermé $/") } ]
+				 #		 | [ <tag> || { fail("Tag $/ erreur") } ]
 			]
 		']]>' <text>
 	}
 
 
 	rule tag {
-		'<' (\d*\w+) <attribute>*
+		'<' (\d*\w+) [<attribute> \s*]*
 					[
 						|'/>'
 						|'>' <xml> '</' $0 '>'
@@ -116,7 +117,7 @@ grammar XML {
 };
 
 my @tests = (
-#`{{{
+# #`{{{
     [1, 'abc'                       ],      # 01
     [1, '<a></a>'                   ],      # 02
     [1, '..<ab>foo</ab>dd'          ],      # 03
@@ -166,14 +167,18 @@ my @tests = (
 
     [1, '<?xml version="1.0" ?><momo><Tuu class="click(1,2);"></Tuu>test</momo>'                       ],      # 43
     [1, '<?xml version="1.0" ?><momo><Tuu class="click(1,2);">test within</Tuu>test</momo>'                       ],      # 43
-}}}
     [1, '<?xml version="1.0" ?> <redir> index.php </redir> <momo><Tuu class="click(1,2);">test within</Tuu>test</momo>'                       ],      # 43
+    [1, '<?xml version="1.0" ?><momo><Tuu class="click(1,2);">test within</Tuu>test</momo>'                       ],      # 43
     [1, '<?xml version="1.0" ?><momo>azazaza<Tuu class="click(1,2);" onclick="ee">test within<![CDATA[ <div class="categorie" onclick="click(1,4);">Nouveau menu</div> <div class="dossier"> Accueil</div> ]]></Tuu>test</momo>'                       ],      # 43
     [1, '<?xml version="1.0" ?> <redir> index.php </redir> <menu>'~
     		'<![CDATA[ '~
 			'<div class="dossier"> Accueil <div class="categorie" onclick="click(1,3);">D&#65533;connexion</div> </div> '~
 			'<div class="dossier"> Administration <div class="categorie" onclick="click(1,4);">Nouveau menu</div> </div>'~
 		' ]]></menu>'],
+		# }}}
+    [1, '<?xml version="1.0" ?><momo><Tuu  onclick="ee" class="click(1,2);">test within</Tuu>test <![CDATA[ sdsfdfsdfdsfs  <toto>aqwxsz</toto>]]></momo>'                       ],      # 43
+    [1, '<?xml version="1.0" ?><momo><Tuu  onclick="ee" class="click(1,2);">test within</Tuu>test <![CDATA[ sdsfdfsdfdsfs  <div class="categorie" onclick="click(1,4);">Nouveau menu</div>]]></momo>'                       ],      # 43
+    [1, '<?xml version="1.0" ?><momo>azazaza<Tuu class="click(1,2);" onclick="ee">test within<![CDATA[ <div class="categorie" onclick="click(1,4);">Nouveau menu</div> <div class="dossier"> Accueil</div> ]]></Tuu>test</momo>'                       ],      # 43
 );
 
 my $count = 1;
