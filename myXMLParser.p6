@@ -9,7 +9,7 @@ use Grammar::Tracer;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Fri Apr 19 00:56:18 2019
+* Last Modified : Fri Apr 19 01:03:03 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -87,10 +87,10 @@ grammar XML {
 	}
 
 	rule myCDATACorpse {
-		<text2>
+		#<text2>
 			[
-				 | [ <text2>* || { fail("Crochet non fermé $/") } ]
-				 | [ <tag>* || { fail("Tag $/ erreur") } ]
+				 | [ (<text2> <tag>)* || { fail("Crochet non fermé $/") } ]
+				 | [ (<tag> <text2>)* || { fail("Tag $/ erreur") } ]
 			]
 	}
 
@@ -165,7 +165,7 @@ my @tests = (
     [1, '<?xml version="1.0" ?><momo>azazaza<Tuu onclick="clock(3,2);" class="ee">test within 1<![CDATA[ <div id="click" class="categorie2">Nouveau menu</div> ]]></Tuu>test</momo>'                       ],      # 50
 }}}
     [1, '<?xml version="1.0" ?><momo>azazaza<Tuu onclick="clock(3,2);" class="ee">test within 1<![CDATA[ <div id="click" class="categorie2">Nouveau menu</div>  <div id="click" class="categorie2">Nouveau menu</div> ]]></Tuu>test</momo>'                       ],      # 50
-    [1, '<?xml version="1.0" ?><momo>azazaza<Tuu onclick="clock(3,2);" class="ee">test within 1<![CDATA[ aaa aaaazeazeaz <div id="click" class="categorie2">Nouveau menu</div>  <div id="click" class="categorie2">Nouveau menu</div> ]]></Tuu>test</momo>'                       ],      # 50
+    [1, '<?xml version="1.0" ?><momo>azazaza<Tuu onclick="clock(3,2);" class="ee">test within 1<![CDATA[ aaa aaaazeazeaz <div id="click" class="categorie2">Nouveau menu</div> uuuu  <div id="click" class="categorie2">Nouveau menu</div> ]]></Tuu>test</momo>'                       ],      # 50
 #`{{{
     [1, '<?xml version="1.0" ?><momo><Tuu  onclick="ee" class="click(1,2);">test within</Tuu>test <![CDATA[ sdsfdfsdfdsfs  <toto>aqwxsz</toto>]]></momo>'                       ],      # 51
     [1, '<?xml version="1.0" ?><momo><Tuu  onclick="ee" class="click(1,2);">test within</Tuu>test <![CDATA[ sdsfdfsdfdsfs  <div class="categorie" onclick="click(1,4);">Nouveau menu</div>]]></momo>'                       ],      # 52
