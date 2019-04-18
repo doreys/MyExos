@@ -2,14 +2,14 @@
 
 use v6 ;
 
-use Grammar::Tracer;
+# use Grammar::Tracer;
 
 # ------------------------------------------------------
 #`[
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Fri Apr 19 01:03:03 2019
+* Last Modified : Fri Apr 19 01:06:08 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -95,14 +95,14 @@ grammar XML {
 	}
 
 	rule tag {
-		'<' (\d*\w+) [ <attribute> \s* { say "-----|$/|----" } ]*
+		'<' (\d*\w+) [ <attribute> \s* ]*
 					[
 						|'/>'
 						|'>' <xml> '</' $0 '>'
 					] 
 		}
 
-	token attribute { \w+ '="' <-[="\<\>\s]>+ \" { say ">>>>>>>>|$/|<<<<<<"} }
+	token attribute { \w+ '="' <-[="\<\>\s]>+ \" }
 
 	token antity {
 		[
@@ -112,7 +112,7 @@ grammar XML {
 };
 
 my @tests = (
-#`{{{
+	# #`{{{
     [1, 'abc'                       ],      # 01
     [1, '<a></a>'                   ],      # 02
     [1, '..<ab>foo</ab>dd'          ],      # 03
@@ -163,7 +163,7 @@ my @tests = (
     [1, '<?xml version="1.0" ?> <redir> index.php </redir> <momo><Tuu class="click(1,2);">test within</Tuu>test</momo>'                       ],      # 48
     [1, '<?xml version="1.0" ?><momo><Tuu class="click(1,2);">test within momo</Tuu>test</momo>'                       ],      # 49
     [1, '<?xml version="1.0" ?><momo>azazaza<Tuu onclick="clock(3,2);" class="ee">test within 1<![CDATA[ <div id="click" class="categorie2">Nouveau menu</div> ]]></Tuu>test</momo>'                       ],      # 50
-}}}
+    #}}}
     [1, '<?xml version="1.0" ?><momo>azazaza<Tuu onclick="clock(3,2);" class="ee">test within 1<![CDATA[ <div id="click" class="categorie2">Nouveau menu</div>  <div id="click" class="categorie2">Nouveau menu</div> ]]></Tuu>test</momo>'                       ],      # 50
     [1, '<?xml version="1.0" ?><momo>azazaza<Tuu onclick="clock(3,2);" class="ee">test within 1<![CDATA[ aaa aaaazeazeaz <div id="click" class="categorie2">Nouveau menu</div> uuuu  <div id="click" class="categorie2">Nouveau menu</div> ]]></Tuu>test</momo>'                       ],      # 50
 #`{{{
