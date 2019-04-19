@@ -2,14 +2,14 @@
 
 use v6 ;
 
-# use Grammar::Tracer;
+use Grammar::Tracer;
 
 # ------------------------------------------------------
 #`[
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Fri Apr 19 14:50:04 2019
+* Last Modified : Fri Apr 19 21:59:58 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -44,7 +44,7 @@ grammar XML {
 	}
 
 	rule bodyXML {
-		<myxml1> { say "bodyXML line: $/" }
+		<myxml1>
 	}
 
 	rule entete { '<?xml' 'version="' \d+ '.' \d+ '"' ['encoding="' <-[\'\"\s]>+ '"']**0..1  '?>' }
@@ -64,24 +64,9 @@ grammar XML {
 		]
 	}
 
-	token text2 {
-		<basicText2>
-		[
-			| <basicText2> 
-			| <basicAntity2> 
-		]
-	}
-
-	rule basicText2 {
-		<-[<>&\[\]]>*
-	}
 
 	rule basicAntity {
 		<antity> <text>
-	}
-
-	rule basicAntity2 {
-		<antity> <text2>
 	}
 
 	rule tag {
@@ -90,7 +75,18 @@ grammar XML {
 						|'/>'
 						|'>' <myxml1> '</' $0 '>'
 					] 
-		}
+	}
+
+	token basicText2 {
+		<-[<>&\[\]]>*
+		#<myCDATACorpse>
+	}
+
+	rule basicAntity2 {
+		<antity> 
+		#<text2>
+		#<myCDATACorpse>
+	}
 
 	rule myCDATA { 
 		'<![CDATA[' 
@@ -100,9 +96,17 @@ grammar XML {
 
 	rule myCDATACorpse {
 		[
-			 | <text2>
-			 | <tag2>
+			 | [ <text2> { say "text2 ------> $/" }]
+			 | [ <tag2> { say "tag2 ------> $/" }]
 		]
+	}
+
+	rule text2 {
+		[
+			| <basicText2>
+			| <basicAntity2>
+		]
+		#<myCDATACorpse>
 	}
 
 	rule tag2 {
@@ -179,9 +183,17 @@ my @tests = (
     [1, '<?xml version="1.0" ?><momo>azazaza<Tuu onclick="clock(3,2);" class="ee">test within 1<![CDATA[ aaa aaaazeazeaz <div id="click" class="categorie2">Nouveau menu</div> uuuu  <div id="click" class="categorie2">Nouveau menu</div> ]]></Tuu>test</momo>'                       ],      # 50
     [1, '<?xml version="1.0" ?><momo><![CDATA[ <div id="click" class="categorie2">Nouveau menu</div> ]]></momo>'                       ],      # 50
     [1, '<?xml version="1.0" ?><momo>aaa<![CDATA[ <div id="click" class="maviecestmacategorieazerty2">Nouveau menu</div> ]]></momo>'                       ],      # 50
-}}}
     [1, '<?xml version="1.0" ?><momo>aaa<![CDATA[ <div id="click" class="categorie2">Nouveau menu</div> azerty]]></momo>'                       ],      # 50
+    [1, '<?xml version="1.0" ?><momo>aaa<azerty><![CDATA[ <div id="click" class="categorie2">Nouveau menu</div> azerty]]></momo>'                       ],      # 50
+    [1, '<?xml version="1.0" ?><momo>aaa<azerty><![CDATA[ <div id="click" class="categorie2">Nouveau menu</div> azerty]]></azerty></momo>'                       ],      # 50
+    [1, '<?xml version="1.0" ?><momo>aaa<azerty>uuu<![CDATA[ <div id="click" class="categorie2">Nouveau menu</div> azerty]]></azerty></momo>'                       ],      # 50
+    [1, '<?xml version="1.0" ?><momo>aaa<azerty>uuu<![CDATA[ <div id="click" class="categorie2">Nouveau menu</div> azerty]]>azert<aze>toto is here</aze></azerty></momo>'                       ],      # 50
+    [1, '<?xml version="1.0" ?><momo>aaa<aze>qawxsz</aze><azerty>uuu<![CDATA[ <div id="click" class="categorie2">Nouveau menu</div> azerty]]>azert<aze>toto is here</aze></azerty></momo>'                       ],      # 50
+    [1, '<?xml version="1.0" ?><momo>aaa<aze>qawxsz</aze><azerty>uuu<![CDATA[ <div id="click" class="categorie2">Nouveau menu</div> <div onclick="click(1,4,2);" class="categorie3">Nouveau menu9</div>azerty]]>azert<aze>toto is here</aze></azerty></momo>'                       ],      # 50
+}}}
+    [1, '<?xml version="1.0" ?><momo>aaa<![CDATA[ <div id="click" class="categorie2">Nouveau menu</div> ooooo <div onclick="click(1,4,2);" class="categorie3">Nouveau menu9</div>azerty]]></momo>'                       ],      # 50
 #`{{{
+    [1, '<?xml version="1.0" ?><momo>aaa<![CDATA[ <div id="click" class="categorie2">Nouveau menu</div> <div onclick="click(1,4,2);" class="categorie3">Nouveau menu9</div>azerty]]></momo>'                       ],      # 50
     [1, '<?xml version="1.0" ?><momo>azazaza<Tuu onclick="clock(3,2);" class="ee">test within 1<![CDATA[ aaa aaaazeazeaz <div id="click" class="categorie2">Nouveau menu</div> uuuu  <div id="click" class="categorie2">Nouveau menu</div> oooo ]]></Tuu>test</momo>'                       ],      # 50
     [1, '<?xml version="1.0" ?><momo><Tuu  onclick="ee" class="click(1,2);">test within</Tuu>test <![CDATA[ sdsfdfsdfdsfs  <toto>aqwxsz</toto>]]></momo>'                       ],      # 51
     [1, '<?xml version="1.0" ?><momo><Tuu  onclick="ee" class="click(1,2);">test within</Tuu>test <![CDATA[ sdsfdfsdfdsfs  <div class="categorie" onclick="click(1,4);">Nouveau menu</div>]]></momo>'                       ],      # 52
