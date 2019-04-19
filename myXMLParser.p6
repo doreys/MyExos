@@ -9,7 +9,7 @@ use v6 ;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Fri Apr 19 01:06:08 2019
+* Last Modified : Fri Apr 19 14:50:04 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -39,8 +39,12 @@ grammar XML {
 	rule corps {
 		[
 			| <myxml1>
-			| <entete> <tag>+
+			| <entete> <bodyXML>
 		]
+	}
+
+	rule bodyXML {
+		<myxml1> { say "bodyXML line: $/" }
 	}
 
 	rule entete { '<?xml' 'version="' \d+ '.' \d+ '"' ['encoding="' <-[\'\"\s]>+ '"']**0..1  '?>' }
@@ -60,16 +64,16 @@ grammar XML {
 		]
 	}
 
-	rule text2 {
+	token text2 {
 		<basicText2>
 		[
-			| <basicText2>
-			| <basicAntity2>
+			| <basicText2> 
+			| <basicAntity2> 
 		]
 	}
 
 	rule basicText2 {
-		<-[<>&\[\]]>* 
+		<-[<>&\[\]]>*
 	}
 
 	rule basicAntity {
@@ -80,6 +84,14 @@ grammar XML {
 		<antity> <text2>
 	}
 
+	rule tag {
+		'<' (\d*\w+) [ <attribute> \s* ]*
+					[
+						|'/>'
+						|'>' <myxml1> '</' $0 '>'
+					] 
+		}
+
 	rule myCDATA { 
 		'<![CDATA[' 
 			<myCDATACorpse>
@@ -87,20 +99,20 @@ grammar XML {
 	}
 
 	rule myCDATACorpse {
-		#<text2>
-			[
-				 | [ (<text2> <tag>)* || { fail("Crochet non fermé $/") } ]
-				 | [ (<tag> <text2>)* || { fail("Tag $/ erreur") } ]
-			]
+		[
+			 | <text2>
+			 | <tag2>
+		]
 	}
 
-	rule tag {
+	rule tag2 {
 		'<' (\d*\w+) [ <attribute> \s* ]*
 					[
 						|'/>'
-						|'>' <xml> '</' $0 '>'
+						|'>' <myCDATACorpse> '</' $0 '>'
 					] 
-		}
+		<myCDATACorpse>
+	}
 
 	token attribute { \w+ '="' <-[="\<\>\s]>+ \" }
 
@@ -112,7 +124,7 @@ grammar XML {
 };
 
 my @tests = (
-	# #`{{{
+#`{{{
     [1, 'abc'                       ],      # 01
     [1, '<a></a>'                   ],      # 02
     [1, '..<ab>foo</ab>dd'          ],      # 03
@@ -163,15 +175,21 @@ my @tests = (
     [1, '<?xml version="1.0" ?> <redir> index.php </redir> <momo><Tuu class="click(1,2);">test within</Tuu>test</momo>'                       ],      # 48
     [1, '<?xml version="1.0" ?><momo><Tuu class="click(1,2);">test within momo</Tuu>test</momo>'                       ],      # 49
     [1, '<?xml version="1.0" ?><momo>azazaza<Tuu onclick="clock(3,2);" class="ee">test within 1<![CDATA[ <div id="click" class="categorie2">Nouveau menu</div> ]]></Tuu>test</momo>'                       ],      # 50
-    #}}}
     [1, '<?xml version="1.0" ?><momo>azazaza<Tuu onclick="clock(3,2);" class="ee">test within 1<![CDATA[ <div id="click" class="categorie2">Nouveau menu</div>  <div id="click" class="categorie2">Nouveau menu</div> ]]></Tuu>test</momo>'                       ],      # 50
     [1, '<?xml version="1.0" ?><momo>azazaza<Tuu onclick="clock(3,2);" class="ee">test within 1<![CDATA[ aaa aaaazeazeaz <div id="click" class="categorie2">Nouveau menu</div> uuuu  <div id="click" class="categorie2">Nouveau menu</div> ]]></Tuu>test</momo>'                       ],      # 50
+    [1, '<?xml version="1.0" ?><momo><![CDATA[ <div id="click" class="categorie2">Nouveau menu</div> ]]></momo>'                       ],      # 50
+    [1, '<?xml version="1.0" ?><momo>aaa<![CDATA[ <div id="click" class="maviecestmacategorieazerty2">Nouveau menu</div> ]]></momo>'                       ],      # 50
+}}}
+    [1, '<?xml version="1.0" ?><momo>aaa<![CDATA[ <div id="click" class="categorie2">Nouveau menu</div> azerty]]></momo>'                       ],      # 50
 #`{{{
+    [1, '<?xml version="1.0" ?><momo>azazaza<Tuu onclick="clock(3,2);" class="ee">test within 1<![CDATA[ aaa aaaazeazeaz <div id="click" class="categorie2">Nouveau menu</div> uuuu  <div id="click" class="categorie2">Nouveau menu</div> oooo ]]></Tuu>test</momo>'                       ],      # 50
     [1, '<?xml version="1.0" ?><momo><Tuu  onclick="ee" class="click(1,2);">test within</Tuu>test <![CDATA[ sdsfdfsdfdsfs  <toto>aqwxsz</toto>]]></momo>'                       ],      # 51
     [1, '<?xml version="1.0" ?><momo><Tuu  onclick="ee" class="click(1,2);">test within</Tuu>test <![CDATA[ sdsfdfsdfdsfs  <div class="categorie" onclick="click(1,4);">Nouveau menu</div>]]></momo>'                       ],      # 52
     [1, '<?xml version="1.0" ?><momo>azazaza<Tuu class="click(1,2);" onclick="ee">test within<![CDATA[ <div class="categorie" onclick="click(1,4);">Nouveau menu</div> <div class="dossier"> Accueil</div> ]]></Tuu>test</momo>'                       ],      # 53
     [1, 'abctotozezrerze'                       ],      # 54
     [1, '<?xml version="1.0" ?> <redir> index.php </redir> <menu>'~ '<![CDATA[ '~ '<div class="dossier"> Accueil <div class="categorie" onclick="click(1,3);">D&#65533;connexion</div> </div> '~ '<div class="dossier"> Administration <div class="categorie" onclick="click(1,4);">Nouveau menu</div> </div>'~ ' ]]></menu>'], #55
+    [1, '<?xml version="1.0" ?> <redir> index.php </redir> <menu>'~ '<![CDATA[ '~ '<div class="dossier"> Accueil <div class="categorie" onclick="click(1,3);">D&#65533;connexion</div> </div> '~ '<div class="onclick(2,9);" class="dossier"> Administration <div class="categorie" onclick="click(1,4);">Nouveau menu</div> </div>'~ ' ]]></menu>'], #55
+[1, '<?xml version="1.0" ?><momo><Tuu  onclick="ee" class="click(1,2);">test within</Tuu>test <![CDATA[ sdsfdfsdfdsfs  <toto  onclick="click(2,8);" class="categorie2">aqwxsz</toto> uuuuu]]></momo>'                       ],      # 51
 }}}
 );
 
