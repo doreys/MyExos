@@ -9,7 +9,7 @@ use Grammar::Tracer;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Fri Apr 19 21:59:58 2019
+* Last Modified : Fri Apr 19 22:19:56 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -95,10 +95,7 @@ grammar XML {
 	}
 
 	rule myCDATACorpse {
-		[
-			 | [ <text2> { say "text2 ------> $/" }]
-			 | [ <tag2> { say "tag2 ------> $/" }]
-		]
+		 <text2> [ <tag2> <text2> ]*
 	}
 
 	rule text2 {
