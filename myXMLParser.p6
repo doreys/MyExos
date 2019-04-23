@@ -9,7 +9,7 @@ use v6 ;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Wed Apr 24 00:06:34 2019
+* Last Modified : Wed Apr 24 00:19:12 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -126,10 +126,15 @@ grammar XML {
 
 	token entities_formats {
 		[
-			| '&amp;'
+			#| '&amp;'
+			| <entity>
 			| <entity_decimal>
 			| <entity_hexadecimal>
 		]
+	}
+
+	token entity {
+		'&' <[a..z]>**1..5 ';'
 	}
 
 	token entity_decimal {
@@ -223,7 +228,7 @@ my @tests = (
     [1, 'a&#123H;bc'                       ],      # 76
     [1, 'a&#x123H;bc'                       ],      # 77
     [1, 'a&#x123f;bc'                       ],      # 78
-    [1, 'a&#233;&#xE9;&#x123f;bc'                       ],      # 78
+    [1, 'a&#233;&#xE9;&#x123f;&amp;bc'                       ],      # 78
 # }}}
 );
 
