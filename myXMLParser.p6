@@ -9,7 +9,7 @@ use v6 ;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Sat Apr 20 00:01:03 2019
+* Last Modified : Wed Apr 24 00:02:30 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -23,6 +23,12 @@ use v6 ;
 
    - Extra tests:
 	X du texte pur contient des entités telles que &amp; ;
+		Prerequisites & format:
+			• &#NNNN; ou &#xHHHH;
+			• Les caractères &# et ; délimitent la référence.
+			• Le caractère x indique que le nombre qui suit est en notation hexadécimale.
+			• NNNN est le numéro du caractère en notation décimale.
+			• HHHH est le numéro du caractère en notation hexadécimale.
 	X je ne sais pas si les noms des balises XML peuvent commencer par un chiffre, mais la grammaire actuelle (à l'époque de l'écriture de l'article) l'autorise. Vous pourriez vérifier la spécification XML et, si besoin, adopter cette grammaire ;
 	X du texte pur peut contenir des blocs du genre <![CDATA[ ... ]]> , dans lesquels les balises de type XML sont ignorées et les caractères tels que < sont ignorés et n'ont pas besoin d'un caractère d'échappement ;
 	X du XML réel autorise des préambules du type <?xml version="0.9" encoding="utf-8"?> nécessitant une balise racine contenant le reste (il faudra peut-être modifier des cas de test) ;
@@ -67,7 +73,7 @@ grammar XML {
 
 
 	rule basicAntity {
-		<antity> <text>
+		<entities_formats> <text>
 	}
 
 	rule tag {
@@ -84,7 +90,7 @@ grammar XML {
 	}
 
 	rule basicAntity2 {
-		<antity> 
+		<entities_formats> 
 		#<text2>
 		#<myCDATACorpse>
 	}
@@ -118,10 +124,20 @@ grammar XML {
 
 	token attribute { \w+ '="' <-[="\<\>\s]>+ \" }
 
-	token antity {
+	token entities_formats {
 		[
 			| '&amp;'
+			| <entity_decimal>
+			| <entity_hexadecimal>
 		]
+	}
+
+	token entity_decimal {
+		'&#' <[0..9]>**4 ';'
+	}
+
+	token entity_hexadecimal {
+		'&#x' <[0..9A..Fa..f]>**4 ';'
 	}
 };
 
@@ -201,6 +217,12 @@ my @tests = (
     [1, '<?xml version="1.0" ?> <redir> index.php </redir> <menu>'~ '<![CDATA[ '~ '<div class="dossier"> Accueil <div class="categorie" onclick="click(1,3);">D&#65533;connexion</div> </div> '~ '<div class="dossier"> Administration <div class="categorie" onclick="click(1,4);">Nouveau menu</div> </div>'~ ' ]]></menu>'], #70
     [1, '<?xml version="1.0" ?> <redir> index.php </redir> <menu>'~ '<![CDATA[ '~ '<div class="dossier"> Accueil <div class="categorie" onclick="click(1,3);">D&#65533;connexion</div> </div> '~ '<div class="onclick(2,9);" class="dossier"> Administration <div class="categorie" onclick="click(1,4);">Nouveau menu</div> </div>'~ ' ]]></menu>'], #71
 [1, '<?xml version="1.0" ?><momo><Tuu  onclick="ee" class="click(1,2);">test within</Tuu>test <![CDATA[ sdsfdfsdfdsfs  <toto  onclick="click(2,8);" class="categorie2">aqwxsz</toto> uuuuu]]></momo>'                       ],      # 72
+    [1, 'a&#1234;bc'                       ],      # 73
+    [1, 'a&#234;bc'                       ],      # 74
+    [1, 'a&#233234;bc'                       ],      # 75
+    [1, 'a&#123H;bc'                       ],      # 76
+    [1, 'a&#x123H;bc'                       ],      # 77
+    [1, 'a&#x123f;bc'                       ],      # 78
 # }}}
 );
 
