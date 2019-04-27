@@ -4,12 +4,14 @@ use v6 ;
 
 # use Grammar::Tracer;
 
+my $rank=0;
+
 # ------------------------------------------------------
 #`[
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Wed Apr 24 12:37:12 2019
+* Last Modified : Sat Apr 27 17:05:39 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -46,7 +48,7 @@ grammar XML {
 	rule corps {
 		[
 			| <myxml1>
-			| <entete> <bodyXML>
+			| (<entete>) (<bodyXML>) { say "\ntest #$rank ---->0:$0\n1:$1"; $rank++; }
 		]
 	}
 
@@ -147,7 +149,7 @@ grammar XML {
 };
 
 my @tests = (
-	# #`{{{
+#`{{{
     [1, 'abc'                       ],      # 01
     [1, '<a></a>'                   ],      # 02
     [1, '..<ab>foo</ab>dd'          ],      # 03
@@ -209,11 +211,11 @@ my @tests = (
     [1, '<?xml version="1.0" ?><momo>aaa<azerty>uuu<![CDATA[ <div id="click" class="categorie2">Nouveau menu</div> azerty]]>azert<aze>toto is here</aze></azerty></momo>'                       ],      # 59
     [1, '<?xml version="1.0" ?><momo>aaa<aze>qawxsz</aze><azerty>uuu<![CDATA[ <div id="click" class="categorie2">Nouveau menu</div> azerty]]>azert<aze>toto is here</aze></azerty></momo>'                       ],      # 60
     [1, '<?xml version="1.0" ?><momo>aaa<aze>qawxsz</aze><azerty>uuu<![CDATA[ <div id="click" class="categorie2">Nouveau menu</div> <div onclick="click(1,4,2);" class="categorie3">Nouveau menu9</div>azerty]]>azert<aze>toto is here</aze></azerty></momo>'                       ],      # 61
-    # }}}
     [1, '<?xml version="1.0" ?><momo>aaa<![CDATA[ <div id="click" class="categorie2">Nouveau menu</div> ooooo <div onclick="click(1,4,2);" class="categorie3">Nouveau menu9</div>azerty]]></momo>'                       ],      # 62
+}}}
     [1, '<?xml version="1.0" ?><momo>aaa<![CDATA[ <aaaaz> <div id="click" class="categorie2">Nouveau menu</div> ooooo <div onclick="click(1,4,2);" class="categorie3">Nouveau menu9</div>azerty</aaaaz>]]></momo>'                       ],      # 63
-    # #`{{{
     [1, '<?xml version="1.0" ?><momo>aaa<![CDATA[ <div id="click" class="categorie2">Nouveau menu</div> <div onclick="click(1,4,2);" class="categorie3">Nouveau menu9</div>azerty]]></momo>'                       ],      # 64
+#`{{{
     [1, '<?xml version="1.0" ?><momo>azazaza<Tuu onclick="clock(3,2);" class="ee">test within 1<![CDATA[ aaa aaaazeazeaz <div id="click" class="categorie2">Nouveau menu</div> uuuu  <div id="click" class="categorie2">Nouveau menu</div> oooo ]]></Tuu>test</momo>'                       ],      # 65
     [1, '<?xml version="1.0" ?><momo><Tuu  onclick="ee" class="click(1,2);">test within</Tuu>test <![CDATA[ sdsfdfsdfdsfs  <toto>aqwxsz</toto>]]></momo>'                       ],      # 66
     [1, '<?xml version="1.0" ?><momo><Tuu  onclick="ee" class="click(1,2);">test within</Tuu>test <![CDATA[ sdsfdfsdfdsfs  <div class="categorie" onclick="click(1,4);">Nouveau menu</div>]]></momo>'                       ],      # 67
@@ -230,7 +232,7 @@ my @tests = (
     [1, 'a&#x123f;bc'                       ],      # 78
     [1, 'a&#x12334;bc'                       ],      # 78
     [1, 'a&#233;&#xE9;&#x123f;&amp;bc'                       ],      # 78
-# }}}
+}}}
 );
 
 # -----------------------------
