@@ -11,7 +11,7 @@ my $rank=0;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Tue Apr 30 00:49:28 2019
+* Last Modified : Tue Apr 30 00:55:40 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -61,7 +61,7 @@ grammar XML {
 	token myxml1 { <text> [ <tag> <text> ]* }
 
 	rule basicText {
-		( <-[<>&]>* ) { say "basic text $0 " ~ $0.lc ~ "---" ~ $0.uc }
+		( <-[<>&]>* ) { say "basic text $0 " if $0.chars }
 	}
 
 	rule text {
@@ -75,7 +75,7 @@ grammar XML {
 
 
 	rule basicAntity {
-		<entities_formats> <text>
+		(<entities_formats> <text>) {  say "basic antity $0 " ~ $0.lc ~ "---" ~ $0.uc }
 	}
 
 	rule tag {
