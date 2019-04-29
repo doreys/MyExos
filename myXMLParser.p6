@@ -11,7 +11,7 @@ my $rank=0;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Sat Apr 27 17:05:39 2019
+* Last Modified : Tue Apr 30 00:49:28 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -48,7 +48,7 @@ grammar XML {
 	rule corps {
 		[
 			| <myxml1>
-			| (<entete>) (<bodyXML>) { say "\ntest #$rank ---->0:$0\n1:$1"; $rank++; }
+			| (<entete>) (<bodyXML>) { say "\n$0"; $rank++; }
 		]
 	}
 
@@ -61,7 +61,7 @@ grammar XML {
 	token myxml1 { <text> [ <tag> <text> ]* }
 
 	rule basicText {
-		<-[<>&]>* 
+		( <-[<>&]>* ) { say "basic text $0 " ~ $0.lc ~ "---" ~ $0.uc }
 	}
 
 	rule text {
