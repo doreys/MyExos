@@ -11,7 +11,7 @@ my $rank=0;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Tue Apr 30 23:59:00 2019
+* Last Modified : Wed May  1 01:24:49 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -63,15 +63,15 @@ grammar XML {
 			  (<text>) { say "myxml1 act 2 text:$2 ----- $/" } ]* }
 
 	rule basicText {
-		<-[<>&]>*  { say "basicText: ---------------| $/ |-------------" }
+		<-[<>&]>*  { say "basicText: ---------------|$/|-------------" ~ $/.chars if $/.chars }
 	}
 
 	rule text {
-		<basicText> { say "text:basicText (1) ---------------| $/ |-------------" }
+		<basicText> { say "text:basicText (1) ---------------|$/|-------------" if $/.chars }
 		[
-			| <basicText> { say "text:basicText (2) ---------------| $/ |-------------" }
-			| <basicAntity> { say "text:basicAntity ---------------| $/ |-------------" }
-			| <myCDATA> { say "text:myCDATA ---------------| $/ |-------------" }
+			| <basicText> { say "text:basicText (2) ---------------|$/|-------------" if $/.chars }
+			| <basicAntity> { say "text:basicAntity ---------------|$/|-------------"  if $/.chars }
+			| <myCDATA> { say "text:myCDATA ---------------|$/|-------------"  if $/.chars }
 		]
 	}
 
@@ -89,7 +89,7 @@ grammar XML {
 	}
 
 	token basicText2 {
-		<-[<>&\[\]]>* { say "basicText2: ---------------| $/ |-------------" }
+		<-[<>&\[\]]>* { say "basicText2: ---------------|$/|-------------" if $/.chars }
 		#<myCDATACorpse>
 	}
 
