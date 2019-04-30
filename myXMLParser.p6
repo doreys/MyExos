@@ -11,7 +11,7 @@ my $rank=0;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Tue Apr 30 01:09:58 2019
+* Last Modified : Tue Apr 30 23:59:00 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -58,18 +58,20 @@ grammar XML {
 
 	rule entete { '<?xml' 'version="' \d+ '.' \d+ '"' ['encoding="' <-[\'\"\s]>+ '"']**0..1  '?>' }
 
-	token myxml1 { <text> [ <tag> <text> ]* }
+	token myxml1 { (<text>)  { say "myxml1 act 1 text:$0 ----- $/" }
+			[ (<tag>)  { say "myxml1 act tag:$1 ----- $/" }
+			  (<text>) { say "myxml1 act 2 text:$2 ----- $/" } ]* }
 
 	rule basicText {
-		<-[<>&]>* 
+		<-[<>&]>*  { say "basicText: ---------------| $/ |-------------" }
 	}
 
 	rule text {
-		<basicText>
+		<basicText> { say "text:basicText (1) ---------------| $/ |-------------" }
 		[
-			| <basicText>
-			| <basicAntity>
-			| <myCDATA>
+			| <basicText> { say "text:basicText (2) ---------------| $/ |-------------" }
+			| <basicAntity> { say "text:basicAntity ---------------| $/ |-------------" }
+			| <myCDATA> { say "text:myCDATA ---------------| $/ |-------------" }
 		]
 	}
 
@@ -87,7 +89,7 @@ grammar XML {
 	}
 
 	token basicText2 {
-		<-[<>&\[\]]>*
+		<-[<>&\[\]]>* { say "basicText2: ---------------| $/ |-------------" }
 		#<myCDATACorpse>
 	}
 
@@ -241,6 +243,7 @@ my $count = 1;
 for @tests -> $t {
     my $s = $t[1];
     my $M = XML.parse($s);
+    say "++++++++++++++++++++++++++++++++++++++";
     if !($M  xor $t[0]) {
         say "ok $count - '$s'";
     } else {
