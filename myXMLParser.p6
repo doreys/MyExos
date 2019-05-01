@@ -11,7 +11,7 @@ my $rank=0;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Wed May  1 14:34:45 2019
+* Last Modified : Thu May  2 01:11:03 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -58,9 +58,9 @@ grammar XML {
 
 	rule entete { '<?xml' 'version="' \d+ '.' \d+ '"' ['encoding="' <-[\'\"\s]>+ '"']**0..1  '?>' }
 
-	token myxml1 { (<text>)  { say "myxml1 act 1 text:$0 ----- $/" }
-			[ (<tag>)  { say "myxml1 act tag:$1 ----- $/" }
-			  (<text>) { say "myxml1 act 2 text:$2 ----- $/" } ]* }
+	token myxml1 { (<text>)  { say "myxml1 tag text:$0 ----- $/"  if $/.chars }
+			[ (<tag>)  { say "myxml1 X tag tag:$1 ----- $/" if $/.chars  }
+			  (<text>) { say "myxml1 X tag text:$2 ----- $/" if $/.chars  } ]* }
 
 	rule basicText {
 		<-[<>&]>*  { say "basicText: ---------------|$/|-------------" ~ $/.chars if $/.chars }
@@ -106,7 +106,9 @@ grammar XML {
 	}
 
 	rule myCDATACorpse {
-		 <text2> [ <tag2> <text2> ]*
+		 (<text2>)  { say "myCDATACorpse X text2 tag:$0 ----- $/" if $/.chars  }
+			 [ 	(<tag2>)  { say "myCDATACorpse X tag2 tag:$1 ----- $/" if $/.chars  } 
+			 	(<text2>)  { say "myCDATACorpse X text2 tag:$2 ----- $/" if $/.chars  } ]*
 	}
 
 	rule text2 {
