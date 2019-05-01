@@ -11,7 +11,7 @@ my $rank=0;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Wed May  1 01:24:49 2019
+* Last Modified : Wed May  1 14:34:45 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -67,11 +67,11 @@ grammar XML {
 	}
 
 	rule text {
-		<basicText> { say "text:basicText (1) ---------------|$/|-------------" if $/.chars }
+		<basicText> #{ say "X text:basicText (1) ---------------|$/|-------------" if $/.chars }
 		[
-			| <basicText> { say "text:basicText (2) ---------------|$/|-------------" if $/.chars }
-			| <basicAntity> { say "text:basicAntity ---------------|$/|-------------"  if $/.chars }
-			| <myCDATA> { say "text:myCDATA ---------------|$/|-------------"  if $/.chars }
+			| <basicText> #{ say "---> text:basicText (2) ---------------|$/|-------------" if $/.chars }
+			| <basicAntity> { say "---> text:basicAntity ---------------|$/|-------------"  if $/.chars }
+			| <myCDATA> # { say "---> text:myCDATA ---------------|$/|-------------"  if $/.chars }
 		]
 	}
 
@@ -83,7 +83,7 @@ grammar XML {
 	rule tag {
 		'<' (\d*\w+) [ <attribute> \s* ]*
 					[
-						|'/>'
+						|'/>' { say "---> tag ---------------|$/|-------------"  if $/.chars }
 						|'>' <myxml1> '</' $0 '>'
 					] 
 	}
@@ -120,7 +120,7 @@ grammar XML {
 	rule tag2 {
 		'<' (\d*\w+) [ <attribute> \s* ]*
 					[
-						|'/>'
+						|'/>' { say "---> tag2 ---------------|$/|-------------"  if $/.chars }
 						|'>' <myCDATACorpse> '</' $0 '>'
 					] 
 		<myCDATACorpse>
@@ -130,7 +130,6 @@ grammar XML {
 
 	token entities_formats {
 		[
-			#| '&amp;'
 			| <entity>
 			| <entity_decimal>
 			| <entity_hexadecimal>
@@ -138,15 +137,15 @@ grammar XML {
 	}
 
 	token entity {
-		'&' <[a..z]>**1..5 ';'
+		'&' <[a..z]>**1..5 ';'  { say "entity: ---------------|$/|-------------" ~ $/.chars if $/.chars }
 	}
 
 	token entity_decimal {
-		'&#' <[0..9]>**1..4 ';'
+		'&#' <[0..9]>**1..4 ';' { say "entity_decimal: ---------------|$/|-------------" ~ $/.chars if $/.chars }
 	}
 
 	token entity_hexadecimal {
-		'&#x' <[0..9A..Fa..f]>**1..4 ';'
+		'&#x' <[0..9A..Fa..f]>**1..4 ';' { say "entity_hexadecimal: ---------------|$/|-------------" ~ $/.chars if $/.chars }
 	}
 };
 
