@@ -11,7 +11,7 @@ my $rank=0;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Thu May  2 01:11:03 2019
+* Last Modified : Thu May  2 01:25:29 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -122,13 +122,13 @@ grammar XML {
 	rule tag2 {
 		'<' (\d*\w+) [ <attribute> \s* ]*
 					[
-						|'/>' { say "---> tag2 ---------------|$/|-------------"  if $/.chars }
-						|'>' <myCDATACorpse> '</' $0 '>'
+						| '/>' { say "---> tag2 -------------|$/|-------------"  if $/.chars }
+						| '>' <myCDATACorpse> '</' $0 '>' { say "---->tag2 ----|$/|-----" if $/.chars }
 					] 
 		<myCDATACorpse>
 	}
 
-	token attribute { \w+ '="' <-[="\<\>\s]>+ \" }
+	token attribute { \w+ '="' <-[="\<\>\s]>+ \" {  say "---->attribute ----|$/|-----" if $/.chars } }
 
 	token entities_formats {
 		[
