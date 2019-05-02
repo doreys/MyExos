@@ -11,7 +11,7 @@ my $rank=0;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Thu May  2 01:25:29 2019
+* Last Modified : Fri May  3 01:53:48 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -120,11 +120,10 @@ grammar XML {
 	}
 
 	rule tag2 {
-		'<' (\d*\w+) [ <attribute> \s* ]*
-					[
-						| '/>' { say "---> tag2 -------------|$/|-------------"  if $/.chars }
-						| '>' <myCDATACorpse> '</' $0 '>' { say "---->tag2 ----|$/|-----" if $/.chars }
-					] 
+		[
+			| ( '<' (\d*\w+) [ <attribute> \s* ]* '/>') { say "---> tag2 part1-------------|$/|-|$0|------------"  if $/.chars }
+			| '<' (\d*\w+) [ <attribute> \s* ]* '>' <myCDATACorpse> '</' $0 '>' { say "---->tag2 part2----|$/|-----" if $/.chars }
+		] 
 		<myCDATACorpse>
 	}
 
@@ -217,6 +216,7 @@ my @tests = (
     [1, '<?xml version="1.0" ?><momo>aaa<![CDATA[ <div id="click" class="categorie2">Nouveau menu</div> ooooo <div onclick="click(1,4,2);" class="categorie3">Nouveau menu9</div>azerty]]></momo>'                       ],      # 62
 }}}
     [1, '<?xml version="1.0" ?><momo>aaa<![CDATA[ <aaaaz> <div id="click" class="categorie2">Nouveau menu</div> ooooo <div onclick="click(1,4,2);" class="categorie3">Nouveau menu9</div>azerty</aaaaz>]]></momo>'                       ],      # 63
+    [1, '<?xml version="1.0" ?><momo>aaa<![CDATA[ <aaaaz> <div id="click" class="categorie2"/> ooooo <div onclick="click(1,4,2);" class="categorie3">Nouveau menu9</div>azerty</aaaaz>]]></momo>'                       ],      # 63
 #`{{{
     [1, '<?xml version="1.0" ?><momo>aaa<![CDATA[ <div id="click" class="categorie2">Nouveau menu</div> <div onclick="click(1,4,2);" class="categorie3">Nouveau menu9</div>azerty]]></momo>'                       ],      # 64
     [1, '<?xml version="1.0" ?><momo>azazaza<Tuu onclick="clock(3,2);" class="ee">test within 1<![CDATA[ aaa aaaazeazeaz <div id="click" class="categorie2">Nouveau menu</div> uuuu  <div id="click" class="categorie2">Nouveau menu</div> oooo ]]></Tuu>test</momo>'                       ],      # 65
