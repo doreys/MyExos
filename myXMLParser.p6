@@ -11,7 +11,7 @@ my $rank=0;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Fri May  3 01:53:48 2019
+* Last Modified : Thu May  9 00:23:18 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -63,7 +63,7 @@ grammar XML {
 			  (<text>) { say "myxml1 X tag text:$2 ----- $/" if $/.chars  } ]* }
 
 	rule basicText {
-		<-[<>&]>*  { say "basicText: ---------------|$/|-------------" ~ $/.chars if $/.chars }
+		<-[<>&]>*  { say "\t---->$/ " ~ $/.chars if $/.chars }
 	}
 
 	rule text {
@@ -83,8 +83,8 @@ grammar XML {
 	rule tag {
 		'<' (\d*\w+) [ <attribute> \s* ]*
 					[
-						|'/>' { say "---> tag ---------------|$/|-------------"  if $/.chars }
-						|'>' <myxml1> '</' $0 '>'
+						|'/>' { say "\n\n---> tag ---------------|$/|-------------\n\n\n\n"  if $/.chars }
+						|'>' <myxml1> '</' $0 '>' { say "\n\n---> tag recursive part ---------------|$/|-------------\n\n\n\n"  if $/.chars }
 					] 
 	}
 
@@ -106,9 +106,9 @@ grammar XML {
 	}
 
 	rule myCDATACorpse {
-		 (<text2>)  { say "myCDATACorpse X text2 tag:$0 ----- $/" if $/.chars  }
-			 [ 	(<tag2>)  { say "myCDATACorpse X tag2 tag:$1 ----- $/" if $/.chars  } 
-			 	(<text2>)  { say "myCDATACorpse X text2 tag:$2 ----- $/" if $/.chars  } ]*
+		 (<text2>)  { say "\t\t$0 ******  $/" if $/.chars  }
+			 [ 	(<tag2>)  { say "\t\t$1 ----- $/" if $/.chars  } 
+			 	(<text2>)  { say "\t\t$2 ----- $/" if $/.chars  } ]*
 	}
 
 	rule text2 {
@@ -127,7 +127,7 @@ grammar XML {
 		<myCDATACorpse>
 	}
 
-	token attribute { \w+ '="' <-[="\<\>\s]>+ \" {  say "---->attribute ----|$/|-----" if $/.chars } }
+	token attribute { \w+ '="' <-[="\<\>\s]>+ \" {  print " $/ " if $/.chars } }
 
 	token entities_formats {
 		[
@@ -216,8 +216,8 @@ my @tests = (
     [1, '<?xml version="1.0" ?><momo>aaa<![CDATA[ <div id="click" class="categorie2">Nouveau menu</div> ooooo <div onclick="click(1,4,2);" class="categorie3">Nouveau menu9</div>azerty]]></momo>'                       ],      # 62
 }}}
     [1, '<?xml version="1.0" ?><momo>aaa<![CDATA[ <aaaaz> <div id="click" class="categorie2">Nouveau menu</div> ooooo <div onclick="click(1,4,2);" class="categorie3">Nouveau menu9</div>azerty</aaaaz>]]></momo>'                       ],      # 63
-    [1, '<?xml version="1.0" ?><momo>aaa<![CDATA[ <aaaaz> <div id="click" class="categorie2"/> ooooo <div onclick="click(1,4,2);" class="categorie3">Nouveau menu9</div>azerty</aaaaz>]]></momo>'                       ],      # 63
 #`{{{
+    [1, '<?xml version="1.0" ?><momo>aaa<![CDATA[ <aaaaz> <div id="click" class="categorie2"/> ooooo <div onclick="click(1,4,2);" class="categorie3">Nouveau menu9</div>azerty</aaaaz>]]></momo>'                       ],      # 63
     [1, '<?xml version="1.0" ?><momo>aaa<![CDATA[ <div id="click" class="categorie2">Nouveau menu</div> <div onclick="click(1,4,2);" class="categorie3">Nouveau menu9</div>azerty]]></momo>'                       ],      # 64
     [1, '<?xml version="1.0" ?><momo>azazaza<Tuu onclick="clock(3,2);" class="ee">test within 1<![CDATA[ aaa aaaazeazeaz <div id="click" class="categorie2">Nouveau menu</div> uuuu  <div id="click" class="categorie2">Nouveau menu</div> oooo ]]></Tuu>test</momo>'                       ],      # 65
     [1, '<?xml version="1.0" ?><momo><Tuu  onclick="ee" class="click(1,2);">test within</Tuu>test <![CDATA[ sdsfdfsdfdsfs  <toto>aqwxsz</toto>]]></momo>'                       ],      # 66
