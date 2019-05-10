@@ -11,7 +11,7 @@ my $rank=0;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Thu May  9 00:23:18 2019
+* Last Modified : Sat May 11 00:10:32 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -81,10 +81,12 @@ grammar XML {
 	}
 
 	rule tag {
-		'<' (\d*\w+) [ <attribute> \s* ]*
+		'<' (\d*\w+)
+		[ <attribute> \s* ]* { print "$/" }
 					[
-						|'/>' { say "\n\n---> tag ---------------|$/|-------------\n\n\n\n"  if $/.chars }
-						|'>' <myxml1> '</' $0 '>' { say "\n\n---> tag recursive part ---------------|$/|-------------\n\n\n\n"  if $/.chars }
+						|'/>' { say "$/ ****1***"  if $/.chars }
+						|'>'  { say "$/ ****2***"  if $/.chars }
+						<myxml1> '</' $0 '>' { say "$/"  if $/.chars }
 					] 
 	}
 
@@ -214,8 +216,9 @@ my @tests = (
     [1, '<?xml version="1.0" ?><momo>aaa<aze>qawxsz</aze><azerty>uuu<![CDATA[ <div id="click" class="categorie2">Nouveau menu</div> azerty]]>azert<aze>toto is here</aze></azerty></momo>'                       ],      # 60
     [1, '<?xml version="1.0" ?><momo>aaa<aze>qawxsz</aze><azerty>uuu<![CDATA[ <div id="click" class="categorie2">Nouveau menu</div> <div onclick="click(1,4,2);" class="categorie3">Nouveau menu9</div>azerty]]>azert<aze>toto is here</aze></azerty></momo>'                       ],      # 61
     [1, '<?xml version="1.0" ?><momo>aaa<![CDATA[ <div id="click" class="categorie2">Nouveau menu</div> ooooo <div onclick="click(1,4,2);" class="categorie3">Nouveau menu9</div>azerty]]></momo>'                       ],      # 62
-}}}
     [1, '<?xml version="1.0" ?><momo>aaa<![CDATA[ <aaaaz> <div id="click" class="categorie2">Nouveau menu</div> ooooo <div onclick="click(1,4,2);" class="categorie3">Nouveau menu9</div>azerty</aaaaz>]]></momo>'                       ],      # 63
+}}}
+    [1, '<?xml version="1.0" ?><momo popo="aze">aaa<![CDATA[ <aaaaz> <div id="click" class="categorie2">Nouveau menu</div> ooooo <div onclick="click(1,4,2);" class="categorie3">Nouveau menu9</div>azerty</aaaaz>]]></momo>'                       ],      # 63
 #`{{{
     [1, '<?xml version="1.0" ?><momo>aaa<![CDATA[ <aaaaz> <div id="click" class="categorie2"/> ooooo <div onclick="click(1,4,2);" class="categorie3">Nouveau menu9</div>azerty</aaaaz>]]></momo>'                       ],      # 63
     [1, '<?xml version="1.0" ?><momo>aaa<![CDATA[ <div id="click" class="categorie2">Nouveau menu</div> <div onclick="click(1,4,2);" class="categorie3">Nouveau menu9</div>azerty]]></momo>'                       ],      # 64
