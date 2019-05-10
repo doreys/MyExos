@@ -11,7 +11,7 @@ my $rank=0;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Sat May 11 00:10:32 2019
+* Last Modified : Sat May 11 00:28:53 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -48,7 +48,7 @@ grammar XML {
 	rule corps {
 		[
 			| <myxml1>
-			| (<entete>) (<bodyXML>) { say "$rank ---->0:$0\n1:$1"; $rank++; }
+			| (<entete>) (<bodyXML>) { say "----> go" }
 		]
 	}
 
@@ -56,14 +56,14 @@ grammar XML {
 		<myxml1>
 	}
 
-	rule entete { '<?xml' 'version="' \d+ '.' \d+ '"' ['encoding="' <-[\'\"\s]>+ '"']**0..1  '?>' }
+	rule entete { '<?xml' 'version="' \d+ '.' \d+ '"' ['encoding="' <-[\'\"\s]>+ '"']**0..1  '?>'  {say "Entete> $/" if $/.chars } }
 
 	token myxml1 { (<text>)  { say "myxml1 tag text:$0 ----- $/"  if $/.chars }
 			[ (<tag>)  { say "myxml1 X tag tag:$1 ----- $/" if $/.chars  }
 			  (<text>) { say "myxml1 X tag text:$2 ----- $/" if $/.chars  } ]* }
 
 	rule basicText {
-		<-[<>&]>*  { say "\t---->$/ " ~ $/.chars if $/.chars }
+		<-[<>&]>*  { say "\ttext form1> $/" ~ $/.chars if $/.chars }
 	}
 
 	rule text {
@@ -81,12 +81,11 @@ grammar XML {
 	}
 
 	rule tag {
-		'<' (\d*\w+)
-		[ <attribute> \s* ]* { print "$/" }
+		'<' (\d*\w+) [ <attribute> \s* ]*
 					[
-						|'/>' { say "$/ ****1***"  if $/.chars }
-						|'>'  { say "$/ ****2***"  if $/.chars }
-						<myxml1> '</' $0 '>' { say "$/"  if $/.chars }
+						|'/>' { say "tag form 1> $/"  if $/.chars }
+						|'>'  { say "tag form 2> $/"  if $/.chars }
+						<myxml1> '</' $0 '>' { say "3>>>>>>>> $/ *****3***"  if $/.chars }
 					] 
 	}
 
