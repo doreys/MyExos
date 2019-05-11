@@ -11,7 +11,7 @@ my $rank=0;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Sat May 11 00:33:53 2019
+* Last Modified : Sat May 11 23:26:03 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -78,7 +78,7 @@ grammar XML {
 
 
 	rule basicAntity {
-		<entities_formats> <text>
+		<entities_formats> <text> { say "tag basicEtity> $/"; }
 	}
 
 	rule tag {
@@ -91,14 +91,12 @@ grammar XML {
 	}
 
 	token basicText2 {
-		<-[<>&\[\]]>* { say "basicText2: ---------------|$/|-------------" if $/.chars }
+		<-[<>&\[\]]>* { say "tag basicText2> $/" if $/.chars }
 		#<myCDATACorpse>
 	}
 
 	rule basicAntity2 {
-		<entities_formats> 
-		#<text2>
-		#<myCDATACorpse>
+		<entities_formats> { say "tag entities_formats> $/" }
 	}
 
 	rule myCDATA { 
