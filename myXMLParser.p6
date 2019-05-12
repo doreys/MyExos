@@ -11,7 +11,7 @@ my $rank=0;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Sun May 12 06:46:11 2019
+* Last Modified : Sun May 12 09:56:51 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -121,10 +121,10 @@ grammar XML {
 
 	rule tag2 {
 		[
-			| ( '<' (\d*\w+) [ <attribute> \s* ]* '/>') { say "---> tag2 part1-------------|$/|-|$0|------------"  if $/.chars }
-			| '<' (\d*\w+) [ <attribute> \s* ]* '>' <myCDATACorpse> '</' $0 '>' { say "---->tag2 part2----|$/|-----" if $/.chars }
+			| ( '<' (\d*\w+) [ <attribute> \s* ]* '/>') { say "\t\ttag2 part1>$/"  if $/.chars }
+			| '<' (\d*\w+) [ <attribute> \s* ]* '>' <myCDATACorpse> '</' $0 '>' { say "\t\ttag2 part2>$/" if $/.chars }
 		] 
-		<myCDATACorpse> { say "---->tag2 part3----|$/|-----" if $/.chars }
+		<myCDATACorpse> { say "\t\ttag2 part3>$/" if $/.chars }
 	}
 
 	token attribute { \w+ '="' <-[="\<\>\s]>+ \" } # {  print " $/ " if $/.chars } }
