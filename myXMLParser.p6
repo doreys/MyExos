@@ -11,7 +11,7 @@ my $rank=0;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Sun May 12 10:58:46 2019
+* Last Modified : Sun May 12 12:18:09 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -91,7 +91,7 @@ grammar XML {
 	}
 
 	token basicText2 {
-		<-[<>&\[\]]>* { say "tag basicText2> $/" if $/.chars }
+		<-[<>&\[\]]>* {  { $rank++;say "\t" x $rank ~ "tag basicText2> $/"; $rank--; } if $/.chars }
 		#<myCDATACorpse>
 	}
 
