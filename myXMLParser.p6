@@ -11,7 +11,7 @@ my $rank=0;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Sun May 12 10:42:58 2019
+* Last Modified : Sun May 12 10:44:43 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -106,9 +106,9 @@ grammar XML {
 	}
 
 	rule myCDATACorpse {
-		 (<text2>)  #{ say "\t\t$/" if $/.chars  }
-			 [ 	(<tag2>)  #`(( { say "\t\t$/" if $/.chars  }))  
-			 	(<text2>) #`((  { say "\t\t$/" if $/.chars  } )) ]*
+		 (<text2>)  { $rank-- }
+			 [ 	(<tag2>)  { $rank-- }
+			 	(<text2>) { $rank-- }
 	}
 
 	rule text2 {
