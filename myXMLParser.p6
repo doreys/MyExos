@@ -11,7 +11,7 @@ my $rank=0;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Sun May 12 18:21:40 2019
+* Last Modified : Sun May 12 18:48:34 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -126,7 +126,7 @@ grammar XML {
 	rule tag2 {
 		[
 			| '<' (\d*\w+) [ <attribute> \s* ]* '/>' { { $rank++;say "\t" x $rank ~ "tag2 part1>$/"; $rank-- } if $/.chars }
-			| '<' (\d*\w+) [ <attribute> \s* ]* '>' <myCDATACorpse> '</' $0 '>' { { $rank++; say "\t" x $rank ~ "tag2 part2>$/" ; $rank--} if $/.chars }
+			| ('<') (\d*\w+) ([ <attribute> \s* ]*) ('>') <myCDATACorpse> '</' $1 '>' { { $rank++; say "\t ($0 $1 $2 $3)" x $rank ~ "tag2 part2>$/" ; $rank--} if $/.chars }
 		] 
 		<myCDATACorpse> { { $rank++;say "\t" x $rank ~ "tag2 part3>$/" ; $rank--} if $/.chars }
 	}
