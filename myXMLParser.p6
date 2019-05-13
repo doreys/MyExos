@@ -11,7 +11,7 @@ my $rank=0;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Sun May 12 18:48:34 2019
+* Last Modified : Tue May 14 01:19:04 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -66,7 +66,7 @@ grammar XML {
 	}
 
 	rule basicText {
-		<-[<>&]>*  { say "\ttext form1> $/" ~ $/.chars if $/.chars }
+		<-[<>&]>*  { say "\ttext form1> $/" if $/.chars }
 	}
 
 	rule text {
@@ -108,7 +108,7 @@ grammar XML {
 	}
 
 	rule myCDATACorpse {
-		 <text2> # { $rank-- if $/.chars } 
+		 <text2>  { { $rank++ ; say "\t" x $rank ~ "myDAC> $/" } if $/.chars } 
 			 [
 				<tag2> # { $rank-- if $/.chars }
 				<text2> # { $rank-- if $/.chars }
@@ -126,12 +126,12 @@ grammar XML {
 	rule tag2 {
 		[
 			| '<' (\d*\w+) [ <attribute> \s* ]* '/>' { { $rank++;say "\t" x $rank ~ "tag2 part1>$/"; $rank-- } if $/.chars }
-			| ('<') (\d*\w+) ([ <attribute> \s* ]*) ('>') <myCDATACorpse> '</' $1 '>' { { $rank++; say "\t ($0 $1 $2 $3)" x $rank ~ "tag2 part2>$/" ; $rank--} if $/.chars }
+			| ('<') (\d*\w+) ([<attribute> \s* ]*) ('>') <myCDATACorpse> '</' $1 '>' { { $rank++; say "test>" ~ "\t" x $rank ~ "$0$1 $2$3" ; $rank--;} if $/.chars }
 		] 
 		<myCDATACorpse> { { $rank++;say "\t" x $rank ~ "tag2 part3>$/" ; $rank--} if $/.chars }
 	}
 
-	token attribute { \w+ '="' <-[="\<\>\s]>+ \" } # {  print " $/ " if $/.chars } }
+	token attribute { \w+ '="' <-[="\<\>\s]>+ \" } 
 
 	token entities_formats {
 		[
