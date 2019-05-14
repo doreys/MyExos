@@ -11,7 +11,7 @@ my $rank=0;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Tue May 14 01:19:04 2019
+* Last Modified : Wed May 15 01:51:55 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -58,11 +58,11 @@ grammar XML {
 
 	rule entete { '<?xml' 'version="' \d+ '.' \d+ '"' ['encoding="' <-[\'\"\s]>+ '"']**0..1  '?>'  {say "Entete> $/" if $/.chars } }
 
-	token myxml1 { (<text>)  #{ say "myxml1 tag text:$0 ----- $/"  if $/.chars }
-			[ 
-				<tag> # { say "myxml1 X tag tag:$1 ----- $/" if $/.chars  }
-				<text> # { say "myxml1 X tag text:$2 ----- $/" if $/.chars  } 
-		  ]* 
+	token myxml1 { <text>  { say "myxml1 tag text:----- $/"  if $/.chars }
+		[ 
+			<tag> { say "myxml1 X tag tag:----- $/" if $/.chars }
+			<text> { say "myxml1 X tag text:----- $/" if $/.chars } 
+		]* 
 	}
 
 	rule basicText {
@@ -93,8 +93,7 @@ grammar XML {
 	}
 
 	token basicText2 {
-		<-[<>&\[\]]>* {  { $rank++;say "\t" x $rank ~ "tag basicText2> $/"; $rank--; } if $/.chars }
-		#<myCDATACorpse>
+		<-[<>&\[\]]>* # {  { $rank++;say "\t" x $rank ~ "tag basicText2> $/"; $rank--; } if $/.chars }
 	}
 
 	rule basicAntity2 {
@@ -102,16 +101,16 @@ grammar XML {
 	}
 
 	rule myCDATA { 
-		'<![CDATA[' 
-			<myCDATACorpse>
-		']]>' <text>
+		'<![CDATA[' { say "CDA> $/" if $/.chars }
+		<myCDATACorpse> ']]>'
+		<text>
 	}
 
 	rule myCDATACorpse {
-		 <text2>  { { $rank++ ; say "\t" x $rank ~ "myDAC> $/" } if $/.chars } 
+		 <text2>  { { $rank++ ; say "\t" x $rank ~ "myDAC> $/" ; $rank--; } if $/.chars } 
 			 [
 				<tag2> # { $rank-- if $/.chars }
-				<text2> # { $rank-- if $/.chars }
+				<text2>  { { $rank++ ; say "\t" x $rank ~ "myDAC> $/" ; $rank--; } if $/.chars }
 			]*
 	}
 
