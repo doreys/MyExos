@@ -2,14 +2,14 @@
 
 use v6 ;
 
-use Grammar::Tracer;
+#use Grammar::Tracer;
 
 # ------------------------------------------------------
 #`[
 * Created By : sdo
 * File Name : totoold.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Sun Apr 21 13:26:24 2019
+* Last Modified : Wed May 15 05:16:17 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * Purpose :
@@ -92,11 +92,8 @@ grammar XML {
 	}
 
 	rule myCDATACorpse {
-		# <text2> [ <tag2> <text2> ]*
-		[ 
-			| <tag2> 
-			| <text2> 
-		]*
+		<text2> [ <tag2> <text2> ]*
+		#[ | <tag2> | <text2> ]*
 	}
 
 	rule text2 {
