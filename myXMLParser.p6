@@ -11,7 +11,7 @@ my $rank=0;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Wed May 15 22:49:55 2019
+* Last Modified : Wed May 15 23:33:00 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -58,10 +58,10 @@ grammar XML {
 
 	rule entete { '<?xml' 'version="' \d+ '.' \d+ '"' ['encoding="' <-[\'\"\s]>+ '"']**0..1  '?>'  {say "Entete> $/" if $/.chars } }
 
-	token myxml1 { <text>  { say "myxml1 tag text:----- $/"  if $/.chars }
+	token myxml1 { <text> # { say "myxml1 tag text:----- $/"  if $/.chars }
 		[ 
-			<tag> { say "myxml1 X tag tag:----- $/" if $/.chars }
-			<text> { say "myxml1 X tag text:----- $/" if $/.chars } 
+			<tag> #{ say "myxml1 X tag tag:----- $/" if $/.chars }
+			<text># { say "myxml1 X tag text:----- $/" if $/.chars } 
 		]* 
 	}
 
