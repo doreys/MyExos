@@ -11,7 +11,7 @@ my $rank=0;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Thu May 16 13:58:01 2019
+* Last Modified : Fri May 17 00:39:34 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -48,7 +48,7 @@ grammar XML {
 	rule corps {
 		[
 			| <myxml1>
-			| <entete>
+			| <entete> <bodyXML>
 		]
 	}
 
@@ -58,7 +58,8 @@ grammar XML {
 
 	rule entete { '<?xml' 'version="' \d+ '.' \d+ '"' ['encoding="' <-[\'\"\s]>+ '"']**0..1  '?>'  { { $rank++; say "$/" } if $/.chars } }
 
-	token myxml1 { <text> # { say "myxml1 tag text:----- $/"  if $/.chars }
+	token myxml1 { 
+		<text> # { say "myxml1 tag text:----- $/"  if $/.chars }
 		[ 
 			<tag> # { say "myxml1 X tag tag:----- $/" if $/.chars }
 			<text> # { say "myxml1 X tag text:----- $/" if $/.chars } 
@@ -159,8 +160,8 @@ my @tests = (
     [1, 'abc'                       ],      # 01
     [1, '<a></a>'                   ],      # 02
     [1, '..<ab>foo</ab>dd'          ],      # 03
-#`{{{
     [1, '<a><b>c</b></a>'           ],      # 04
+#`{{{
     [1, '<a href="foo"><b>c</b></a>'],      # 05
     [1, '<a empty="" ><b>c</b></a>' ],      # 06
     [1, '<a><b>c</b><c></c></a>'    ],      # 07
@@ -249,13 +250,15 @@ my @tests = (
 my $count = 1;
 for @tests -> $t {
     my $s = $t[1];
-    my $M = XML.parse($s);
     say "++++++++++++++++++++++++++++++++++++++";
+    say "$s";
+    my $M = XML.parse($s);
     if !($M  xor $t[0]) {
         say "ok $count - '$s'";
     } else {
         say "not ok $count - '$s'";
     }
     $count++;
+    say "++++++++++++++++++++++++++++++++++++++++++";
 }
 
