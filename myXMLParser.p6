@@ -11,7 +11,7 @@ my $rank=0;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Wed May 15 23:37:38 2019
+* Last Modified : Thu May 16 09:53:06 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -84,12 +84,12 @@ grammar XML {
 	}
 
 	rule tag {
-		'<' (\d*\w+) [ <attribute> \s* ]*
-					[
-						|'/>' { say "tag form 1> $/"  if $/.chars }
-						|'>'  { say "tag form 2> $/"  if $/.chars }
-						<myxml1> '</' $0 '>' { say "3>>>>>>>> $/ *****3***"  if $/.chars }
-					] 
+		#'<' (\d*\w+) [ <attribute> \s* ]*
+		[
+			| '<' (\d*\w+) [ <attribute> \s* ]* '/>' { say "tag form 1> $/"  if $/.chars }
+			| '<' (\d*\w+) [ <attribute> \s* ]* '>'  { say "tag form 2> $/"  if $/.chars }
+						<myxml1> ('</') $0 ('>') { say "3>>>>>>>> $/ *****3***"  if $/.chars }
+		] 
 	}
 
 	token basicText2 {
@@ -124,7 +124,7 @@ grammar XML {
 
 	rule tag2 {
 		[
-			| '<' (\d*\w+) [ <attribute> \s* ]* '/>' { { $rank++;say "\t" x $rank ~ "tag2 part1>$/"; $rank-- } if $/.chars }
+			| ('<') (\d*\w+) ([ <attribute> \s* ]*) ('/>') { { $rank++;say "\t" x $rank ~ "tag2 part1>$0$1$2$3"; $rank-- } if $/.chars }
 			| ('<') (\d*\w+) ([<attribute> \s* ]*) ('>') { { $rank++; say "\t" x $rank ~ "test>" ~ "$0$1$2$3" ; $rank--; } if $/.chars }
 			<myCDATACorpse>
 			('</') $1 ('>') { #say "=============================hello>\npostm:" ~ $/.prematch ~ "\nmatch: $/" ~ "\nprem: " ~ $/.postmatch ~ "\n*********************"; 
