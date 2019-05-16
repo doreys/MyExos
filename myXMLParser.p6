@@ -11,7 +11,7 @@ my $rank=0;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Fri May 17 00:39:34 2019
+* Last Modified : Fri May 17 01:15:53 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -88,8 +88,8 @@ grammar XML {
 		#'<' (\d*\w+) [ <attribute> \s* ]*
 		[
 			| ('<') (\d*\w+) ([ <attribute> \s* ]*) ('/>') { $rank++; say "$rank tag form 1> $0$1$2$3"  if $/.chars }
-			| ('<') (\d*\w+) ([ <attribute> \s* ]*) ('>')  { { $rank++; say "\t" x $rank ~ "$0$1$2$3 <---tag form 2" } if $/.chars }
-						<myxml1> ('</') $1 ('>') { $rank++; say "$rank 3>>>>>>>> $4$1$5 *****3***"  if $/.chars }
+			| ('<') (\d*\w+) ([ <attribute> \s* ]*) ('>')  { { say "\t" x $rank ~ "$0$1$2$3 <---begin tag form 2"; $rank++ } if $/.chars }
+						<myxml1> ('</') $1 ('>') { {$rank--; say "\t" x $rank ~ "$4$1$5 <-----end tag form 2";}  if $/.chars }
 		] 
 	}
 
