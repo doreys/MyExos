@@ -11,7 +11,7 @@ my $rank=0;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Thu May 16 13:34:17 2019
+* Last Modified : Thu May 16 13:58:01 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -39,7 +39,7 @@ my $rank=0;
 # ------------------------------------------------------
 
 grammar XML {
-	token TOP { ^ <xml> $ }
+	token TOP { ^ <xml> $ { $rank = 0 }}
 
 	token xml { 
 		<corps>
@@ -48,7 +48,7 @@ grammar XML {
 	rule corps {
 		[
 			| <myxml1>
-			| (<entete>) (<bodyXML>) { say "----> go" }
+			| <entete>
 		]
 	}
 
@@ -56,7 +56,7 @@ grammar XML {
 		<myxml1>
 	}
 
-	rule entete { '<?xml' 'version="' \d+ '.' \d+ '"' ['encoding="' <-[\'\"\s]>+ '"']**0..1  '?>'  {$rank++; say "$/" if $/.chars } }
+	rule entete { '<?xml' 'version="' \d+ '.' \d+ '"' ['encoding="' <-[\'\"\s]>+ '"']**0..1  '?>'  { { $rank++; say "$/" } if $/.chars } }
 
 	token myxml1 { <text> # { say "myxml1 tag text:----- $/"  if $/.chars }
 		[ 
@@ -66,14 +66,14 @@ grammar XML {
 	}
 
 	rule basicText {
-		<-[<>&]>*  { say "\ttext form1> $/" if $/.chars }
+		(<-[<>&]>*)  { {say "\t" x $rank ~ "$0" ~ "<---text form1"} if $/.chars }
 	}
 
 	rule text {
 		<basicText> #{ say "X text:basicText (1) ---------------|$/|-------------" if $/.chars }
 		[
 			| <basicText> #{ say "---> text:basicText (2) ---------------|$/|-------------" if $/.chars }
-			| <basicAntity> { say "---> text:basicAntity ---------------|$/|-------------"  if $/.chars }
+			| <basicAntity> { { say "\t" x $rank ~ "$/" ~ "<--- text:basicAntity" }  if $/.chars }
 			| <myCDATA> # { say "---> text:myCDATA ---------------|$/|-------------"  if $/.chars }
 		]
 	}
@@ -87,7 +87,7 @@ grammar XML {
 		#'<' (\d*\w+) [ <attribute> \s* ]*
 		[
 			| ('<') (\d*\w+) ([ <attribute> \s* ]*) ('/>') { $rank++; say "$rank tag form 1> $0$1$2$3"  if $/.chars }
-			| ('<') (\d*\w+) ([ <attribute> \s* ]*) ('>')  { $rank++; say "$rank tag form 2> $0$1$2$3"  if $/.chars }
+			| ('<') (\d*\w+) ([ <attribute> \s* ]*) ('>')  { { $rank++; say "\t" x $rank ~ "$0$1$2$3 <---tag form 2" } if $/.chars }
 						<myxml1> ('</') $1 ('>') { $rank++; say "$rank 3>>>>>>>> $4$1$5 *****3***"  if $/.chars }
 		] 
 	}
