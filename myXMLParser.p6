@@ -11,7 +11,7 @@ my $rank=0;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Fri May 17 04:22:53 2019
+* Last Modified : Fri May 17 23:48:48 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -102,13 +102,14 @@ grammar XML {
 	}
 
 	rule myCDATA { 
-		'<![CDATA[' { say "CDA> $/" if $/.chars }
-		<myCDATACorpse> ']]>'
+		('<![CDATA[') { { say "\t" x $rank ~ "$0 <----CDA"; } if $/.chars }
+		<myCDATACorpse> #{ { $rank+=2;} if $/.chars } 
+		(']]>') { { $rank--; say "\t" x $rank ~ "$1";} if $/.chars } 
 		<text>
 	}
 
 	rule myCDATACorpse {
-		 (<text2>)  { { $rank++ ; say "\t" x $rank ~ "myDAC1> $0" ; $rank--; } if $/.chars } 
+		 (<text2>)  { { $rank+=2 ; say "\t" x $rank ~ "myDAC1> $0" ; $rank-=2; } if $/.chars } 
 			 [
 				(<tag2>)  # { { $rank++ ; say "\t" x $rank ~ "myDAC2> $1" ; $rank--; } if $/.chars }
 				(<text2>) # { { $rank++ ; say "\t" x $rank ~ "myDAC3> $2" ; $rank--; } if $/.chars }
