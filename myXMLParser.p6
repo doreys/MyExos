@@ -11,7 +11,7 @@ my $rank=0;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Fri May 17 23:48:48 2019
+* Last Modified : Sat May 18 00:01:51 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -109,7 +109,7 @@ grammar XML {
 	}
 
 	rule myCDATACorpse {
-		 (<text2>)  { { $rank+=2 ; say "\t" x $rank ~ "myDAC1> $0" ; $rank-=2; } if $/.chars } 
+		 (<text2>)  { { $rank++ ; say "\t" x $rank ~ "$0 <---- myDAC1" ; $rank--; } if $/.chars } 
 			 [
 				(<tag2>)  # { { $rank++ ; say "\t" x $rank ~ "myDAC2> $1" ; $rank--; } if $/.chars }
 				(<text2>) # { { $rank++ ; say "\t" x $rank ~ "myDAC3> $2" ; $rank--; } if $/.chars }
@@ -126,10 +126,10 @@ grammar XML {
 
 	rule tag2 {
 		[
-			| ('<') (\d*\w+) ([<attribute> \s*]*) ('/>') { { $rank++;say "\t" x $rank ~ "$0$1 $2$3"; $rank-- } if $/.chars }
-			| ('<') (\d*\w+) ([<attribute> \s*]*) ('>') { { $rank++; say "\t" x $rank ~ "$0$1 $2$3" ; $rank--; } if $/.chars }
+			| ('<') (\d*\w+) ([<attribute> \s*]*) ('/>') { { $rank++;say "\t" x $rank ~ "$0$1 $2$3 <----ppppp"; $rank-- } if $/.chars }
+			| ('<') (\d*\w+) ([<attribute> \s*]*) ('>') { { $rank++; say "\t" x $rank ~ "$0$1 $2$3 <----aaaaaa" ; } if $/.chars }
 			<myCDATACorpse>
-			('</') $1 ('>') { say "$4$1$5"; }
+			('</') $1 ('>') { { say "\t" x $rank ~ "$4$1$5" ~"   <----test"; $rank--; } if $/.chars }
 		] 
 		<myCDATACorpse> #{ { $rank++;say "\t" x $rank ~ "tag2 part3>$/" ; $rank--} if $/.chars }
 	}
