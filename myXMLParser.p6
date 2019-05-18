@@ -11,7 +11,7 @@ my $rank=0;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Sat May 18 14:05:34 2019
+* Last Modified : Sat May 18 15:48:56 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -56,7 +56,7 @@ grammar XML {
 		<myxml1>
 	}
 
-	rule entete { '<?xml' 'version="' \d+ '.' \d+ '"' ['encoding="' <-[\'\"\s]>+ '"']**0..1  '?>'  { { $rank++; say "$/" } if $/.chars } }
+	rule entete { '<?xml' 'version="' \d+ '.' \d+ '"' ['encoding="' <-[\'\"\s]>+ '"']**0..1  '?>'  { { say "$/ <!-- entete -->" } if $/.chars } }
 
 	token myxml1 { 
 		<text> # { say "myxml1 tag text:----- $/"  if $/.chars }
@@ -67,7 +67,7 @@ grammar XML {
 	}
 
 	rule basicText {
-		(<-[<>&]>*)  { {$rank++; say "\t" x $rank ~ "$0" ~ "<!-- text form1 -->";$rank--;} if $/.chars }
+		(<-[<>&]>*)  { {say "\t" x $rank ~ "$0" ~ "<!-- text form1 -->";} if $/.chars }
 	}
 
 	rule text {
@@ -87,11 +87,11 @@ grammar XML {
 	rule tag {
 		#'<' (\d*\w+) [ <attribute> \s* ]*
 		[
-			| ('<') (\d*\w+) ([ <attribute> \s* ]*) ('/>') { $rank++; say "$rank tag form 1> $0$1$2$3"  if $/.chars }
-			| ('<') (\d*\w+) ('>') { { $rank++; say "\t" x $rank ~ "$0$1$2 <!-- begin tag2 xxx-->" ; } if $/.chars }
-				<myxml1> ('</') $1 ('>') { { say "\t" x $rank ~ "$3$1$4" ~"   <!-- end tag2 xxx-->"; $rank--; } if $/.chars }
-			| ('<') (\d*\w+) ([<attribute> \s* ]+) ('>') { { $rank++; my $r="$1-----$2";say "\t" x $rank ~ "$0$1 $2$3 <!-- begin tag2-->" ; } if $/.chars }
-				<myxml1> ('</') $1 ('>') { { say "\t" x $rank ~ "$4$1$5" ~"   <!-- end tag2-->"; $rank--; } if $/.chars }
+			| ('<') (\d*\w+) ([ <attribute> \s* ]*) ('/>') { { say "$rank tag form 1> $0$1$2$3"; $rank++;}  if $/.chars }
+			| ('<') (\d*\w+) ('>') { { say "\t" x $rank ~ "$0$1$2 <!-- begin tag2 xxx-->" ; $rank++; } if $/.chars }
+				<myxml1> ('</') $1 ('>') { { $rank--; say "\t" x $rank ~ "$3$1$4" ~"   <!-- end tag2 xxxX-->"} if $/.chars }
+			| ('<') (\d*\w+) ([<attribute> \s* ]+) ('>') { { my $r="$1-----$2";say "\t" x $rank ~ "$0$1 $2$3 <!-- begin tag2-->" ; $rank++; } if $/.chars }
+				<myxml1> ('</') $1 ('>') { { $rank--; say "\t" x $rank ~ "$4$1$5" ~"   <!-- end tag2-->"; } if $/.chars }
 		] 
 	}
 
