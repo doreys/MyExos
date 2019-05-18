@@ -11,7 +11,7 @@ my $rank=0;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Sat May 18 02:56:19 2019
+* Last Modified : Sat May 18 13:36:50 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -88,7 +88,9 @@ grammar XML {
 		#'<' (\d*\w+) [ <attribute> \s* ]*
 		[
 			| ('<') (\d*\w+) ([ <attribute> \s* ]*) ('/>') { $rank++; say "$rank tag form 1> $0$1$2$3"  if $/.chars }
-			| ('<') (\d*\w+) ([ <attribute> \s* ]*) ('>')  { { say "\t" x $rank ~ "$0$1$2$3 <!---begin tag form 2-->"; $rank++ } if $/.chars }
+			| ('<') (\d*\w+) ('>')  { { say "\t" x $rank ~ "$0$1$2 <!---begin tag form 2 tag simple-->"; $rank++ } if $/.chars }
+						<myxml1> ('</') $1 ('>') { {$rank--; say "\t" x $rank ~ "$3$1$4 <!-----end tag form 2 tag simple-->";}  if $/.chars }
+			| ('<') (\d*\w+) ([ <attribute> \s* ]+) ('>')  { { say "\t" x $rank ~ "$0$1$2$3 <!---begin tag form 2-->"; $rank++ } if $/.chars }
 						<myxml1> ('</') $1 ('>') { {$rank--; say "\t" x $rank ~ "$4$1$5 <!-----end tag form 2-->";}  if $/.chars }
 		] 
 	}
@@ -165,8 +167,8 @@ my @tests = (
     [1, '<a></a>'                   ],      # 02
     [1, '..<ab>foo</ab>dd'          ],      # 03
     [1, '<a><b>c</b></a>'           ],      # 04
-#`{{{
     [1, '<a href="foo"><b>c</b></a>'],      # 05
+#`{{{
     [1, '<a empty="" ><b>c</b></a>' ],      # 06
     [1, '<a><b>c</b><c></c></a>'    ],      # 07
     [0, '<'                         ],      # 08
