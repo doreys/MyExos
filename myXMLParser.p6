@@ -11,7 +11,7 @@ my $rank=0;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Sat May 18 01:54:06 2019
+* Last Modified : Sat May 18 02:56:19 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -74,7 +74,7 @@ grammar XML {
 		<basicText> #{ say "X text:basicText (1) ---------------|$/|-------------" if $/.chars }
 		[
 			| <basicText> #{ say "---> text:basicText (2) ---------------|$/|-------------" if $/.chars }
-			| <basicAntity> { { say "\t" x $rank ~ "$/" ~ "<!--- text:basicAntity" }  if $/.chars }
+			| <basicAntity> { { say "\t" x $rank ~ "$/" ~ "<!--- text:basicAntity -->" }  if $/.chars }
 			| <myCDATA> # { say "---> text:myCDATA ---------------|$/|-------------"  if $/.chars }
 		]
 	}
