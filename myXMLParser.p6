@@ -11,7 +11,7 @@ my $rank=0;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Sat May 18 15:57:05 2019
+* Last Modified : Sat May 18 16:24:44 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -39,10 +39,10 @@ my $rank=0;
 # ------------------------------------------------------
 
 grammar XML {
-	token TOP { ^ <xml> $ { $rank = 0 }}
+	token TOP { ^ <xml> $ }
 
 	token xml { 
-		<corps>
+		<corps> { $rank = 0; }
 	}
 	
 	rule corps {
@@ -71,7 +71,7 @@ grammar XML {
 	}
 
 	rule text {
-		<basicText> #{ say "X text:basicText (1) ---------------|$/|-------------" if $/.chars }
+		<basicText> # { say "X text:basicText (1) ---------------|$/|-------------" if $/.chars }
 		[
 			| <basicText> #{ say "---> text:basicText (2) ---------------|$/|-------------" if $/.chars }
 			| <basicAntity> { { say "\t" x $rank ~ "$/" ~ "<!--  text:basicAntity -->" }  if $/.chars }
@@ -90,7 +90,7 @@ grammar XML {
 			| ('<') (\d*\w+) ([ <attribute> \s* ]*) ('/>') { { say "$rank tag form 1> $0$1$2$3"; $rank++;}  if $/.chars }
 			| ('<') (\d*\w+) ('>') { { say "\t" x $rank ~ "$0$1$2 <!-- begin tag2 xxx-->" ; $rank++; } if $/.chars }
 				<myxml1> ('</') $1 ('>') { { $rank--; say "\t" x $rank ~ "$3$1$4" ~"   <!-- end tag2 xxxX-->"} if $/.chars }
-			| ('<') (\d*\w+) ([<attribute> \s* ]+) ('>') { { my $r="$1-----$2";say "\t" x $rank ~ "$0$1 $2$3 <!-- begin tag2-->" ; $rank++; } if $/.chars }
+			| ('<') (\d*\w+) ([<attribute> \s* ]+) ('>') { { say "\t" x $rank ~ "$0$1 $2$3 <!-- begin tag2-->" ; $rank++; } if $/.chars }
 				<myxml1> ('</') $1 ('>') { { $rank--; say "\t" x $rank ~ "$4$1$5" ~"   <!-- end tag2-->"; } if $/.chars }
 		] 
 	}
@@ -129,7 +129,7 @@ grammar XML {
 	rule tag2 {
 		[
 			| ('<') (\d*\w+) ([<attribute> \s*]*) ('/>') { { $rank++;say "\t" x $rank ~ "$0$1 $2$3 <!----ppppp-->"; $rank-- } if $/.chars }
-			| ('<') (\d*\w+) ('>') { { $rank++; say "\t" x $rank ~ "$0$1$2 <!-- begin tag2 xxx-->" ; } if $/.chars }
+			| ('<') (\d*\w+) ('>') { { say "\t" x $rank ~ "$0$1$2 <!-- begin tag2 xxx-->" ; $rank++; } if $/.chars }
 				<myCDATACorpse> ('</') $1 ('>') { { say "\t" x $rank ~ "$3$1$4" ~"   <!-- end tag2 xxx-->"; $rank--; } if $/.chars }
 			| ('<') (\d*\w+) ([<attribute> \s* ]+) ('>') { { $rank++; my $r="$1-----$2";say "\t" x $rank ~ "$0$1 $2$3 <!-- begin tag2-->" ; } if $/.chars }
 				<myCDATACorpse> ('</') $1 ('>') { { say "\t" x $rank ~ "$4$1$5" ~"   <!-- end tag2-->"; $rank--; } if $/.chars }
@@ -170,11 +170,13 @@ my @tests = (
     [1, '<a empty=""><b>c</b></a>' ],       # 06.a
     [1, '<a empty=""><b>c</b></a>' ],       # 06.b
     [1, '<a empty="a"><b>c</b></a>' ],      # 06.c
-#`{{{
     [1, '<a><b>c</b><c></c></a>'    ],      # 07
     [0, '<'                         ],      # 08
-    [0, '<a>b</b>'                  ],      # 09
-    [0, '<a>b</a'                   ],      # 10
+    [0, '<a>b</b>'                  ],      # 09.a
+    [1, '<a>b</b>'                  ],      # 09.b
+    [0, '<a>b</a'                   ],      # 10.a
+    [1, '<a>b</a>'                  ],      # 10.b
+#`{{{
     [0, '<a>b</a href="">'          ],      # 11
     [1, '<a/>'                      ],      # 12
     [1, '<a />'                     ],      # 13
