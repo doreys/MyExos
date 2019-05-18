@@ -11,7 +11,7 @@ my $rank=0;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Sat May 18 16:24:44 2019
+* Last Modified : Sat May 18 16:52:45 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -87,9 +87,10 @@ grammar XML {
 	rule tag {
 		#'<' (\d*\w+) [ <attribute> \s* ]*
 		[
-			| ('<') (\d*\w+) ([ <attribute> \s* ]*) ('/>') { { say "$rank tag form 1> $0$1$2$3"; $rank++;}  if $/.chars }
+			| ('<') (\d*\w+) ('/>') { { say "$0$1$2 <!-- begin/end tag2 xxx no param-->"; }  if $/.chars }
+			| ('<') (\d*\w+) ([ <attribute> \s* ]+) ('/>') { { say "$0$1$2$3 <!-- begin/end tag2 xxx with param-->"; }  if $/.chars }
 			| ('<') (\d*\w+) ('>') { { say "\t" x $rank ~ "$0$1$2 <!-- begin tag2 xxx-->" ; $rank++; } if $/.chars }
-				<myxml1> ('</') $1 ('>') { { $rank--; say "\t" x $rank ~ "$3$1$4" ~"   <!-- end tag2 xxxX-->"} if $/.chars }
+				<myxml1> ('</') $1 ('>') { { $rank--; say "\t" x $rank ~ "$3$1$4" ~ "   <!-- end tag2 xxxX-->"} if $/.chars }
 			| ('<') (\d*\w+) ([<attribute> \s* ]+) ('>') { { say "\t" x $rank ~ "$0$1 $2$3 <!-- begin tag2-->" ; $rank++; } if $/.chars }
 				<myxml1> ('</') $1 ('>') { { $rank--; say "\t" x $rank ~ "$4$1$5" ~"   <!-- end tag2-->"; } if $/.chars }
 		] 
@@ -176,9 +177,10 @@ my @tests = (
     [1, '<a>b</b>'                  ],      # 09.b
     [0, '<a>b</a'                   ],      # 10.a
     [1, '<a>b</a>'                  ],      # 10.b
-#`{{{
-    [0, '<a>b</a href="">'          ],      # 11
+    [0, '<a>b</a href="">'          ],      # 11.a
+    [1, '<a>b</a href="">'          ],      # 11.b
     [1, '<a/>'                      ],      # 12
+#`{{{
     [1, '<a />'                     ],      # 13
     [1, 'abc&amp'                   ],      # 14
     [1, 'abc&amp;'                  ],      # 15
