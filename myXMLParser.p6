@@ -11,7 +11,7 @@ my $rank=0;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Sat May 18 22:16:45 2019
+* Last Modified : Sun May 19 19:14:15 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -181,9 +181,9 @@ my @tests = (
     [1, '<a>b</a href="">'          ],      # 11.b
     [1, '<a/>'                      ],      # 12
     [1, '<a />'                     ],      # 13
-#`{{{
     [1, 'abc&amp'                   ],      # 14
     [1, 'abc&amp;'                  ],      # 15
+#`{{{
     [1, 'abc&amp;aqwxsz'            ],      # 16
     [1, '<a1></a1>'                 ],      # 17
     [1, '<1a></a>'                  ],      # 18
@@ -264,6 +264,7 @@ for @tests -> $t {
     say "++++++++++++++++++++++++++++++++++++++";
     say "$s";
     my $M = XML.parse($s);
+    say "Expected result $t[0]. If the result is $t[0] then it is OK";
     if !($M  xor $t[0]) {
         say "ok $count - '$s'";
     } else {
