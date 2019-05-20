@@ -11,7 +11,7 @@ my $rank=0;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Sun May 19 19:14:15 2019
+* Last Modified : Mon May 20 22:45:19 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -74,7 +74,7 @@ grammar XML {
 		<basicText> # { say "X text:basicText (1) ---------------|$/|-------------" if $/.chars }
 		[
 			| <basicText> #{ say "---> text:basicText (2) ---------------|$/|-------------" if $/.chars }
-			| <basicAntity> { { say "\t" x $rank ~ "$/" ~ "<!--  text:basicAntity -->" }  if $/.chars }
+			| <basicAntity> #{ { say "\t" x $rank ~ "$/" ~ "<!--  text:basicAntity -->" }  if $/.chars }
 			| <myCDATA> # { say "---> text:myCDATA ---------------|$/|-------------"  if $/.chars }
 		]
 	}
@@ -108,7 +108,7 @@ grammar XML {
 		('<![CDATA[') { { say "\t" x $rank ~ "$0 <!-- begin myCDATA -->"; $rank++; } if $/.chars }
 		<myCDATACorpse> #{ { $rank+=2;} if $/.chars } 
 		(']]>') { { $rank--; say "\t" x $rank ~ "$1 <!-- end myCDATA -->";} if $/.chars } 
-		<text>
+		(<text>) { say "\t" x $rank ~ "$2 <----my data rule" }
 	}
 
 	rule myCDATACorpse {
@@ -149,7 +149,7 @@ grammar XML {
 	}
 
 	token entity {
-		'&' <[a..z]>**1..5 ';'  { say "entity: ---------------|$/|-------------" ~ $/.chars if $/.chars }
+		'&' <[a..z]>**1..5 ';'  { say "wwwwww----|$/|-------------" ~ $/.chars if $/.chars }
 	}
 
 	token entity_decimal {
@@ -183,9 +183,9 @@ my @tests = (
     [1, '<a />'                     ],      # 13
     [1, 'abc&amp'                   ],      # 14
     [1, 'abc&amp;'                  ],      # 15
-#`{{{
     [1, 'abc&amp;aqwxsz'            ],      # 16
     [1, '<a1></a1>'                 ],      # 17
+#`{{{
     [1, '<1a></a>'                  ],      # 18
     [1, '<1a></1a>'                 ],      # 19
     [1, '<![CDATA[toto]]>'          ],      # 20
@@ -264,7 +264,7 @@ for @tests -> $t {
     say "++++++++++++++++++++++++++++++++++++++";
     say "$s";
     my $M = XML.parse($s);
-    say "Expected result $t[0]. If the result is $t[0] then it is OK";
+    #    say "Expected result $t[0]. If the result is $t[0] then it is OK";
     if !($M  xor $t[0]) {
         say "ok $count - '$s'";
     } else {
