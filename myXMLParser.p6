@@ -11,7 +11,7 @@ my $rank=0;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Mon May 20 22:45:19 2019
+* Last Modified : Mon May 20 23:00:00 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -67,15 +67,15 @@ grammar XML {
 	}
 
 	rule basicText {
-		(<-[<>&]>*)  { {say "\t" x $rank ~ "$0" ~ "<!-- text form1 -->";} if $/.chars }
+		(<-[<>&]>*)  #{ {print "$0" ~ "<!-- text form1 -->";} if $/.chars }
 	}
 
 	rule text {
-		<basicText> # { say "X text:basicText (1) ---------------|$/|-------------" if $/.chars }
+		(<basicText>) { {print "$0" ~ "<!-- text form 1.21 -->";} if $/.chars }
 		[
-			| <basicText> #{ say "---> text:basicText (2) ---------------|$/|-------------" if $/.chars }
-			| <basicAntity> #{ { say "\t" x $rank ~ "$/" ~ "<!--  text:basicAntity -->" }  if $/.chars }
-			| <myCDATA> # { say "---> text:myCDATA ---------------|$/|-------------"  if $/.chars }
+			| (<basicText>)  { {print "$0" ~ "<!-- text form 1.22 -->";} if $/.chars }
+			| (<basicAntity>)  { {print "$0" ~ "<!-- text form 1.23 -->";} if $/.chars }
+			| (<myCDATA>)  { {print "$0" ~ "<!-- text form 1.24 -->";} if $/.chars }
 		]
 	}
 
@@ -149,7 +149,7 @@ grammar XML {
 	}
 
 	token entity {
-		'&' <[a..z]>**1..5 ';'  { say "wwwwww----|$/|-------------" ~ $/.chars if $/.chars }
+		'&' <[a..z]>**1..5 ';'  #{ say "wwwwww----|$/|-------------" ~ $/.chars if $/.chars }
 	}
 
 	token entity_decimal {
