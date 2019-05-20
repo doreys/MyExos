@@ -11,7 +11,7 @@ my $rank=0;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Mon May 20 23:00:00 2019
+* Last Modified : Tue May 21 01:27:55 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -67,21 +67,22 @@ grammar XML {
 	}
 
 	rule basicText {
-		(<-[<>&]>*)  #{ {print "$0" ~ "<!-- text form1 -->";} if $/.chars }
+		(<-[<>&]>*)  { {print "$0" ~ "<!-- text form1 -->";} if $/.chars }
 	}
 
 	rule text {
-		(<basicText>) { {print "$0" ~ "<!-- text form 1.21 -->";} if $/.chars }
+		(<basicText>) # { {print "$0" ~ "<!-- text form 1.21 -->";} if $0.chars }
 		[
-			| (<basicText>)  { {print "$0" ~ "<!-- text form 1.22 -->";} if $/.chars }
-			| (<basicAntity>)  { {print "$0" ~ "<!-- text form 1.23 -->";} if $/.chars }
-			| (<myCDATA>)  { {print "$0" ~ "<!-- text form 1.24 -->";} if $/.chars }
+			| (<basicText>)  { {print "$1" ~ "<!-- text form 1.22 -->";} if $1.chars }
+			| (<basicAntity>)  #{ {print "$2" ~ "<!-- text form 1.23 -->";} if $2.chars }
+			| (<myCDATA>)  { {print "$3" ~ "<!-- text form 1.24 -->";} if $3.chars }
 		]
 	}
 
 
 	rule basicAntity {
-		<entities_formats> <text> { say "tag basicEtity> $/"; }
+		(<entities_formats>) { print "tag basicEtity> $0"; }
+		<text> 
 	}
 
 	rule tag {
