@@ -11,7 +11,7 @@ my $rank=0;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Tue May 21 14:11:20 2019
+* Last Modified : Wed May 22 00:40:22 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -47,7 +47,7 @@ grammar XML {
 	
 	rule corps {
 		[
-			| <myxml1>
+			| <myxml1> { say " " }
 			| <entete> <bodyXML>
 		]
 	}
@@ -59,10 +59,10 @@ grammar XML {
 	rule entete { '<?xml' 'version="' \d+ '.' \d+ '"' ['encoding="' <-[\'\"\s]>+ '"']**0..1  '?>'  { { say "$/ <!-- entete -->" } if $/.chars } }
 
 	token myxml1 { 
-		<text> # { say "myxml1 tag text:----- $/"  if $/.chars }
+		<text>
 		[ 
-			<tag> # { say "myxml1 X tag tag:----- $/" if $/.chars }
-			<text> # { say "myxml1 X tag text:----- $/" if $/.chars } 
+			<tag> 
+			<text> 
 		]* 
 	}
 
@@ -75,7 +75,7 @@ grammar XML {
 		[
 			| (<basicText>)  { {print "$1" ~ "<!-- text form 1.22 -->";} if $1.chars }
 			| (<basicAntity>)  #{ {print "$2" ~ "<!-- text form 1.23 -->";} if $2.chars }
-			| (<myCDATA>)  { {print "$3" ~ "<!-- text form 1.24 -->";} if $3.chars }
+			| (<myCDATA>)  #{ {print "$3" ~ "<!-- text form 1.24 -->";} if $3.chars }
 		]
 	}
 
@@ -109,7 +109,7 @@ grammar XML {
 		('<![CDATA[') { { say "\t" x $rank ~ "$0 <!-- begin myCDATA -->"; $rank++; } if $/.chars }
 		<myCDATACorpse> #{ { $rank+=2;} if $/.chars } 
 		(']]>') { { $rank--; say "\t" x $rank ~ "$1 <!-- end myCDATA -->";} if $/.chars } 
-		(<text>) { say "\t" x $rank ~ "$2 <----my data rule" }
+		(<text>) { { say "\t" x $rank ~ "$2 <----my data rule"} if $/.chars }
 	}
 
 	rule myCDATACorpse {
