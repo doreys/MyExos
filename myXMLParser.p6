@@ -11,7 +11,7 @@ my $rank=0;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Tue May 21 01:27:55 2019
+* Last Modified : Tue May 21 14:11:20 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -67,7 +67,7 @@ grammar XML {
 	}
 
 	rule basicText {
-		(<-[<>&]>*)  { {print "$0" ~ "<!-- text form1 -->";} if $/.chars }
+		(<-[<>&]>*)  { {print "$0";} if $/.chars }
 	}
 
 	rule text {
@@ -81,7 +81,7 @@ grammar XML {
 
 
 	rule basicAntity {
-		(<entities_formats>) { print "tag basicEtity> $0"; }
+		(<entities_formats>) { print "$0"; }
 		<text> 
 	}
 
