@@ -11,7 +11,7 @@ my $rank=0;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Wed May 22 01:14:19 2019
+* Last Modified : Wed May 22 22:20:29 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -59,15 +59,15 @@ grammar XML {
 	rule entete { '<?xml' 'version="' \d+ '.' \d+ '"' ['encoding="' <-[\'\"\s]>+ '"']**0..1  '?>'  { { say "$/ <!-- entete -->" } if $/.chars } }
 
 	token myxml1 { 
-		<text>
+		(<text>) # { say "\t" x $rank ~ "$0 <!-- myxml1 text 1-->" }
 		[ 
-			<tag> 
-			<text> 
-		]* 
+			(<tag>) #  { say "\t" x $rank ~ "$1 <!-- myxml1 tag-->" }
+			(<text>)  # { say "\t" x $rank ~ "$2 <!-- myxml1 text 2-->" }
+		]*  
 	}
 
 	rule basicText {
-		(<-[<>&]>*)  { {print "$0";} if $/.chars }
+		(<-[<>&]>*)  { {say "$0 <!-- basic text root -->";} if $/.chars }
 	}
 
 	rule text {
@@ -90,15 +90,16 @@ grammar XML {
 		[
 			| ('<') (\d*\w+) ('/>') { { say "$0$1$2 <!-- begin/end tag2 xxx no param-->"; }  if $/.chars }
 			| ('<') (\d*\w+) ([ <attribute> \s* ]+) ('/>') { { say "$0$1$2$3 <!-- begin/end tag2 xxx with param-->"; }  if $/.chars }
-			| ('<') (\d*\w+) ('>') { { say "\t" x $rank ~ "$0$1$2 <!-- begin tag2 xxx-->" ; $rank++; } if $/.chars }
-				<myxml1> ('</') $1 ('>') { { $rank--; say "\t" x $rank ~ "$3$1$4" ~ "   <!-- end tag2 xxxX-->"} if $/.chars }
+			| ('<') (\d*\w+) ('>') { { say "\t" x $rank ~ "$0$1$2 <!-- begin tag2 xUxx-->" ; $rank++; } if $/.chars }
+				(<myxml1>)  { { say "\t" x $rank ~ "$3 <!-- begin tag2 kkkk xUxx-->" ; $rank++; } if $3.chars }
+				('</') $1 ('>') { { $rank--; say "\t" x $rank ~ "$4$1$5" ~ "   <!-- end tag2 xxxX-->"} if $/.chars }
 			| ('<') (\d*\w+) ([<attribute> \s* ]+) ('>') { { say "\t" x $rank ~ "$0$1 $2$3 <!-- begin tag2-->" ; $rank++; } if $/.chars }
 				<myxml1> ('</') $1 ('>') { { $rank--; say "\t" x $rank ~ "$4$1$5" ~"   <!-- end tag2-->"; } if $/.chars }
 		] 
 	}
 
 	token basicText2 {
-		<-[<>&\[\]]>* # {  { $rank++;say "\t" x $rank ~ "tag basicText2> $/"; $rank--; } if $/.chars }
+		<-[<>&\[\]]>*  {  { $rank++;say "\t" x $rank ~ "tag basicText2> $/"; $rank--; } if $/.chars }
 	}
 
 	rule basicAntity2 {
