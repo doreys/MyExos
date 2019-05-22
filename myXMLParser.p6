@@ -11,7 +11,7 @@ my $rank=0;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Wed May 22 22:30:52 2019
+* Last Modified : Wed May 22 22:36:55 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -67,11 +67,11 @@ grammar XML {
 	}
 
 	rule basicText {
-		(<-[<>&]>*)  { {say "$0 <!-- basic text root -->";} if $/.chars }
+		(<-[<>&]>*)  #{ {say "$0 <!-- basic text root -->";} if $/.chars }
 	}
 
 	rule text {
-		(<basicText>) # { {print "$0" ~ "<!-- text form 1.21 -->";} if $0.chars }
+		(<basicText>) { {print "$0" ~ "<!-- text form 1.21 -->";} if $0.chars }
 		[
 			| (<basicText>)  { {print "$1" ~ "<!-- text form 1.22 -->";} if $1.chars }
 			| (<basicAntity>)  { {print "$1" ~ "<!-- text form 1.23 -->";} if $1.chars }
@@ -165,9 +165,9 @@ grammar XML {
 
 my @tests = (
     [1, 'abc'                       ],      # 01
-#`{{{
     [1, '<a></a>'                   ],      # 02
     [1, '..<ab>foo</ab>dd'          ],      # 03
+#`{{{
     [1, '<a><b>c</b></a>'           ],      # 04
     [1, '<a href="foo"><b>c</b></a>'],      # 05
     [1, '<a empty="" ><b>c</b></a>' ],      # 06
