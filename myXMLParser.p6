@@ -11,7 +11,7 @@ my $rank=0;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Thu May 23 00:03:53 2019
+* Last Modified : Thu May 23 00:16:00 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -59,7 +59,7 @@ grammar XML {
 	rule entete { '<?xml' 'version="' \d+ '.' \d+ '"' ['encoding="' <-[\'\"\s]>+ '"']**0..1  '?>'  { { say "$/ <!-- entete -->" } if $/.chars } }
 
 	token myxml1 { 
-		(<text>)  #{ { print "\t" x $rank ~ "$0 <!-- myxml1 text 1-->" } if $0.chars }
+		(<text>)  { { print "\t" x $rank ~ "$0 <!-- myxml1 text 1-->" } if $0.chars }
 		[ 
 			(<tag>) #  { print "$1 <!-- myxml1 tag-->" }
 			(<text>)   { { print "$2 <!-- myxml1 text 2-->" } if $2.chars }
@@ -71,17 +71,17 @@ grammar XML {
 	}
 
 	rule text {
-		(<basicText>) #{ {print "$0" ~ "<!-- text form 1.21 -->";} if $0.chars }
+		(<basicText>) { {print "\t" x $rank ~ "$0" ~ "<!-- text form 1.21 -->";} if $0.chars }
 		[
 			| (<basicText>) # { {print "$1" ~ "<!-- text form 1.22 -->";} if $1.chars }
-			| (<basicAntity>) ## { {print "$1" ~ "<!-- text form 1.23 -->";} if $1.chars }
+			| (<basicEntity>) ## { {print "$1" ~ "<!-- text form 1.23 -->";} if $1.chars }
 			| (<myCDATA>)  #{ {print "$1" ~ "<!-- text form 1.24 -->";} if $1.chars }
 		]
 	}
 
 
-	rule basicAntity {
-		(<entities_formats>) { print "$0"; }
+	rule basicEntity {
+		(<entities_formats>)  { print "$0 <!-- ok basicEntity"; }
 		<text> 
 	}
 
@@ -102,7 +102,7 @@ grammar XML {
 		<-[<>&\[\]]>*  {  { $rank++;say "\t" x $rank ~ "tag basicText2> $/"; $rank--; } if $/.chars }
 	}
 
-	rule basicAntity2 {
+	rule basicEntity2 {
 		<entities_formats> { say "tag entities_formats> $/" }
 	}
 
@@ -124,7 +124,7 @@ grammar XML {
 	rule text2 {
 		[
 			| <basicText2>
-			| <basicAntity2>
+			| <basicEntity2>
 		]
 		#<myCDATACorpse>
 	}
