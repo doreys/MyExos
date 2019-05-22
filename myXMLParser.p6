@@ -11,7 +11,7 @@ my $rank=0;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Wed May 22 23:49:45 2019
+* Last Modified : Thu May 23 00:03:53 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -47,7 +47,7 @@ grammar XML {
 	
 	rule corps {
 		[
-			| <myxml1> #{ say " " }
+			| <myxml1> { say "adios gringo" } #{ say " " }
 			| <entete> <bodyXML>
 		]
 	}
@@ -59,11 +59,11 @@ grammar XML {
 	rule entete { '<?xml' 'version="' \d+ '.' \d+ '"' ['encoding="' <-[\'\"\s]>+ '"']**0..1  '?>'  { { say "$/ <!-- entete -->" } if $/.chars } }
 
 	token myxml1 { 
-		(<text>)  { { print "\t" x $rank ~ "$0 <!-- myxml1 text 1-->" } if $0.chars }
+		(<text>)  #{ { print "\t" x $rank ~ "$0 <!-- myxml1 text 1-->" } if $0.chars }
 		[ 
 			(<tag>) #  { print "$1 <!-- myxml1 tag-->" }
 			(<text>)   { { print "$2 <!-- myxml1 text 2-->" } if $2.chars }
-		]* { say "adios gringo" } 
+		]* 
 	}
 
 	rule basicText {
