@@ -11,7 +11,7 @@ my $rank=0;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Thu May 23 19:50:27 2019
+* Last Modified : Thu May 23 20:19:01 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -62,7 +62,7 @@ grammar XML {
 		(<text>)  { { print "\t" x $rank ~ "$0 <!-- myxml1 text 1 rank:$rank-->" } if $0.chars }
 		[ 
 			(<tag>) #  { print "$1 <!-- myxml1 tag-->" }
-			(<text>)   { { print "$2 <!-- myxml1 text 2-->" } if $2.chars }
+			(<text>)   { { print "\n" ~ "$2 <!-- myxml1 text 2-->" } if $2.chars }
 		]* 
 	}
 
@@ -91,10 +91,10 @@ grammar XML {
 			| ('<') (\d*\w+) ('/>') { { say "\n$0$1$2 <!-- begin/end tag2 xxx no param-->"; }  if $/.chars }
 			| ('<') (\d*\w+) ([ <attribute> \s* ]+) ('/>') { { say "\n$0$1$2$3 <!-- begin/end tag2 xxx with param-->"; }  if $/.chars }
 			| ('<') (\d*\w+) ('>') { { say "\n" ~ "\t" x $rank ~ "$0$1$2 <!-- begin tag2 xUxx-->" ; $rank++; } if $/.chars }
-				(<myxml1>)  #{ { say "\n" ~ "\t" x $rank ~ "$3 <!-- begin tag2 kkkk xUxx-->" ; $rank++; } if $3.chars }
-				('</') $1 ('>') { { $rank--; say "\n" ~ "\t" x $rank ~ "$4$1$5" ~ "   <!-- end tag2 xxxX rank:$rank-->"} if $/.chars }
-			| ('<') (\d*\w+) ([<attribute> \s* ]+) ('>') { { say "\n" ~ "\t" x $rank ~ "$0$1 $2$3 <!-- begin tag2-->" ; $rank++; } if $/.chars }
-				<myxml1> ('</') $1 ('>') { { $rank--; say "\t" x $rank ~ "$4$1$5" ~"   <!-- end tag2-->"; } if $/.chars }
+				<myxml1> 
+				('</') $1 ('>') { { $rank--; print "\n" ~ "\t" x $rank ~ "$3$1$4" ~ "   <!-- end tag2 xxxX rank:$rank-->"} if $/.chars }
+			| ('<') (\d*\w+) ([<attribute> \s* ]+) ('>') { { say "\t" x $rank ~ "$0$1 $2$3 <!-- begin tag2-->" ; $rank++; } if $/.chars }
+				<myxml1> ('</') $1 ('>') { { $rank--; say "\n" ~ "\t" x $rank ~ "$4$1$5" ~ " <!-- end tag2-->"; } if $/.chars }
 		] 
 	}
 
