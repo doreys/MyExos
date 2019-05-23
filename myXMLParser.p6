@@ -4,14 +4,13 @@ use v6 ;
 
 # use Grammar::Tracer;
 
-my $rank=0;
 
 # ------------------------------------------------------
 #`[
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Thu May 23 20:19:01 2019
+* Last Modified : Fri May 24 00:35:32 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -38,16 +37,32 @@ my $rank=0;
 ]
 # ------------------------------------------------------
 
+
+my $rank=0;
+my @lines = ();
 grammar XML {
-	token TOP { ^ <xml> $ }
+	token TOP { ^ <xml> $ { 
+			for @lines -> $l {
+				say "---->$l";
+			}
+			say "beg:" ~ @lines.elems;
+			while @lines.elems >0 {
+				shift(@lines);
+			}
+			say "end:" ~ @lines.elems;
+		}
+	}
+
 
 	token xml { 
-		<corps> { $rank = 0; }
+		<corps> { 
+			$rank=0;
+		}
 	}
 	
 	rule corps {
 		[
-			| <myxml1> { say "adios gringo" } #{ say " " }
+			| <myxml1> 
 			| <entete> <bodyXML>
 		]
 	}
@@ -56,50 +71,83 @@ grammar XML {
 		<myxml1>
 	}
 
-	rule entete { '<?xml' 'version="' \d+ '.' \d+ '"' ['encoding="' <-[\'\"\s]>+ '"']**0..1  '?>'  { { say "$/ <!-- entete -->" } if $/.chars } }
+	rule entete { '<?xml' 'version="' \d+ '.' \d+ '"' ['encoding="' <-[\'\"\s]>+ '"']**0..1  '?>'  { { 
+		push @lines, "$/ <!-- entete -->" ;
+		#say "$/ <!-- entete -->" 
+	} if $/.chars } }
 
 	token myxml1 { 
-		(<text>)  { { print "\t" x $rank ~ "$0 <!-- myxml1 text 1 rank:$rank-->" } if $0.chars }
+		(<text>)  { 
+				{ 
+					push @lines, "\t" x $rank ~ "$0 <!-- myxml1 text 1 rank:$rank -->"; 
+					#print "\t" x $rank ~ "$0 <!-- myxml1 text 1 rank:$rank-->"; 
+				} if $0.chars 
+			}
 		[ 
-			(<tag>) #  { print "$1 <!-- myxml1 tag-->" }
-			(<text>)   { { print "\n" ~ "$2 <!-- myxml1 text 2-->" } if $2.chars }
+			<tag> 
+			(<text>) { 
+				{ 
+					push @lines, "$1" ~ "<!-- myxml1 text 2 -->|$1|" ~ $1.chars;
+					#			print "\n" ~ "$1 <!-- myxml1 text 2-->" 
+				} if $1.chars 
+			}
 		]* 
 	}
 
-	rule basicText {
-		(<-[<>&]>*)  #{ {say "$0 <!-- basic text root -->";} if $/.chars }
+	token basicText {
+		<-[<>&]>*
 	}
 
-	rule text {
-		(<basicText>) # { {print "\t" x $rank ~ "$0" ~ "<!-- text form 1.21 -->";} if $0.chars }
+	token text {
+		<basicText>
 		[
-			| (<basicText>) # { {print "$1" ~ "<!-- text form 1.22 -->";} if $1.chars }
-			| (<basicEntity>) ## { {print "$1" ~ "<!-- text form 1.23 -->";} if $1.chars }
-			| (<myCDATA>)  #{ {print "$1" ~ "<!-- text form 1.24 -->";} if $1.chars }
+			| <basicText>
+			| <basicEntity>
+			| <myCDATA>
 		]
 	}
 
 
 	rule basicEntity {
-		(<entities_formats>)  #{ print "$0 <!-- ok basicEntity"; }
+		(<entities_formats>)  #{ 
+			#		push @lines,"$0 <<<<<<Basic entty";
+			#print "$0 <!-- ok basicEntity"; }
 		<text> 
 	}
 
 	rule tag {
-		#'<' (\d*\w+) [ <attribute> \s* ]*
 		[
 			| ('<') (\d*\w+) ('/>') { { say "\n$0$1$2 <!-- begin/end tag2 xxx no param-->"; }  if $/.chars }
 			| ('<') (\d*\w+) ([ <attribute> \s* ]+) ('/>') { { say "\n$0$1$2$3 <!-- begin/end tag2 xxx with param-->"; }  if $/.chars }
-			| ('<') (\d*\w+) ('>') { { say "\n" ~ "\t" x $rank ~ "$0$1$2 <!-- begin tag2 xUxx-->" ; $rank++; } if $/.chars }
+			| ('<') (\d*\w+) ('>') { 
+							{ 
+								push @lines, "\t" x $rank ~ "$0$1$2 <!-- begin tag2 xUxx $rank -->" ;
+								#		say "\t" x $rank ~ "$0$1$2 <!-- begin tag2 xUxx-->" ;
+								$rank++; 
+							} if $/.chars 
+						}
 				<myxml1> 
-				('</') $1 ('>') { { $rank--; print "\n" ~ "\t" x $rank ~ "$3$1$4" ~ "   <!-- end tag2 xxxX rank:$rank-->"} if $/.chars }
-			| ('<') (\d*\w+) ([<attribute> \s* ]+) ('>') { { say "\t" x $rank ~ "$0$1 $2$3 <!-- begin tag2-->" ; $rank++; } if $/.chars }
-				<myxml1> ('</') $1 ('>') { { $rank--; say "\n" ~ "\t" x $rank ~ "$4$1$5" ~ " <!-- end tag2-->"; } if $/.chars }
+			('</') $1 ('>') { { $rank--;
+				push @lines, "\t" x $rank ~ "$3$1$4" ~ "   <!-- end tag2 xxxX rank:$rank-->";
+				#print "\t" x $rank ~ "$3$1$4" ~ "   <!-- end tag2 xxxX rank:$rank-->";
+			} if $/.chars }
+			| ('<') (\d*\w+) ([<attribute> \s* ]+) ('>') { { 
+				push @lines, "\t" x $rank ~ "$0$1 $2$3 <!-- begin tag2-->" ; 
+				say "\t" x $rank ~ "$0$1 $2$3 <!-- begin tag2-->" ; 
+				$rank++; 
+			} if $/.chars }
+				<myxml1> ('</') $1 ('>') { 
+					{ $rank--; 
+					push @lines, "\t" x $rank ~ "$4$1$5" ~ " <!-- end tag2-->"; 
+					say "\n" ~ "\t" x $rank ~ "$4$1$5" ~ " <!-- end tag2-->"; 
+				} if $/.chars 
+			}
 		] 
 	}
 
 	token basicText2 {
-		<-[<>&\[\]]>*  {  { $rank++;say "\t" x $rank ~ "tag basicText2> $/"; $rank--; } if $/.chars }
+		<-[<>&\[\]]>*  {  { $rank++;
+		say "\t" x $rank ~ "tag basicText2> $/"; $rank--; } if $/.chars }
 	}
 
 	rule basicEntity2 {
@@ -142,7 +190,7 @@ grammar XML {
 
 	token attribute { \w+ '="' <-[="\<\>\s]>+ \" } 
 
-	token entities_formats {
+	rule entities_formats {
 		[
 			| <entity>
 			| <entity_decimal>
@@ -168,7 +216,9 @@ my @tests = (
     [1, '<a></a>'                   ],      # 02
     [1, '..<ab>foo&amp;toto</ab>dd'          ],      # 03
     [1, '<a><b>c</b></a>'           ],      # 04
-    [1, '<a href="foo"><b>c</b></a>'],      # 05
+    [1, '<a href="foo"><b>c</b></a>ooo'],      # 05
+    [1, 'zzz<a href="foo"><b>c</b></a>ooo'],      # 05
+    [1, '<a>b</a>'                  ],      # 10.b
 #`{{{
     [1, '<a empty="" ><b>c</b></a>' ],      # 06
     [1, '<a empty=""><b>c</b></a>' ],       # 06.a
@@ -262,15 +312,18 @@ my @tests = (
 my $count = 1;
 for @tests -> $t {
     my $s = $t[1];
-    say "++++++++++++++++++++++++++++++++++++++";
+    for @lines -> $a { my $b = pop(@lines) ; say "->$b destroyed"; }
+    say "\n++++++++++++++++++++++++++++++++++++++";
     say "$s";
+    say "++++++++++++++++++++++++++++++++++++++";
     my $M = XML.parse($s);
     #    say "Expected result $t[0]. If the result is $t[0] then it is OK";
     if !($M  xor $t[0]) {
-        say "ok $count - '$s'";
+        say "\nok $count - '$s'";
     } else {
-        say "not ok $count - '$s'";
+        say "\nnot ok $count - '$s'";
     }
+    #    $M=();
     $count++;
     say "++++++++++++++++++++++++++++++++++++++++++";
 }
