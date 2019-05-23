@@ -11,7 +11,7 @@ my $rank=0;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Thu May 23 00:16:00 2019
+* Last Modified : Thu May 23 18:00:16 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -71,7 +71,7 @@ grammar XML {
 	}
 
 	rule text {
-		(<basicText>) { {print "\t" x $rank ~ "$0" ~ "<!-- text form 1.21 -->";} if $0.chars }
+		(<basicText>) # { {print "\t" x $rank ~ "$0" ~ "<!-- text form 1.21 -->";} if $0.chars }
 		[
 			| (<basicText>) # { {print "$1" ~ "<!-- text form 1.22 -->";} if $1.chars }
 			| (<basicEntity>) ## { {print "$1" ~ "<!-- text form 1.23 -->";} if $1.chars }
@@ -81,7 +81,7 @@ grammar XML {
 
 
 	rule basicEntity {
-		(<entities_formats>)  { print "$0 <!-- ok basicEntity"; }
+		(<entities_formats>)  #{ print "$0 <!-- ok basicEntity"; }
 		<text> 
 	}
 
@@ -91,8 +91,8 @@ grammar XML {
 			| ('<') (\d*\w+) ('/>') { { say "\n$0$1$2 <!-- begin/end tag2 xxx no param-->"; }  if $/.chars }
 			| ('<') (\d*\w+) ([ <attribute> \s* ]+) ('/>') { { say "\n$0$1$2$3 <!-- begin/end tag2 xxx with param-->"; }  if $/.chars }
 			| ('<') (\d*\w+) ('>') { { say "\n" ~ "\t" x $rank ~ "$0$1$2 <!-- begin tag2 xUxx-->" ; $rank++; } if $/.chars }
-				(<myxml1>)  { { say "\n" ~ "\t" x $rank ~ "$3 <!-- begin tag2 kkkk xUxx-->" ; $rank++; } if $3.chars }
-				('</') $1 ('>') { { $rank--; say "\n" ~ "\t" x $rank ~ "\n$4$1$5" ~ "   <!-- end tag2 xxxX-->"} if $/.chars }
+				(<myxml1>)  #{ { say "\n" ~ "\t" x $rank ~ "$3 <!-- begin tag2 kkkk xUxx-->" ; $rank++; } if $3.chars }
+				('</') $1 ('>') { { $rank--; say "\t" x $rank ~ "\n$4$1$5" ~ "   <!-- end tag2 xxxX-->"} if $/.chars }
 			| ('<') (\d*\w+) ([<attribute> \s* ]+) ('>') { { say "\n" ~ "\t" x $rank ~ "$0$1 $2$3 <!-- begin tag2-->" ; $rank++; } if $/.chars }
 				<myxml1> ('</') $1 ('>') { { $rank--; say "\t" x $rank ~ "$4$1$5" ~"   <!-- end tag2-->"; } if $/.chars }
 		] 
