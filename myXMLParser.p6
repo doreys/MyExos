@@ -10,7 +10,7 @@ use v6 ;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Fri May 24 00:35:32 2019
+* Last Modified : Fri May 24 01:09:13 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -45,11 +45,7 @@ grammar XML {
 			for @lines -> $l {
 				say "---->$l";
 			}
-			say "beg:" ~ @lines.elems;
-			while @lines.elems >0 {
-				shift(@lines);
-			}
-			say "end:" ~ @lines.elems;
+			#say "beg:" ~ @lines.elems; while @lines.elems > 0 { shift(@lines); } say "end:" ~ @lines.elems;
 		}
 	}
 
@@ -57,6 +53,7 @@ grammar XML {
 	token xml { 
 		<corps> { 
 			$rank=0;
+			#	say "list is not empty " ~ @lines.elems if @lines.elems;
 		}
 	}
 	
@@ -133,21 +130,27 @@ grammar XML {
 			} if $/.chars }
 			| ('<') (\d*\w+) ([<attribute> \s* ]+) ('>') { { 
 				push @lines, "\t" x $rank ~ "$0$1 $2$3 <!-- begin tag2-->" ; 
-				say "\t" x $rank ~ "$0$1 $2$3 <!-- begin tag2-->" ; 
+				#say "\t" x $rank ~ "$0$1 $2$3 <!-- begin tag2-->" ; 
 				$rank++; 
 			} if $/.chars }
 				<myxml1> ('</') $1 ('>') { 
 					{ $rank--; 
 					push @lines, "\t" x $rank ~ "$4$1$5" ~ " <!-- end tag2-->"; 
-					say "\n" ~ "\t" x $rank ~ "$4$1$5" ~ " <!-- end tag2-->"; 
+					#say "\n" ~ "\t" x $rank ~ "$4$1$5" ~ " <!-- end tag2-->"; 
 				} if $/.chars 
 			}
 		] 
 	}
 
 	token basicText2 {
-		<-[<>&\[\]]>*  {  { $rank++;
-		say "\t" x $rank ~ "tag basicText2> $/"; $rank--; } if $/.chars }
+		<-[<>&\[\]]>* {  
+				{ 
+					$rank++;
+					push @lines, "\t" x $rank ~ "tag basicText2> $/"; 
+					#		say "\t" x $rank ~ "tag basicText2> $/"; 
+					$rank--;
+				} if $/.chars 
+			}
 	}
 
 	rule basicEntity2 {
@@ -219,7 +222,6 @@ my @tests = (
     [1, '<a href="foo"><b>c</b></a>ooo'],      # 05
     [1, 'zzz<a href="foo"><b>c</b></a>ooo'],      # 05
     [1, '<a>b</a>'                  ],      # 10.b
-#`{{{
     [1, '<a empty="" ><b>c</b></a>' ],      # 06
     [1, '<a empty=""><b>c</b></a>' ],       # 06.a
     [1, '<a empty=""><b>c</b></a>' ],       # 06.b
@@ -230,6 +232,7 @@ my @tests = (
     [1, '<a>b</b>'                  ],      # 09.b
     [0, '<a>b</a'                   ],      # 10.a
     [1, '<a>b</a>'                  ],      # 10.b
+#`{{{
     [0, '<a>b</a href="">'          ],      # 11.a
     [1, '<a>b</a href="">'          ],      # 11.b
     [1, '<a/>'                      ],      # 12
@@ -312,7 +315,6 @@ my @tests = (
 my $count = 1;
 for @tests -> $t {
     my $s = $t[1];
-    for @lines -> $a { my $b = pop(@lines) ; say "->$b destroyed"; }
     say "\n++++++++++++++++++++++++++++++++++++++";
     say "$s";
     say "++++++++++++++++++++++++++++++++++++++";
@@ -323,8 +325,14 @@ for @tests -> $t {
     } else {
         say "\nnot ok $count - '$s'";
     }
-    #    $M=();
     $count++;
+    if @lines.elems {
+	    say "Do some cleanings";
+	    say "beg:" ~ @lines.elems;
+	    while @lines.elems { shift @lines; }
+	    say "end:" ~ @lines.elems;
+    }
+    $rank = 0;
     say "++++++++++++++++++++++++++++++++++++++++++";
 }
 
