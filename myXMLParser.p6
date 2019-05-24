@@ -10,8 +10,8 @@ use v6 ;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Fri May 24 01:16:04 2019
-* Email Address : sdo@macbook-pro-de-sdo.home
+* Last Modified : Fri May 24 18:36:37 2019
+* Email Address : sdo@MBP-de-SDO
 * Version : 0.0.0.0
 * License:
 * 	Permission is granted to copy, distribute, and/or modify this document under the terms of the Creative Commons Attribution-NonCommercial 3.0 
@@ -239,11 +239,11 @@ my @tests = (
     [1, 'abc&amp'                   ],      # 14
     [1, 'abc&amp;'                  ],      # 15
     [1, 'abc&amp;aqwxsz'            ],      # 16
-#`{{{
     [1, '<a1></a1>'                 ],      # 17
     [1, '<1a></a>'                  ],      # 18
     [1, '<1a></1a>'                 ],      # 19
     [1, '<![CDATA[toto]]>'          ],      # 20
+#`{{{
     [1, '<![CDATA[ toto ]]>'        ],      # 21
     [1, 'azert <![CDATA[ ]]> qsdsqd dsfdsfsd'                 ],      # 22
     [1, 'azErt<![CDATA[ ]]>qsdsqd dsfdsfsd'                 ],      # 23
