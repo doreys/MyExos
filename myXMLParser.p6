@@ -10,7 +10,7 @@ use v6 ;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Fri May 24 18:49:04 2019
+* Last Modified : Sat May 25 01:07:40 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -40,6 +40,7 @@ use v6 ;
 
 my $rank=0;
 my @lines = ();
+my $prev=0;
 grammar XML {
 	token TOP { ^ <xml> $ { 
 			for @lines -> $l {
@@ -53,6 +54,7 @@ grammar XML {
 	token xml { 
 		<corps> { 
 			$rank=0;
+			$prev=0;
 			#	say "list is not empty " ~ @lines.elems if @lines.elems;
 		}
 	}
@@ -74,49 +76,76 @@ grammar XML {
 	} if $/.chars } }
 
 	token myxml1 { 
-		(<text>)  { 
-				{ 
-					push @lines, "\t" x $rank ~ "$0 <!-- myxml1 text 1 rank:$rank -->"; 
-					#print "\t" x $rank ~ "$0 <!-- myxml1 text 1 rank:$rank-->"; 
-				} if $0.chars 
-			}
-		[ 
-			<tag> 
-			(<text>) { 
-				{ 
-					push @lines, "$1" ~ "<!-- myxml1 text 2 -->|$1|" ~ $1.chars;
-					#			print "\n" ~ "$1 <!-- myxml1 text 2-->" 
-				} if $1.chars 
-			}
-		]* 
+		<text> [ <tag> <text> ]* 
 	}
 
-	token basicText {
-		<-[<>&]>*
+	rule basicText {
+		(<-[<>&]>*) {
+			#say "------------start----------";
+			#say "prev: $prev";
+			if $0.chars { 
+				my $recup="";
+				if $prev == 1 {
+					if $0.chars {
+						$recup=pop @lines;
+						#say "from pop $recup";
+						$recup="$recup$0";
+						#say "prev already";
+					}
+				}else{
+					if $/.chars {
+						$prev=1;
+						$recup= "\t" x $rank ~ "$/";
+					}
+				}
+				#say "it match >" ~ $recup ~ "<";
+				push @lines,"$recup";
+			}
+		}
 	}
 
 	token text {
 		<basicText>
 		[
 			| <basicText>
-			| <basicEntity>
-			| <myCDATA>
+			| <basicEntity> # { my $recup=""; { $recup=pop @lines; say "oooo>$recup"; $recup~=$1; } if @lines.elems; { push @lines,"$recup"; say "* recup:$1"; say "** recup($0,$1):$recup"; } if $1.chars }
+			<text>
+			| (<myCDATA>) { say "zzzzzzzz>$1" if $1.chars }
+			<text>
 		]
 	}
 
 
 	rule basicEntity {
-		(<entities_formats>)  #{ 
-			#		push @lines,"$0 <<<<<<Basic entty";
-			#print "$0 <!-- ok basicEntity"; }
-		<text> 
+		(<entities_formats>)  { 
+			#say "------------start----------";
+			#say "prev: $prev";
+			if $0.chars { 
+				my $recup="";
+				if $prev == 1 {
+					if $0.chars {
+						$recup=pop @lines;
+						#say "from pop $recup";
+						$recup="$recup$0";
+						#say "prev already";
+					}
+				}else{
+					if $/.chars {
+						$prev=1;
+						$recup= "\t" x $rank ~ "$/";
+					}
+				}
+				#say "it match >" ~ $recup ~ "<";
+				push @lines,"$recup";
+			}
+		}
 	}
 
 	rule tag {
 		[
-			| ('<') (\d*\w+) ('/>') { { say "\n$0$1$2 <!-- begin/end tag2 xxx no param-->"; }  if $/.chars }
-			| ('<') (\d*\w+) ([ <attribute> \s* ]+) ('/>') { { say "\n$0$1$2$3 <!-- begin/end tag2 xxx with param-->"; }  if $/.chars }
-			| ('<') (\d*\w+) ('>') { 
+			| ('<') (\d*\w+) ('/>') { $prev = 0; { say "\n$0$1$2 <!-- begin/end tag2 xxx no param-->"; }  if $/.chars }
+			| ('<') (\d*\w+) ([ <attribute> \s* ]+) ('/>') { $prev = 0; { say "\n$0$1$2$3 <!-- begin/end tag2 xxx with param-->"; }  if $/.chars }
+			| ('<') (\d*\w+) ('>') {$prev = 0;  
 							{ 
 								push @lines, "\t" x $rank ~ "$0$1$2 <!-- begin tag2 xUxx $rank -->" ;
 								#		say "\t" x $rank ~ "$0$1$2 <!-- begin tag2 xUxx-->" ;
@@ -124,20 +153,27 @@ grammar XML {
 							} if $/.chars 
 						}
 				<myxml1> 
-			('</') $1 ('>') { { $rank--;
-				push @lines, "\t" x $rank ~ "$3$1$4" ~ "   <!-- end tag2 xxxX rank:$rank-->";
-				#print "\t" x $rank ~ "$3$1$4" ~ "   <!-- end tag2 xxxX rank:$rank-->";
-			} if $/.chars }
-			| ('<') (\d*\w+) ([<attribute> \s* ]+) ('>') { { 
-				push @lines, "\t" x $rank ~ "$0$1 $2$3 <!-- begin tag2-->" ; 
-				#say "\t" x $rank ~ "$0$1 $2$3 <!-- begin tag2-->" ; 
-				$rank++; 
-			} if $/.chars }
-				<myxml1> ('</') $1 ('>') { 
-					{ $rank--; 
-					push @lines, "\t" x $rank ~ "$4$1$5" ~ " <!-- end tag2-->"; 
-					#say "\n" ~ "\t" x $rank ~ "$4$1$5" ~ " <!-- end tag2-->"; 
-				} if $/.chars 
+			('</') $1 ('>') {
+				$prev = 0; 
+				{
+					$rank--;
+					push @lines, "\t" x $rank ~ "$3$1$4" ~ "   <!-- end tag2 xxxX rank:$rank-->";
+					#print "\t" x $rank ~ "$3$1$4" ~ "   <!-- end tag2 xxxX rank:$rank-->";
+				} if $/.chars }
+			| ('<') (\d*\w+) ([<attribute> \s* ]+) ('>') {
+					$prev = 0; 
+					{ 
+						push @lines, "\t" x $rank ~ "$0$1 $2$3 <!-- begin tag2-->" ; 
+						#say "\t" x $rank ~ "$0$1 $2$3 <!-- begin tag2-->" ; 
+						$rank++; 
+					} if $/.chars 
+				}
+			<myxml1> ('</') $1 ('>') { 
+					{ 
+						$rank--; 
+						push @lines, "\t" x $rank ~ "$4$1$5" ~ " <!-- end tag2-->"; 
+						#say "\n" ~ "\t" x $rank ~ "$4$1$5" ~ " <!-- end tag2-->"; 
+					} if $/.chars 
 			}
 		] 
 	}
@@ -145,8 +181,8 @@ grammar XML {
 	token basicText2 {
 		<-[<>&\[\]]>* {  
 				{ 
-					$rank++;
-					push @lines, "\t" x $rank ~ "tag basicText2> $/"; 
+					#$rank++;
+					push @lines, "\t" x $rank ~ "$/ <tag basicText2"; 
 					#		say "\t" x $rank ~ "tag basicText2> $/"; 
 					$rank--;
 				} if $/.chars 
@@ -158,14 +194,25 @@ grammar XML {
 	}
 
 	rule myCDATA { 
-		('<![CDATA[') { { say "\t" x $rank ~ "$0 <!-- begin myCDATA -->"; $rank++; } if $/.chars }
+		('<![CDATA[') { 
+				{ 
+					push @lines, "\t" x $rank ~ "$0 <!-- begin myCDATA -->";
+					#say "\t" x $rank ~ "$0 <!-- begin myCDATA -->";
+					$rank++; 
+				} if $/.chars 
+			}
 		<myCDATACorpse> #{ { $rank+=2;} if $/.chars } 
-		(']]>') { { $rank--; say "\t" x $rank ~ "$1 <!-- end myCDATA -->";} if $/.chars } 
-		(<text>) { { say "\t" x $rank ~ "$2 <----my data rule"} if $/.chars }
+		(']]>') { 
+				{ 
+					$rank--; 
+					push @lines, "\t" x $rank ~ "$1 <!-- end myCDATA -->";
+					# say "\t" x $rank ~ "$1 <!-- end myCDATA -->";
+				} if $/.chars 
+			} 
 	}
 
 	rule myCDATACorpse {
-		 (<text2>)  { { say "\t" x $rank ~ "$0 <!-- <text2> myDATACorpse-->" ;  } if $/.chars } 
+		 (<text2>)  # { { say "\t" x $rank ~ "$0 <!-- <text2> myDATACorpse-->" ;  } if $/.chars } 
 			 [
 				(<tag2>)  # { { $rank++ ; say "\t" x $rank ~ "myDAC2> $1" ; $rank--; } if $/.chars }
 				(<text2>) # { { $rank++ ; say "\t" x $rank ~ "myDAC3> $2" ; $rank--; } if $/.chars }
@@ -215,11 +262,13 @@ grammar XML {
 };
 
 my @tests = (
+#`{{{ }}}
     [1, 'abc'                       ],      # 01
     [1, '<a></a>'                   ],      # 02
     [1, '..<ab>foo&amp;toto</ab>dd'          ],      # 03
     [1, '<a><b>c</b></a>'           ],      # 04
     [1, '<a href="foo"><b>c</b></a>ooo'],      # 05
+#`{{{
     [1, 'zzz<a href="foo"><b>c</b></a>ooo'],      # 05
     [1, '<a>b</a>'                  ],      # 10.b
     [1, '<a empty="" ><b>c</b></a>' ],      # 06
@@ -243,7 +292,6 @@ my @tests = (
     [1, '<1a></a>'                  ],      # 18
     [1, '<1a></1a>'                 ],      # 19
     [1, '<![CDATA[toto]]>'          ],      # 20
-#`{{{
     [1, '<![CDATA[ toto ]]>'        ],      # 21
     [1, 'azert <![CDATA[ ]]> qsdsqd dsfdsfsd'                 ],      # 22
     [1, 'azErt<![CDATA[ ]]>qsdsqd dsfdsfsd'                 ],      # 23
@@ -315,15 +363,16 @@ my @tests = (
 my $count = 1;
 for @tests -> $t {
     my $s = $t[1];
+    say "very begining:" ~ @lines.elems;
     say "\n++++++++++++++++++++++++++++++++++++++";
     say "$s";
     say "++++++++++++++++++++++++++++++++++++++";
     my $M = XML.parse($s);
     #    say "Expected result $t[0]. If the result is $t[0] then it is OK";
     if !($M  xor $t[0]) {
-        say "\ntest # $count: ok $count - '$s'";
+        say "\nok $count - '$s'";
     } else {
-        say "\ntest # $count: not ok $count - '$s'";
+        say "\nnot ok $count - '$s'";
     }
     $count++;
     if @lines.elems {
