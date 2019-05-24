@@ -2,6 +2,7 @@
 
 use v6 ;
 
+
 # use Grammar::Tracer;
 
 
@@ -10,7 +11,7 @@ use v6 ;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Sat May 25 01:16:35 2019
+* Last Modified : Sat May 25 01:46:20 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -36,7 +37,6 @@ use v6 ;
 	• vous pourriez essayer de mettre en place un bel affichage de code XML en analysant récursivement l'objet $/. (Ce n'est pas du tout trivial, il se peut que vous deviez contourner des bogues Rakudo et peut-être introduire de nouvelles captures.)
 ]
 # ------------------------------------------------------
-
 
 my $rank=0;
 my @lines = ();
@@ -275,7 +275,6 @@ my @tests = (
     [1, '<a empty=""><b>c</b></a>' ],       # 06.b
     [1, '<a empty="a"><b>c</b></a>' ],      # 06.c
     [1, '<a><b>c</b><c></c></a>'    ],      # 07
-#`{{{
     [0, '<'                         ],      # 08
     [0, '<a>b</b>'                  ],      # 09.a
     [1, '<a>b</b>'                  ],      # 09.b
@@ -283,6 +282,7 @@ my @tests = (
     [1, '<a>b</a>'                  ],      # 10.b
     [0, '<a>b</a href="">'          ],      # 11.a
     [1, '<a>b</a href="">'          ],      # 11.b
+#`{{{
     [1, '<a/>'                      ],      # 12
     [1, '<a />'                     ],      # 13
     [1, 'abc&amp'                   ],      # 14
@@ -364,11 +364,10 @@ my $count = 1;
 for @tests -> $t {
     my $s = $t[1];
     say "very begining:" ~ @lines.elems;
-    say "\n++++++++++++++++++++++++++++++++++++++";
-    say "$s";
-    say "++++++++++++++++++++++++++++++++++++++";
+    say "string>$s";
     my $M = XML.parse($s);
     #    say "Expected result $t[0]. If the result is $t[0] then it is OK";
+    say "expect: $t[0] --->" ~ !($M  xor $t[0]);
     if !($M  xor $t[0]) {
         say "\nok $count - '$s'";
     } else {
@@ -376,12 +375,9 @@ for @tests -> $t {
     }
     $count++;
     if @lines.elems {
-	    say "Do some cleanings";
-	    say "beg:" ~ @lines.elems;
+	    say "Do some cleanings"; 
 	    while @lines.elems { shift @lines; }
-	    say "end:" ~ @lines.elems;
     }
     $rank = 0;
-    say "++++++++++++++++++++++++++++++++++++++++++";
 }
 
