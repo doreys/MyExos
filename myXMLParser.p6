@@ -10,8 +10,8 @@ use v6 ;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Fri May 24 18:36:37 2019
-* Email Address : sdo@MBP-de-SDO
+* Last Modified : Fri May 24 18:49:04 2019
+* Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
 * 	Permission is granted to copy, distribute, and/or modify this document under the terms of the Creative Commons Attribution-NonCommercial 3.0 
@@ -321,9 +321,9 @@ for @tests -> $t {
     my $M = XML.parse($s);
     #    say "Expected result $t[0]. If the result is $t[0] then it is OK";
     if !($M  xor $t[0]) {
-        say "\nok $count - '$s'";
+        say "\ntest # $count: ok $count - '$s'";
     } else {
-        say "\nnot ok $count - '$s'";
+        say "\ntest # $count: not ok $count - '$s'";
     }
     $count++;
     if @lines.elems {
