@@ -11,7 +11,7 @@ use v6 ;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Sun May 26 22:21:46 2019
+* Last Modified : Sun May 26 22:29:59 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -375,7 +375,6 @@ my @tests = (
     [1, 'abc toto zezrerze'                       ],      # 26
     [1, '<empty_tag/> test'], # 27
     [1, '<empty_tag></empty_tag/> test'], # 28
-#`{{{
     [1, 'test <empty_tag></empty_tag/> test'], # 29
     [1, 'test <empty_tag> aaaaa </empty_tag/> test'], # 30
     [1, '<empty_tag>zzz</empty_tag/> test'], # 31
@@ -388,6 +387,7 @@ my @tests = (
     [1, '<?xml version="0.9" encoding="utf-8"?>'                       ],      # 38
     [1, '<?xml version="0.9" encoding="utf-8"?><momo></momo>'                       ],      # 39
     [1, '<?xml version="0.9" encoding="utf-8"?><momo>test</momo>'                       ],      # 40
+    #`{{{
     [1, '<?xml version="0.9" encoding="utf-8"?><tuu><momo></tuu>test</momo>'                       ],      # 41
     [1, '<?xml version="0.9" encoding="utf-8"?><momo><tuu></Tuu>test</momo>'                       ],      # 42
     [1, '<?xml version="0.9" encoding="utf-8"?><momo><Tuu></Tuu>test</momo>'                       ],      # 43
