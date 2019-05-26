@@ -11,7 +11,7 @@ use v6 ;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Sun May 26 11:11:57 2019
+* Last Modified : Sun May 26 11:22:08 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -105,11 +105,10 @@ grammar XML {
 	}
 
 	token text {
-		<basicText>
+		(<basicText>)
 		[
-			| <basicText>
-			| <basicEntity> # { my $recup=""; { $recup=pop @lines; say "oooo>$recup"; $recup~=$1; } if @lines.elems; { push @lines,"$recup"; say "* recup:$1"; say "** recup($0,$1):$recup"; } if $1.chars }
-			<text>
+			| (<basicText>)
+			| (<basicEntity>) <text>
 			| (<myCDATA>) { say "zzzzzzzz>$1" if $1.chars }
 			<text>
 		]
@@ -292,9 +291,9 @@ my @tests = (
     [1, '<1a></1a>'                 ],      # 19
     [1, '<![CDATA[toto]]>'          ],      # 20
     [1, '<![CDATA[ toto ]]>'        ],      # 21
-#`{{{
     [1, 'azert <![CDATA[ ]]> qsdsqd dsfdsfsd'                 ],      # 22
     [1, 'azErt<![CDATA[ ]]>qsdsqd dsfdsfsd'                 ],      # 23
+#`{{{
     [1, 'azert<![CDATA[ <a></a> ]]>qsdsqd dsfdsfsd'                 ],      # 24
     [1, 'azert<![CDATA[ <a></a> ]]>'                 ],      # 25
     [1, 'abc toto zezrerze'                       ],      # 26
@@ -363,7 +362,8 @@ my @tests = (
 my $count = 1;
 for @tests -> $t {
     my $s = $t[1];
-    say "very begining:" ~ @lines.elems;
+    say "------------------------------------------------";
+    say "Check content of [ @lines ] at the very begining:" ~ @lines.elems;
     say "string>$s";
     my $M = XML.parse($s);
     #    say "Expected result $t[0]. If the result is $t[0] then it is OK";
