@@ -11,7 +11,7 @@ use v6 ;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Sun May 26 11:23:34 2019
+* Last Modified : Sun May 26 20:24:20 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -105,10 +105,10 @@ grammar XML {
 	}
 
 	token text {
-		(<basicText>)
+		<basicText>
 		[
-			| (<basicText>)
-			| (<basicEntity>) <text>
+			| <basicText>
+			| <basicEntity> <text>
 			| (<myCDATA>) { say "zzzzzzzz>$1" if $1.chars }
 			<text>
 		]
@@ -178,52 +178,90 @@ grammar XML {
 	}
 
 	token basicText2 {
-		<-[<>&\[\]]>* {  
-				{ 
-					#$rank++;
-					push @lines, "\t" x $rank ~ "$/ <tag basicText2"; 
-					#		say "\t" x $rank ~ "tag basicText2> $/"; 
-					$rank--;
-				} if $/.chars 
+		(<-[<>&\]{2}]>*) {
+			#say "------------start----------";
+			#say "prev: $prev";
+			if $0.chars { 
+				my $recup="";
+				if $prev == 1 {
+					if $0.chars {
+						$recup=pop @lines;
+						say "from pop $recup";
+						$recup="$recup$0";
+						say "prev already";
+					}
+				}else{
+					if $0.chars {
+						$prev=1;
+						$recup= "\t" x $rank ~ "$0";
+						say "*** It matches >" ~ $recup ~ "<";
+					}
+				}
+				say "It matches >" ~ $recup ~ "<";
+				push @lines,"$recup";
 			}
+		}
 	}
 
 	rule basicEntity2 {
-		<entities_formats> { say "tag entities_formats> $/" }
+		#<entities_formats> { say "tag entities_formats> $/" }
+		(<entities_formats>)  { 
+			#say "------------start----------";
+			#say "prev: $prev";
+			if $0.chars { 
+				my $recup="";
+				if $prev == 1 {
+					if $0.chars {
+						$recup=pop @lines;
+						#say "from pop $recup";
+						$recup="$recup$0";
+						#say "prev already";
+					}
+				}else{
+					if $/.chars {
+						$prev=1;
+						$recup= "\t" x $rank ~ "$/";
+					}
+				}
+				#say "it match >" ~ $recup ~ "<";
+				push @lines,"$recup";
+			}
+		}
 	}
 
 	rule myCDATA { 
-		('<![CDATA[') { 
+		(<bCDATA>) { 
 				{ 
 					push @lines, "\t" x $rank ~ "$0 <!-- begin myCDATA -->";
 					#say "\t" x $rank ~ "$0 <!-- begin myCDATA -->";
 					$rank++; 
+					$prev=0;
 				} if $/.chars 
 			}
 		<myCDATACorpse> #{ { $rank+=2;} if $/.chars } 
-		(']]>') { 
-				{ 
+		(<eCDATA>) {  
+				if $1.chars { 
 					$rank--; 
 					push @lines, "\t" x $rank ~ "$1 <!-- end myCDATA -->";
 					# say "\t" x $rank ~ "$1 <!-- end myCDATA -->";
-				} if $/.chars 
+				}
 			} 
 	}
 
+	token bCDATA { '<![CDATA[' }
+
+	token eCDATA { ']]>' }
+
 	rule myCDATACorpse {
-		 (<text2>)  # { { say "\t" x $rank ~ "$0 <!-- <text2> myDATACorpse-->" ;  } if $/.chars } 
-			 [
-				(<tag2>)  # { { $rank++ ; say "\t" x $rank ~ "myDAC2> $1" ; $rank--; } if $/.chars }
-				(<text2>) # { { $rank++ ; say "\t" x $rank ~ "myDAC3> $2" ; $rank--; } if $/.chars }
-			]*
+		 <text2> [ <tag2> <text2> ]*
 	}
 
 	rule text2 {
+		<basicText2>
 		[
 			| <basicText2>
-			| <basicEntity2>
+			| <basicEntity2> <text2>
 		]
-		#<myCDATACorpse>
 	}
 
 	rule tag2 {
@@ -261,7 +299,7 @@ grammar XML {
 };
 
 my @tests = (
-#`{{{ }}}
+#`{{{
     [1, 'abc'                       ],      # 01
     [1, '<a></a>'                   ],      # 02
     [1, '..<ab>foo&amp;toto</ab>dd'          ],      # 03
@@ -289,12 +327,13 @@ my @tests = (
     [1, '<a1></a1>'                 ],      # 17
     [1, '<1a></a>'                  ],      # 18
     [1, '<1a></1a>'                 ],      # 19
+}}}
     [1, '<![CDATA[toto]]>'          ],      # 20
+#`{{{
     [1, '<![CDATA[ toto ]]>'        ],      # 21
     [1, 'azert <![CDATA[ ]]> qsdsqd dsfdsfsd'                 ],      # 22
     [1, 'azErt<![CDATA[ ]]>qsdsqd dsfdsfsd'                 ],      # 23
     [1, 'azert<![CDATA[ <a></a> ]]>qsdsqd dsfdsfsd'                 ],      # 24
-#`{{{
     [1, 'azert<![CDATA[ <a></a> ]]>'                 ],      # 25
     [1, 'abc toto zezrerze'                       ],      # 26
     [1, '<empty_tag/> test'], # 27
