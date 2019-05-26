@@ -11,7 +11,7 @@ use v6 ;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Sun May 26 20:28:33 2019
+* Last Modified : Sun May 26 21:48:46 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -109,7 +109,7 @@ grammar XML {
 		[
 			| <basicText>
 			| <basicEntity> <text>
-			| (<myCDATA>) { say "zzzzzzzz>$1" if $1.chars }
+			| <myCDATA>
 			<text>
 		]
 	}
@@ -266,11 +266,38 @@ grammar XML {
 
 	rule tag2 {
 		[
-			| ('<') (\d*\w+) ([<attribute> \s*]*) ('/>') { { $rank++;say "\t" x $rank ~ "$0$1 $2$3 <!----ppppp-->"; $rank-- } if $/.chars }
-			| ('<') (\d*\w+) ('>') { { say "\t" x $rank ~ "$0$1$2 <!-- begin tag2 xxx-->" ; $rank++; } if $/.chars }
-				<myCDATACorpse> ('</') $1 ('>') { { $rank--;say "\t" x $rank ~ "$3$1$4" ~"   <!-- end tag2 xxx-->"; } if $/.chars }
-			| ('<') (\d*\w+) ([<attribute> \s* ]+) ('>') { { my $r="$1-----$2";say "\t" x $rank ~ "$0$1 $2$3 <!-- begin tag2 XXXXW-->" ; $rank++; } if $/.chars }
-				<myCDATACorpse> ('</') $1 ('>') { { $rank--; say "\t" x $rank ~ "$4$1$5" ~"   <!-- end tag2-->"; } if $/.chars }
+			| ('<') (\d*\w+) ([<attribute> \s*]*) ('/>') { { $rank++;
+				push @lines, "\t" x $rank ~ "$0$1 $2$3 <!----ppppp-->"; 
+				#say "\t" x $rank ~ "$0$1 $2$3 <!----ppppp-->"; 
+				$rank-- } if $/.chars }
+			| ('<') (\d*\w+) ('>') { { 
+					push @lines, "\t" x $rank ~ "$0$1$2 <!-- begin tag2 xxx-->" ; 
+					#say "\t" x $rank ~ "$0$1$2 <!-- begin tag2 xxx-->" ; 
+					$rank++; 
+				} if $/.chars 
+			}
+			<myCDATACorpse> ('</') $1 ('>') { 
+				{ 
+					$rank--;
+					push @lines, "\t" x $rank ~ "$3$1$4" ~"   <!-- end tag2 xxx-->"; 
+					say "\t" x $rank ~ "$3$1$4" ~"   <!-- end tag2 xxx-->"; 
+				} if $/.chars 
+			}
+			| ('<') (\d*\w+) ([<attribute> \s* ]+) ('>') {
+				{ 
+					my $r="$1-----$2";
+					push @lines, "\t" x $rank ~ "$0$1 $2$3 <!-- begin tag2 XXXXW-->" ; 
+					#say "\t" x $rank ~ "$0$1 $2$3 <!-- begin tag2 XXXXW-->" ; 
+					$rank++;
+				} if $/.chars 
+			}
+			<myCDATACorpse> ('</') $1 ('>') {
+				{ 
+					$rank--; 
+					push @lines, "\t" x $rank ~ "$4$1$5" ~"   <!-- end tag2-->"; 
+					say "\t" x $rank ~ "$4$1$5" ~"   <!-- end tag2-->"; 
+				} if $/.chars
+			}
 		] 
 		<myCDATACorpse> #{ { $rank++;say "\t" x $rank ~ "tag2 part3>$/" ; $rank--} if $/.chars }
 	}
@@ -328,11 +355,11 @@ my @tests = (
     [1, '<1a></a>'                  ],      # 18
     [1, '<1a></1a>'                 ],      # 19
     [1, '<![CDATA[toto]]>'          ],      # 20
-#`{{{
     [1, '<![CDATA[ toto ]]>'        ],      # 21
     [1, 'azert <![CDATA[ ]]> qsdsqd dsfdsfsd'                 ],      # 22
     [1, 'azErt<![CDATA[ ]]>qsdsqd dsfdsfsd'                 ],      # 23
     [1, 'azert<![CDATA[ <a></a> ]]>qsdsqd dsfdsfsd'                 ],      # 24
+#`{{{
     [1, 'azert<![CDATA[ <a></a> ]]>'                 ],      # 25
     [1, 'abc toto zezrerze'                       ],      # 26
     [1, '<empty_tag/> test'], # 27
@@ -398,6 +425,7 @@ my @tests = (
 # -----------------------------
 
 my $count = 1;
+say "==============================================================================================";
 for @tests -> $t {
     my $s = $t[1];
     say "------------------------------------------------";
