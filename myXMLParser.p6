@@ -11,7 +11,7 @@ use v6 ;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Sun May 26 21:48:46 2019
+* Last Modified : Sun May 26 22:18:36 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -142,8 +142,20 @@ grammar XML {
 
 	rule tag {
 		[
-			| ('<') (\d*\w+) ('/>') { $prev = 0; { say "\n$0$1$2 <!-- begin/end tag2 xxx no param-->"; }  if $/.chars }
-			| ('<') (\d*\w+) ([ <attribute> \s* ]+) ('/>') { $prev = 0; { say "\n$0$1$2$3 <!-- begin/end tag2 xxx with param-->"; }  if $/.chars }
+			| ('<') (\d*\w+) ('/>') { 
+				$prev = 0; 
+				{ 
+					push @lines, "$0$1$2 <!-- begin/end tag2 xxx no param-->"; 
+					#say "\n$0$1$2 <!-- begin/end tag2 xxx no param-->"; 
+				}  if $/.chars 
+			}
+			| ('<') (\d*\w+) ([ <attribute> \s* ]+) ('/>') {
+				$prev = 0; 
+				{ 
+					push @lines, "$0$1$2$3 <!-- begin/end tag2 xxx with param-->"; 
+					#say "\n$0$1$2$3 <!-- begin/end tag2 xxx with param-->"; 
+				}  if $/.chars 
+			}
 			| ('<') (\d*\w+) ('>') {$prev = 0;  
 							{ 
 								push @lines, "\t" x $rank ~ "$0$1$2 <!-- begin tag2 xUxx $rank -->" ;
@@ -359,10 +371,10 @@ my @tests = (
     [1, 'azert <![CDATA[ ]]> qsdsqd dsfdsfsd'                 ],      # 22
     [1, 'azErt<![CDATA[ ]]>qsdsqd dsfdsfsd'                 ],      # 23
     [1, 'azert<![CDATA[ <a></a> ]]>qsdsqd dsfdsfsd'                 ],      # 24
-#`{{{
     [1, 'azert<![CDATA[ <a></a> ]]>'                 ],      # 25
     [1, 'abc toto zezrerze'                       ],      # 26
     [1, '<empty_tag/> test'], # 27
+#`{{{
     [1, '<empty_tag></empty_tag/> test'], # 28
     [1, 'test <empty_tag></empty_tag/> test'], # 29
     [1, 'test <empty_tag> aaaaa </empty_tag/> test'], # 30
