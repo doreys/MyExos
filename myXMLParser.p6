@@ -11,7 +11,7 @@ use v6 ;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Sun May 26 20:24:20 2019
+* Last Modified : Sun May 26 20:28:33 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -299,7 +299,7 @@ grammar XML {
 };
 
 my @tests = (
-#`{{{
+#`{{{ }}}
     [1, 'abc'                       ],      # 01
     [1, '<a></a>'                   ],      # 02
     [1, '..<ab>foo&amp;toto</ab>dd'          ],      # 03
@@ -327,7 +327,6 @@ my @tests = (
     [1, '<a1></a1>'                 ],      # 17
     [1, '<1a></a>'                  ],      # 18
     [1, '<1a></1a>'                 ],      # 19
-}}}
     [1, '<![CDATA[toto]]>'          ],      # 20
 #`{{{
     [1, '<![CDATA[ toto ]]>'        ],      # 21
