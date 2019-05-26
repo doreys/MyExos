@@ -11,7 +11,7 @@ use v6 ;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Sun May 26 21:48:46 2019
+* Last Modified : Sun May 26 21:50:25 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -359,8 +359,8 @@ my @tests = (
     [1, 'azert <![CDATA[ ]]> qsdsqd dsfdsfsd'                 ],      # 22
     [1, 'azErt<![CDATA[ ]]>qsdsqd dsfdsfsd'                 ],      # 23
     [1, 'azert<![CDATA[ <a></a> ]]>qsdsqd dsfdsfsd'                 ],      # 24
-#`{{{
     [1, 'azert<![CDATA[ <a></a> ]]>'                 ],      # 25
+#`{{{
     [1, 'abc toto zezrerze'                       ],      # 26
     [1, '<empty_tag/> test'], # 27
     [1, '<empty_tag></empty_tag/> test'], # 28
