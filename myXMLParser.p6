@@ -11,7 +11,7 @@ use v6 ;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Sun May 26 22:37:28 2019
+* Last Modified : Mon May 27 21:28:11 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -198,18 +198,18 @@ grammar XML {
 				if $prev == 1 {
 					if $0.chars {
 						$recup=pop @lines;
-						say "from pop $recup";
+						#say "from pop $recup";
 						$recup="$recup$0";
-						say "prev already";
+						#say "prev already";
 					}
 				}else{
 					if $0.chars {
 						$prev=1;
 						$recup= "\t" x $rank ~ "$0";
-						say "*** It matches >" ~ $recup ~ "<";
+						#say "*** It matches >" ~ $recup ~ "<";
 					}
 				}
-				say "It matches >" ~ $recup ~ "<";
+				#say "It matches >" ~ $recup ~ "<";
 				push @lines,"$recup";
 			}
 		}
@@ -306,8 +306,9 @@ grammar XML {
 			<myCDATACorpse> ('</') $1 ('>') {
 				{ 
 					$rank--; 
-					push @lines, "\t" x $rank ~ "$4$1$5" ~"   <!-- end tag2-->"; 
-					say "\t" x $rank ~ "$4$1$5" ~"   <!-- end tag2-->"; 
+					push @lines, "\t" x $rank ~ "$4$1$5" ~"   <!-- end tag2 aaaaaa-->"; 
+					#say "\t" x $rank ~ "$4$1$5" ~"   <!-- end tag2-->"; 
+					$prev=0;
 				} if $/.chars
 			}
 		] 
@@ -391,7 +392,6 @@ my @tests = (
     [1, '<?xml version="0.9" encoding="utf-8"?><momo><tuu></Tuu>test</momo>'                       ],      # 42
     [1, '<?xml version="0.9" encoding="utf-8"?><momo><Tuu></Tuu>test</momo>'                       ],      # 43
     [1, '<?xml version="1.0" ?><momo>test within &amp;totot<Tuu>test within within &amp;ok to go</Tuu>test</momo>'                       ],      # 44
-    #`{{{
     [1, '<?xml version="1.0" ?><momo><Tuu class="aqaqa"></Tuu>test</momo>'                       ],      # 45
     [1, '<?xml version="1.0" ?><momo><Tuu class="click(1,2);"></Tuu>test</momo>'                       ],      # 46
     [1, '<?xml version="1.0" ?><momo><Tuu class="click(1,2);">test within</Tuu>test</momo>'                       ],      # 47
@@ -403,6 +403,7 @@ my @tests = (
     [1, '<?xml version="1.0" ?><momo><![CDATA[ <div id="click" class="categorie2">Nouveau menu</div> ]]></momo>'                       ],      # 53
     [1, '<?xml version="1.0" ?><momo>aaa<![CDATA[ <div id="click" class="maviecestmacategorieazerty2">Nouveau menu</div> ]]></momo>'                       ],      # 54
     [1, '<?xml version="1.0" ?><momo>aaa<![CDATA[ <div id="click" class="categorie2">Nouveau menu</div> azerty]]></momo>'                       ],      # 55
+    #`{{{
     [1, '<?xml version="1.0" ?><momo>aaa<azerty><![CDATA[ <div id="click" class="categorie2">Nouveau menu</div> azerty]]></momo>'                       ],      # 56
     [1, '<?xml version="1.0" ?><momo>aaa<azerty><![CDATA[ <div id="click" class="categorie2">Nouveau menu</div> azerty]]></azerty></momo>'                       ],      # 57
     [1, '<?xml version="1.0" ?><momo>aaa<azerty>uuu<![CDATA[ <div id="click" class="categorie2">Nouveau menu</div> azerty]]></azerty></momo>'                       ],      # 58
