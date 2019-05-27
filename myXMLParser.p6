@@ -11,7 +11,7 @@ use v6 ;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Mon May 27 21:28:11 2019
+* Last Modified : Mon May 27 21:47:29 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -255,6 +255,7 @@ grammar XML {
 				if $1.chars { 
 					$rank--; 
 					push @lines, "\t" x $rank ~ "$1 <!-- end myCDATA -->";
+					$prev=0;
 					# say "\t" x $rank ~ "$1 <!-- end myCDATA -->";
 				}
 			} 
@@ -403,9 +404,9 @@ my @tests = (
     [1, '<?xml version="1.0" ?><momo><![CDATA[ <div id="click" class="categorie2">Nouveau menu</div> ]]></momo>'                       ],      # 53
     [1, '<?xml version="1.0" ?><momo>aaa<![CDATA[ <div id="click" class="maviecestmacategorieazerty2">Nouveau menu</div> ]]></momo>'                       ],      # 54
     [1, '<?xml version="1.0" ?><momo>aaa<![CDATA[ <div id="click" class="categorie2">Nouveau menu</div> azerty]]></momo>'                       ],      # 55
-    #`{{{
     [1, '<?xml version="1.0" ?><momo>aaa<azerty><![CDATA[ <div id="click" class="categorie2">Nouveau menu</div> azerty]]></momo>'                       ],      # 56
     [1, '<?xml version="1.0" ?><momo>aaa<azerty><![CDATA[ <div id="click" class="categorie2">Nouveau menu</div> azerty]]></azerty></momo>'                       ],      # 57
+    #`{{{
     [1, '<?xml version="1.0" ?><momo>aaa<azerty>uuu<![CDATA[ <div id="click" class="categorie2">Nouveau menu</div> azerty]]></azerty></momo>'                       ],      # 58
     [1, '<?xml version="1.0" ?><momo>aaa<azerty>uuu<![CDATA[ <div id="click" class="categorie2">Nouveau menu</div> azerty]]>azert<aze>toto is here</aze></azerty></momo>'                       ],      # 59
     [1, '<?xml version="1.0" ?><momo>aaa<aze>qawxsz</aze><azerty>uuu<![CDATA[ <div id="click" class="categorie2">Nouveau menu</div> azerty]]>azert<aze>toto is here</aze></azerty></momo>'                       ],      # 60
