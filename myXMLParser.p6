@@ -11,7 +11,7 @@ use v6 ;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Mon May 27 21:59:14 2019
+* Last Modified : Mon May 27 22:22:47 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -200,16 +200,16 @@ grammar XML {
 						$recup=pop @lines;
 						#say "from pop $recup";
 						$recup="$recup$0";
-						#say "prev already";
+						say "prev already";
 					}
 				}else{
 					if $0.chars {
 						$prev=1;
 						$recup= "\t" x $rank ~ "$0";
-						#say "*** It matches >" ~ $recup ~ "<";
+						say "*** It matches >" ~ $recup ~ "<";
 					}
 				}
-				#say "It matches >" ~ $recup ~ "<";
+				say "It matches >" ~ $recup ~ "<";
 				push @lines,"$recup";
 			}
 		}
@@ -281,10 +281,13 @@ grammar XML {
 		[
 			| ('<') (\d*\w+) ([<attribute> \s*]*) ('/>') { { $rank++;
 				push @lines, "\t" x $rank ~ "$0$1 $2$3 <!----ppppp-->"; 
+				$prev=0;
 				#say "\t" x $rank ~ "$0$1 $2$3 <!----ppppp-->"; 
 				$rank-- } if $/.chars }
-			| ('<') (\d*\w+) ('>') { { 
+			| ('<') (\d*\w+) ('>') { 
+				{ 
 					push @lines, "\t" x $rank ~ "$0$1$2 <!-- begin tag2 xxx-->" ; 
+					$prev=0;
 					#say "\t" x $rank ~ "$0$1$2 <!-- begin tag2 xxx-->" ; 
 					$rank++; 
 				} if $/.chars 
@@ -293,7 +296,7 @@ grammar XML {
 				{ 
 					$rank--;
 					push @lines, "\t" x $rank ~ "$3$1$4" ~"   <!-- end tag2 xxx-->"; 
-					say "\t" x $rank ~ "$3$1$4" ~"   <!-- end tag2 xxx-->"; 
+					#		say "\t" x $rank ~ "$3$1$4" ~"   <!-- end tag2 xxx-->"; 
 				} if $/.chars 
 			}
 			| ('<') (\d*\w+) ([<attribute> \s* ]+) ('>') {
@@ -412,13 +415,13 @@ my @tests = (
     [1, '<?xml version="1.0" ?><momo>aaa<aze>qawxsz</aze><azerty>uuu<![CDATA[ <div id="click" class="categorie2">Nouveau menu</div> azerty]]>azert<aze>toto is here</aze></azerty></momo>'                       ],      # 60
     [1, '<?xml version="1.0" ?><momo>aaa<aze>qawxsz</aze><azerty>uuu<![CDATA[ <div id="click" class="categorie2">Nouveau menu</div> <div onclick="click(1,4,2);" class="categorie3">Nouveau menu9</div>azerty]]>azert<aze>toto is here</aze></azerty></momo>'                       ],      # 61
     [1, '<?xml version="1.0" ?><momo>aaa<![CDATA[ <div id="click" class="categorie2">Nouveau menu</div> ooooo <div onclick="click(1,4,2);" class="categorie3">Nouveau menu9</div>azerty]]></momo>'                       ],      # 62
-    #`{{{
     [1, '<?xml version="1.0" ?><momo>aaa<![CDATA[ <aaaaz> <div id="click" class="categorie2">Nouveau menu</div> ooooo <div onclick="click(1,4,2);" class="categorie3">Nouveau menu9</div>azerty</aaaaz>]]></momo>'                       ],      # 63
     [1, '<?xml version="1.0" ?><momo popo="aze">aaa<![CDATA[ <aaaaz> <div id="click" class="categorie2">Nouveau menu</div> ooooo <div onclick="click(1,4,2);" class="categorie3">Nouveau menu9</div>azerty</aaaaz>]]></momo>'                       ],      # 63
     [1, '<?xml version="1.0" ?><momo>aaa<![CDATA[ <aaaaz> <div id="click" class="categorie2"/> ooooo <div onclick="click(1,4,2);" class="categorie3">Nouveau menu9</div>azerty</aaaaz>]]></momo>'                       ],      # 63
     [1, '<?xml version="1.0" ?><momo>aaa<![CDATA[ <div id="click" class="categorie2">Nouveau menu</div> <div onclick="click(1,4,2);" class="categorie3">Nouveau menu9</div>azerty]]></momo>'                       ],      # 64
     [1, '<?xml version="1.0" ?><momo>azazaza<Tuu onclick="clock(3,2);" class="ee">test within 1<![CDATA[ aaa aaaazeazeaz <div id="click" class="categorie2">Nouveau menu</div> uuuu  <div id="click" class="categorie2">Nouveau menu</div> oooo ]]></Tuu>test</momo>'                       ],      # 65
     [1, '<?xml version="1.0" ?><momo><Tuu  onclick="ee" class="click(1,2);">test within</Tuu>test <![CDATA[ sdsfdfsdfdsfs  <toto>aqwxsz</toto>]]></momo>'                       ],      # 66
+    #`{{{
     [1, '<?xml version="1.0" ?><momo><Tuu  onclick="ee" class="click(1,2);">test within</Tuu>test <![CDATA[ sdsfdfsdfdsfs  <div class="categorie" onclick="click(1,4);">Nouveau menu</div>]]></momo>'                       ],      # 67
     [1, '<?xml version="1.0" ?><momo>azazaza<Tuu class="click(1,2);" onclick="ee">test within<![CDATA[ <div class="categorie" onclick="click(1,4);">Nouveau menu</div> <div class="dossier"> Accueil</div> ]]></Tuu>test</momo>'                       ],      # 68
     [1, 'abctotozezrerze'                       ],      # 69
