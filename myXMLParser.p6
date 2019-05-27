@@ -11,7 +11,7 @@ use v6 ;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Mon May 27 23:00:33 2019
+* Last Modified : Tue May 28 01:07:41 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -332,15 +332,72 @@ grammar XML {
 	}
 
 	token entity {
-		'&' <[a..z]>**1..5 ';'  #{ say "wwwwww----|$/|-------------" ~ $/.chars if $/.chars }
+		('&' <[a..z]>**1..5 ';')  {
+			if $0.chars { 
+				my $recup="";
+				if $prev == 1 {
+					if $0.chars {
+						$recup=pop @lines;
+						#say "from pop $recup";
+						$recup="$recup$0";
+						#say "prev already";
+					}
+				}else{
+					if $/.chars {
+						$prev=1;
+						$recup= "\t" x $rank ~ "$/";
+					}
+				}
+				#say "it match >" ~ $recup ~ "<";
+				push @lines,"$recup";
+			}
+		}
 	}
 
 	token entity_decimal {
-		'&#' <[0..9]>**1..4 ';' { say "entity_decimal: ---------------|$/|-------------" ~ $/.chars if $/.chars }
+		('&#' <[0..9]>**1..4 ';') { 
+			if $0.chars { 
+				my $recup="";
+				if $prev == 1 {
+					if $0.chars {
+						$recup=pop @lines;
+						#say "from pop $recup";
+						$recup="$recup$0";
+						#say "prev already";
+					}
+				}else{
+					if $/.chars {
+						$prev=1;
+						$recup= "\t" x $rank ~ "$/";
+					}
+				}
+				#say "it match >" ~ $recup ~ "<";
+				push @lines,"$recup";
+			}
+		}
 	}
 
 	token entity_hexadecimal {
-		'&#x' <[0..9A..Fa..f]>**1..4 ';' { say "entity_hexadecimal: ---------------|$/|-------------" ~ $/.chars if $/.chars }
+		('&#x' <[0..9A..Fa..f]>**1..4 ';') {
+			if $0.chars { 
+				my $recup="";
+				if $prev == 1 {
+					if $0.chars {
+						$recup=pop @lines;
+						#say "from pop $recup";
+						$recup="$recup$0";
+						#say "prev already";
+					}
+				}else{
+					if $/.chars {
+						$prev=1;
+						$recup= "\t" x $rank ~ "$/";
+					}
+				}
+				#say "it match >" ~ $recup ~ "<";
+				push @lines,"$recup";
+			}
+		}
 	}
 };
 
@@ -433,10 +490,10 @@ my @tests = (
     [1, 'a&#233234;bc'                       ],      # 75
     [1, 'a&#123H;bc'                       ],      # 76
     [1, 'a&#x123H;bc'                       ],      # 77
-    #`{{{
     [1, 'a&#x123f;bc'                       ],      # 78
     [1, 'a&#x12334;bc'                       ],      # 78
     [1, 'a&#233;&#xE9;&#x123f;&amp;bc'                       ],      # 78
+    #`{{{
    [1,' <?xml version="1.0"?> <cities><calctime>0</calctime><count>10</count><mode>center</mode><list><item><city id="2978048" name="Saint-Merri"><coord lon="2.3521" lat="48.8592"></coord><country></country><sun rise="2019-05-23T03:59:58" set="2019-05-23T19:34:58"></sun></city><temperature value="295.44" min="294.15" max="296.48" unit="kelvin"></temperature><humidity value="31" unit="%"></humidity><pressure value="1017" unit="hPa"></pressure><wind><speed value="2.6" name="Light breeze"></speed><direction value="250" code="WSW" name="West-southwest"></direction><gust value=""></gust></wind><clouds value="0" name="clear sky" low="0" middle="0" high="0"></clouds><precipitation mode="no"></precipitation><weather number="800" value="Sky is Clear" icon="01d"></weather><lastupdate value="2019-05-23T13:58:40" unix="1558619920"></lastupdate></item><item><city id="6455259" name="Paris"><coord lon="2.3524" lat="48.8565"></coord><country></country><sun rise="2019-05-23T03:59:58" set="2019-05-23T19:34:57"></sun></city><temperature value="295.44" min="294.15" max="296.48" unit="kelvin"></temperature><humidity value="31" unit="%"></humidity><pressure value="1017" unit="hPa"></pressure><wind><speed value="2.6" name="Light breeze"></speed><direction value="250" code="WSW" name="West-southwest"></direction><gust value=""></gust></wind><clouds value="0" name="clear sky" low="0" middle="0" high="0"></clouds><precipitation mode="no"></precipitation><weather number="800" value="Sky is Clear" icon="01d"></weather><lastupdate value="2019-05-23T13:58:40" unix="1558619920"></lastupdate></item><item><city id="6269531" name="Paris 01 Louvre"><coord lon="2.3417" lat="48.8592"></coord><country></country><sun rise="2019-05-23T04:00:00" set="2019-05-23T19:35:00"></sun></city><temperature value="295.44" min="294.15" max="296.48" unit="kelvin"></temperature><humidity value="40" unit="%"></humidity><pressure value="1018" unit="hPa"></pressure><wind><speed value="2.1" name="Light breeze"></speed><direction value="260" code="W" name="West"></direction><gust value=""></gust></wind><clouds value="0" name="clear sky" low="0" middle="0" high="0"></clouds><precipitation mode="no"></precipitation><weather number="800" value="Sky is Clear" icon="01d"></weather><lastupdate value="2019-05-23T13:58:01" unix="1558619881"></lastupdate></item><item><city id="6618607" name="Paris 01"><coord lon="2.3417" lat="48.8592"></coord><country></country><sun rise="2019-05-23T04:00:00" set="2019-05-23T19:35:00"></sun></city><temperature value="295.44" min="294.15" max="296.48" unit="kelvin"></temperature><humidity value="40" unit="%"></humidity><pressure value="1018" unit="hPa"></pressure><wind><speed value="2.1" name="Light breeze"></speed><direction value="260" code="W" name="West"></direction><gust value=""></gust></wind><clouds value="0" name="clear sky" low="0" middle="0" high="0"></clouds><precipitation mode="no"></precipitation><weather number="800" value="Sky is Clear" icon="01d"></weather><lastupdate value="2019-05-23T13:58:01" unix="1558619881"></lastupdate></item><item><city id="2988507" name="Paris"><coord lon="2.3488" lat="48.8534"></coord><country></country><sun rise="2019-05-23T04:00:00" set="2019-05-23T19:34:57"></sun></city><temperature value="295.44" min="294.15" max="296.48" unit="kelvin"></temperature><humidity value="40" unit="%"></humidity><pressure value="1018" unit="hPa"></pressure><wind><speed value="2.1" name="Light breeze"></speed><direction value="260" code="W" name="West"></direction><gust value=""></gust></wind><clouds value="0" name="clear sky" low="0" middle="0" high="0"></clouds><precipitation mode="no"></precipitation><weather number="800" value="Sky is Clear" icon="01d"></weather><lastupdate value="2019-05-23T13:56:00" unix="1558619760"></lastupdate></item><item><city id="2968815" name="Paris"><coord lon="2.3486" lat="48.8534"></coord><country></country><sun rise="2019-05-23T04:00:00" set="2019-05-23T19:34:57"></sun></city><temperature value="295.44" min="294.15" max="296.48" unit="kelvin"></temperature><humidity value="40" unit="%"></humidity><pressure value="1018" unit="hPa"></pressure><wind><speed value="2.1" name="Light breeze"></speed><direction value="260" code="W" name="West"></direction><gust value=""></gust></wind><clouds value="0" name="clear sky" low="0" middle="0" high="0"></clouds><precipitation mode="no"></precipitation><weather number="800" value="Sky is Clear" icon="01d"></weather><lastupdate value="2019-05-23T13:56:00" unix="1558619760"></lastupdate></item><item><city id="2988506" name="Paris"><coord lon="2.3486" lat="48.8534"></coord><country></country><sun rise="2019-05-23T04:00:00" set="2019-05-23T19:34:57"></sun></city><temperature value="295.44" min="294.15" max="296.48" unit="kelvin"></temperature><humidity value="40" unit="%"></humidity><pressure value="1018" unit="hPa"></pressure><wind><speed value="2.1" name="Light breeze"></speed><direction value="260" code="W" name="West"></direction><gust value=""></gust></wind><clouds value="0" name="clear sky" low="0" middle="0" high="0"></clouds><precipitation mode="no"></precipitation><weather number="800" value="Sky is Clear" icon="01d"></weather><lastupdate value="2019-05-23T13:56:00" unix="1558619760"></lastupdate></item><item><city id="6545270" name="Palais-Royal"><coord lon="2.3388" lat="48.8635"></coord><country></country><sun rise="2019-05-23T04:00:00" set="2019-05-23T19:35:02"></sun></city><temperature value="295.44" min="294.15" max="296.48" unit="kelvin"></temperature><humidity value="40" unit="%"></humidity><pressure value="1018" unit="hPa"></pressure><wind><speed value="2.1" name="Light breeze"></speed><direction value="260" code="W" name="West"></direction><gust value=""></gust></wind><clouds value="0" name="clear sky" low="0" middle="0" high="0"></clouds><precipitation mode="no"></precipitation><weather number="800" value="Sky is Clear" icon="01d"></weather><lastupdate value="2019-05-23T13:58:01" unix="1558619881"></lastupdate></item><item><city id="6618620" name="Paris 14"><coord lon="2.3264" lat="48.8331"></coord><country></country><sun rise="2019-05-23T04:00:10" set="2019-05-23T19:34:58"></sun></city><temperature value="295.5" min="294.15" max="296.48" unit="kelvin"></temperature><humidity value="40" unit="%"></humidity><pressure value="1018" unit="hPa"></pressure><wind><speed value="2.1" name="Light breeze"></speed><direction value="260" code="W" name="West"></direction><gust value=""></gust></wind><clouds value="0" name="clear sky" low="0" middle="0" high="0"></clouds><precipitation mode="no"></precipitation><weather number="800" value="Sky is Clear" icon="01d"></weather><lastupdate value="2019-05-23T14:00:04" unix="1558620004"></lastupdate></item><item><city id="6618626" name="Paris 20"><coord lon="2.3984" lat="48.8646"></coord><country></country><sun rise="2019-05-23T03:59:45" set="2019-05-23T19:34:48"></sun></city><temperature value="295.44" min="294.15" max="296.48" unit="kelvin"></temperature><humidity value="31" unit="%"></humidity><pressure value="1017" unit="hPa"></pressure><wind><speed value="2.6" name="Light breeze"></speed><direction value="250" code="WSW" name="West-southwest"></direction><gust value=""></gust></wind><clouds value="0" name="clear sky" low="0" middle="0" high="0"></clouds><precipitation mode="no"></precipitation><weather number="800" value="Sky is Clear" icon="01d"></weather><lastupdate value="2019-05-23T13:59:26" unix="1558619966"></lastupdate></item></list></cities>'],
 }}}
 );
