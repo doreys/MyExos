@@ -11,7 +11,7 @@ use v6 ;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Wed May 29 18:46:39 2019
+* Last Modified : Wed May 29 18:55:26 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -321,7 +321,7 @@ grammar XML {
 		<myCDATACorpse> #{ { $rank++;say "\t" x $rank ~ "tag2 part3>$/" ; $rank--} if $/.chars }
 	}
 
-	token attribute { \w+ '="' <-[="\<\>]>+ \" } 
+	token attribute { \w+ '="' <-[="\<\>]>* \" } 
 
 	rule entities_formats {
 		[
@@ -499,7 +499,8 @@ my @tests = (
     [1,'<weather number="800" value="Sky is Clear" icon="01d" />'],
     [1, '<item> <city id="2988507" name="Paris"> <coord lon="2.3488" lat="48.8534" /></item>'],
     [1, '<item> <city id="2988507" name="Paris"> <coord lon="2.3488" lat="48.8534" /></city></item>'],
-    # [1, '<item> <city id="2988507" name="Paris"> <coord lon="2.3488" lat="48.8534" /> <country /> <sun rise="2019-05-29T03:54:23" set="2019-05-29T19:41:53" /> </city> <temperature value="292.01" min="290.93" max="293.15" unit="kelvin" /> <humidity value="48" unit="%" /> <pressure value="1022" unit="hPa" /> <wind> <speed value="5.1" name="Gentle Breeze" /> <direction value="240" code="WSW" name="West-southwest" /> <gust value="" /> </wind> <clouds value="0" name="clear sky" low="0" middle="0" high="0" /> <precipitation mode="no" /> <weather number="800" value="Sky is Clear" icon="01d" /> <lastupdate value="2019-05-29T15:45:14" unix="1559144714" /> </item>'],
+    [1, '<city id="2988507" name="Paris"> <coord lon="2.3488" lat="48.8534" /> <country /> <sun rise="2019-05-29T03:54:23" set="2019-05-29T19:41:53" /> </city>'],
+    [1, '<item> <city id="2988507" name="Paris"> <coord lon="2.3488" lat="48.8534" /> <country /> <sun rise="2019-05-29T03:54:23" set="2019-05-29T19:41:53" /> </city> <temperature value="292.01" min="290.93" max="293.15" unit="kelvin" /> <humidity value="48" unit="%" /> <pressure value="1022" unit="hPa" /> <wind> <speed value="5.1" name="Gentle Breeze" /> <direction value="240" code="WSW" name="West-southwest" /> <gust value="" /> </wind> <clouds value="0" name="clear sky" low="0" middle="0" high="0" /> <precipitation mode="no" /> <weather number="800" value="Sky is Clear" icon="01d" /> <lastupdate value="2019-05-29T15:45:14" unix="1559144714" /> </item>'],
 );
 
 # -----------------------------
