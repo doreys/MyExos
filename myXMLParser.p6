@@ -11,7 +11,7 @@ use v6 ;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Wed May 29 18:14:01 2019
+* Last Modified : Wed May 29 18:41:59 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -146,14 +146,14 @@ grammar XML {
 				$prev = 0; 
 				{ 
 					push @lines, "$0$1$2 <!-- begin/end tag2 xxx no param-->"; 
-					say "\n$0$1$2 <!-- begin/end tag2 xxx no param-->"; 
+					#say "\n$0$1$2 <!-- begin/end tag2 xxx no param-->"; 
 				}  if $/.chars 
 			}
 			| ('<') (\d*\w+) ([<attribute> \s* ]+) ('/>') {
 				$prev = 0; 
 				{ 
-					push @lines, "$0$1$2$3 <!-- begin/end tag2 xxx with param-->"; 
-					say "\n$0$1$2$3 <!-- begin/end tag2 xxx with param-->"; 
+					push @lines, "\t" x $rank ~ "$0$1 $2$3 <!-- begin/end tag2 xxx with param-->"; 
+					#say "\n$0$1$2$3 <!-- begin/end tag2 xxx with param-->"; 
 				}  if $/.chars 
 			}
 			| ('<') (\d*\w+) ('>') {$prev = 0;  
@@ -497,6 +497,9 @@ my @tests = (
     [1, '<weather number="800"/>'                      ],      # 12
     [1, '<weather number="800" value="Sky is Clear"/>'                      ],      # 12
     [1,'<weather number="800" value="Sky is Clear" icon="01d" />'],
+    [1, '<item> <city id="2988507" name="Paris"> <coord lon="2.3488" lat="48.8534" /></item>'],
+    [1, '<item> <city id="2988507" name="Paris"> <coord lon="2.3488" lat="48.8534" /></city></item>'],
+    # [1, '<item> <city id="2988507" name="Paris"> <coord lon="2.3488" lat="48.8534" /> <country /> <sun rise="2019-05-29T03:54:23" set="2019-05-29T19:41:53" /> </city> <temperature value="292.01" min="290.93" max="293.15" unit="kelvin" /> <humidity value="48" unit="%" /> <pressure value="1022" unit="hPa" /> <wind> <speed value="5.1" name="Gentle Breeze" /> <direction value="240" code="WSW" name="West-southwest" /> <gust value="" /> </wind> <clouds value="0" name="clear sky" low="0" middle="0" high="0" /> <precipitation mode="no" /> <weather number="800" value="Sky is Clear" icon="01d" /> <lastupdate value="2019-05-29T15:45:14" unix="1559144714" /> </item>'],
 );
 
 # -----------------------------
