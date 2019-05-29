@@ -11,7 +11,7 @@ use v6 ;
 * Created By : sdo
 * File Name : myXMLParser.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Wed May 29 18:41:59 2019
+* Last Modified : Wed May 29 18:46:39 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -145,7 +145,7 @@ grammar XML {
 			| ('<') (\d*\w+) ('/>') { 
 				$prev = 0; 
 				{ 
-					push @lines, "$0$1$2 <!-- begin/end tag2 xxx no param-->"; 
+					push @lines,"\t" x $rank ~ "$0$1$2 <!-- begin/end tag2 xxx no param-->"; 
 					#say "\n$0$1$2 <!-- begin/end tag2 xxx no param-->"; 
 				}  if $/.chars 
 			}
