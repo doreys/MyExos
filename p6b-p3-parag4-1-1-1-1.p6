@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : p6b-p3-parag4-1-1-1-1.p6
 * Creation Date : Fri May 31 22:49:16 2019
-* Last Modified : Fri May 31 22:49:38 2019
+* Last Modified : Fri May 31 22:55:37 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -18,6 +18,6 @@ use v6 ;
 # ------------------------------------------------------
 
 my $gourmandise = "miel";
-my @liste = Q :w :s/lait toast $gourmandise barres\nobliques\tinverses\nbizarres/;
-say @liste[*-1];     # imprime : barres\nobliques\tinverses\nbizarres
+my @liste = Q :w :s :c/lait toast $gourmandise barres\nobliques\tinverses\nbizarres ("1 + 2 = { 1 + 2 }")/;
+say @liste[*-2];     # imprime : barres\nobliques\tinverses\nbizarres
 say @liste[2];       # imprime : miel
