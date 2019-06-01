@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : bestTree.p6
 * Creation Date : Sat Jun  1 13:10:31 2019
-* Last Modified : Sat Jun  1 13:17:45 2019
+* Last Modified : Sat Jun  1 13:38:25 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -22,8 +22,12 @@ use BestTree;
 use Cro::HTTP::Server;
 
 my $application = routes();
-my $server = Cro::HTTP::Server.new(:port(10000), :$application);
+my $server = Cro::HTTP::Server.new:
+					:host<localhost>, 
+					:port<10000>, 
+					:$application;
 $server.start;
+
 react whenever signal(SIGINT) {
     $server.stop;
     exit;
