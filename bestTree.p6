@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : bestTree.p6
 * Creation Date : Sat Jun  1 13:10:31 2019
-* Last Modified : Sat Jun  1 13:10:44 2019
+* Last Modified : Sat Jun  1 13:17:45 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -17,6 +17,7 @@ use v6 ;
 ]
 # ------------------------------------------------------
 
+use lib 'lib';
 use BestTree;
 use Cro::HTTP::Server;
 
