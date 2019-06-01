@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : p6b-p3-4-1-1-1-ex2.p6
 * Creation Date : Sat Jun  1 22:26:19 2019
-* Last Modified : Sat Jun  1 22:31:30 2019
+* Last Modified : Sat Jun  1 23:00:27 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -30,3 +30,8 @@ my $gourmandise = "miel";
 my @liste = Q :w :s/lait toast $gourmandise barres\nobliques\tinverses\nbizarres/;
 say @liste[*-1];     # imprime : barres\nobliques\tinverses\nbizarres
 say @liste[2];       # imprime : miel
+
+my @l = 4, 3, 2, 1, 'a' ;
+my @a = 1, 2, 3 ;
+for @l -> $m { $m.say } 
+for @liste -> $m { $m.say } 
