@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : p6b-p3-5-1-resume.p6
 * Creation Date : Sat Jun  1 23:44:35 2019
-* Last Modified : Sat Jun  1 23:53:27 2019
+* Last Modified : Sat Jun  8 20:11:21 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -21,10 +21,11 @@ say [+] 1, 2, 3;    # 6
 say [+] ();         # 0
 say [~] <a b>;      # ab
 say [**] 2, 3, 4;   # 2417851639229258349412352 (= 2**(3**4) = 2**81)
+say [~] <a b c>;      # abc
 
-[+] 1, 2, 3, 4     # 1, 3, 6, 10
-[**] 2, 3, 4       # 4, 81, 2417851639229258349412352
+#say [\+] 1, 2, 3, 4     # 1, 3, 6, 10
+#say [\**] 2, 3, 4       # 4, 81, 2417851639229258349412352
 
-if [<=] @list {
-    say "Liste en ordre ascendant";
-}
+#if [<=] @list {
+#say "Liste en ordre ascendant";
+#}
