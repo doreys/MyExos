@@ -3,11 +3,11 @@
 use v6 ;
 
 # ------------------------------------------------------
-#`[
+#`[[[
 * Created By : sdo
 * File Name : my-rot13-service.p6
 * Creation Date : Thu Jun 13 15:51:30 2019
-* Last Modified : Thu Jun 13 16:31:30 2019
+* Last Modified : Fri Jun 14 14:56:07 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -31,7 +31,7 @@ go to other terminal and type:
 
 
 it just work fine ;-)
-]
+]]]
 # ------------------------------------------------------
 
 use Cro;
@@ -44,9 +44,9 @@ class Rot13 does Cro::Transform {
 		supply {
 			whenever $messages { 
 				emit Cro::TCP::Message.new: data => 
-				.data.decode('latin-1')
-				.trans('a..mn..z' => 'n..za..m', :ii)
-				.encode('latin-1')
+									.data.decode('latin-1')
+									.trans('a..mn..z' => 'n..za..m', :ii)
+									.encode('latin-1')
 			}
 		}
 	}
