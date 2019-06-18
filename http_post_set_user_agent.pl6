@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : http_post_set_user_agent.pl6
 * Creation Date : Tue Jun 18 10:30:17 2019
-* Last Modified : Tue Jun 18 11:29:13 2019
+* Last Modified : Tue Jun 18 11:32:19 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -40,8 +40,8 @@ use XML;
 use URI::Escape;
 use LWP::Simple;
 
-print "Content-type: text/html\n\n";
-
+say "Content-type: text/html\n\n";
+say "<pre>";
 my %params =
    name     => "Larry Wall",
    language => "Perl",
@@ -61,3 +61,4 @@ say $xml[0]; # <folks we="Al Barb Carl"/>
 
 $xml[0].add-values("we", <Carl Dave Ellie>.Set);
 say $xml[0]; # <folks we="Al Barb Carl Dave Ellie"/>
+say "</pre>";
