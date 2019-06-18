@@ -7,13 +7,31 @@ use v6 ;
 * Created By : sdo
 * File Name : http_post_set_user_agent.pl6
 * Creation Date : Tue Jun 18 10:30:17 2019
-* Last Modified : Tue Jun 18 10:31:16 2019
+* Last Modified : Tue Jun 18 10:38:16 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
 * 	Permission is granted to copy, distribute, and/or modify this document under the terms of the Creative Commons Attribution-NonCommercial 3.0 
 * 	Unported License, which is available at http: //creativecommons.org/licenses/by- nc/3.0/.
 * Purpose :
+	check: http://perl6maven.com/simple-web-client
+
+	macbook-pro-de-sdo:tp6 sdo$ ./http_post_set_user_agent.pl6
+	{
+	  "args": {},
+	  "data": "name=Larry%20Wall&math=19%2B23%3D42&language=Perl",
+	  "files": {},
+	  "form": {},
+	  "headers": {
+	    "Content-Length": "49",
+	    "Host": "httpbin.org",
+	    "User-Agent": "Perl 6 Maven"
+	  },
+	  "json": null,
+	  "origin": "90.44.192.251, 90.44.192.251",
+	  "url": "https://httpbin.org/post"
+	}
+
 ]
 # ------------------------------------------------------
 
