@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : http_post_set_user_agent.pl6
 * Creation Date : Tue Jun 18 10:30:17 2019
-* Last Modified : Tue Jun 18 11:15:19 2019
+* Last Modified : Tue Jun 18 11:29:13 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -39,6 +39,8 @@ use v6 ;
 use XML;
 use URI::Escape;
 use LWP::Simple;
+
+print "Content-type: text/html\n\n";
 
 my %params =
    name     => "Larry Wall",
