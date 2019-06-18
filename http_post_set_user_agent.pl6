@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : http_post_set_user_agent.pl6
 * Creation Date : Tue Jun 18 10:30:17 2019
-* Last Modified : Tue Jun 18 10:38:16 2019
+* Last Modified : Tue Jun 18 11:13:20 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -35,6 +35,7 @@ use v6 ;
 ]
 # ------------------------------------------------------
 
+use XML;
 use URI::Escape;
 use LWP::Simple;
 
@@ -52,3 +53,8 @@ my $html = LWP::Simple.new.post("http://httpbin.org/post",
     }, $url-params);
 say $html;
 
+my $xml = from-xml('<test><folks we = "Al Barb Carl"/></test>');
+say $xml[0]; # <folks we="Al Barb Carl"/>
+
+$xml[0].add-values("we", <Carl Dave Ellie>.Set);
+say $xml[0]; # <folks we="Al Barb Carl Dave Ellie"/>
