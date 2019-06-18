@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : http_post_set_user_agent.pl6
 * Creation Date : Tue Jun 18 10:30:17 2019
-* Last Modified : Tue Jun 18 11:13:20 2019
+* Last Modified : Tue Jun 18 11:15:19 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -15,6 +15,7 @@ use v6 ;
 * 	Unported License, which is available at http: //creativecommons.org/licenses/by- nc/3.0/.
 * Purpose :
 	check: http://perl6maven.com/simple-web-client
+	check: https://github.com/supernovus/exemel
 
 	macbook-pro-de-sdo:tp6 sdo$ ./http_post_set_user_agent.pl6
 	{
