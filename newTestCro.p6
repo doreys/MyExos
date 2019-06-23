@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : newTestCro.p6
 * Creation Date : Sun Jun 23 22:29:33 2019
-* Last Modified : Mon Jun 24 00:04:24 2019
+* Last Modified : Mon Jun 24 00:05:51 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -18,6 +18,7 @@ use v6 ;
 * server side:
 /Users/sdo/rakudo/install/share/perl6/site/bin
 macbook-pro-de-sdo:tp6 sdo$ ./newTestCro.p6
+
 * client side:
 Last login: Sun Jun 23 19:40:18 on ttys000
 macbook-pro-de-sdo:tp6 sdo$ curl http://localhost:4242/
