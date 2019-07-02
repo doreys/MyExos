@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : p6b-p3-parag7-2_description.p6
 * Creation Date : Thu Jun 27 13:41:38 2019
-* Last Modified : Thu Jun 27 13:42:19 2019
+* Last Modified : Thu Jun 27 13:48:48 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -18,9 +18,11 @@ use v6 ;
 # ------------------------------------------------------
 
 sub s {
-    my $block = -> { return "block"; say "Toujours ici" };
-    $block();
-    return "sub";
+    CONTROL {
+	    my $block = -> { return "block"; say "Toujours ici" };
+	    $block();
+	    return "sub";
+    }
 }
 
 say s();    # block
