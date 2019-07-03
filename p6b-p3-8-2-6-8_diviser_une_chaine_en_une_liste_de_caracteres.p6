@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : p6b-p3-8-2-6-8_diviser_une_chaine_en_une_liste_de_caracteres.p6
 * Creation Date : Wed Jul  3 21:14:30 2019
-* Last Modified : Wed Jul  3 21:14:45 2019
+* Last Modified : Wed Jul  3 21:17:13 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -18,3 +18,4 @@ use v6 ;
 # ------------------------------------------------------
 
 say "tototititatato".comb(/to/).perl;   # affiche ("to", "to", "to")
+say "tototiti".comb.perl;    # ("t", "o", "t", "o", "t", "i", "t", "i")
