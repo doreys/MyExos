@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : Vacances.p6
 * Creation Date : Thu Sep 13 21:42:41 2018
-* Last Modified : Thu Sep 13 22:02:01 2018
+* @modify date 2019-07-19 14:32:56
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:

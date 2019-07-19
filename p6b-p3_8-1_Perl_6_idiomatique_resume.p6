@@ -7,7 +7,7 @@ use v6 ;
 * Created By : sdo
 * File Name : p6b-p3_8-1_Perl_6_idiomatique_resume.p6
 * Creation Date : Tue Jul  2 21:26:23 2019
-* Last Modified : Tue Jul  2 21:26:49 2019
+* Last Modified : Tue Jul  2 21:42:24 2019
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
@@ -16,6 +16,9 @@ use v6 ;
 * Purpose :
 ]
 # ------------------------------------------------------
+
+my @keys = 1,2,3,4,5;
+my @values = 2,3,4,5,6;
 
 # Créer un hachage à partir d'une liste de clefs et de valeurs :
 # solution 1: tranches

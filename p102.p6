@@ -8,7 +8,7 @@ use v6.c;
 * Created By : sdo
 * File Name : p102.p6
 * Creation Date : Mon Jul 30 21:33:45 2018
-* Last Modified : Sat Sep  8 02:06:01 2018
+* @modify date 2019-07-19 14:25:31
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * License:
