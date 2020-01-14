@@ -867,3 +867,4 @@ not ok 28 - 'azert<![CDATA[ <! [CDATA[  <a></a> ]] <a></a> ]]>qsdsqd dsfdsfsd'
 |  * [37;42mMATCH[0m[37m "azert<![CDATA[ <CDATA>  <a>![]</a> </CDATA> <a></a> ]]>qs"[0m
 * [37;42mMATCH[0m[37m "azert<![CDATA[ <CDATA>  <a>![]</a> </CDATA> <a></a> ]]>qsdsq"[0m
 ok 29 - 'azert<![CDATA[ <CDATA>  <a>![]</a> </CDATA> <a></a> ]]>qsdsqd dsfdsfsd'
+
