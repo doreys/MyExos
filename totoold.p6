@@ -9,7 +9,7 @@ use v6 ;
 * Created By : sdo
 * File Name : totoold.p6
 * Creation Date : Sat Apr 13 23:44:44 2019
-* Last Modified : Wed May 15 05:16:17 2019
+* @modify date 2020-01-14 23:52:38
 * Email Address : sdo@macbook-pro-de-sdo.home
 * Version : 0.0.0.0
 * Purpose :
